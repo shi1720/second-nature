@@ -1,7 +1,15 @@
 import http.client
 import importlib.util
 import json
+import os
 from pathlib import Path
+import queue
+import re
+import shutil
+import signal
+import sqlite3
+import subprocess
+import sys
 import tempfile
 import threading
 import time
@@ -116,5 +124,64 @@ class StudioTests(unittest.TestCase):
         self.assertEqual(self.client.call('/api/register',{'email':'a@example.com','password':'short'})[0],400)
         self.assertEqual(self.client.call('/api/register',{'email':'invalid','password':'long-password-123'})[0],400)
         self.assertEqual(self.client.call('/media/demo/film/second-nature.mp4')[0],401)
+
+    def run_cli_shutdown_check(self, terminating_signal, stubborn=False):
+        fixture=self.base/('cli-'+str(terminating_signal)+('-stubborn' if stubborn else ''))
+        studio=fixture/'studio';studio.mkdir(parents=True)
+        shutil.copy2(Path(server.__file__),studio/'server.py')
+        pipeline=fixture/'pipeline.py'
+        pipeline.write_text("""import os, signal, time
+from pathlib import Path
+def cleanup(signum, frame):
+    time.sleep(.2)
+    Path('cleanup-complete').write_text('yes')
+    raise SystemExit(0)
+signal.signal(signal.SIGTERM, signal.SIG_IGN if STUBBORN else cleanup)
+Path('pipeline.pid').write_text(str(os.getpid()))
+print('Pipeline worker ready', flush=True)
+while True: time.sleep(.1)
+""".replace('STUBBORN',repr(stubborn)))
+        proc=subprocess.Popen([sys.executable,str(studio/'server.py'),'--port','0'],cwd=fixture,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True,start_new_session=True)
+        worker_pid=None
+        try:
+            lines=queue.Queue()
+            threading.Thread(target=lambda:lines.put(proc.stdout.readline()),daemon=True).start()
+            ready=lines.get(timeout=10)
+            match=re.search(r'http://127\.0\.0\.1:(\d+)',ready)
+            self.assertIsNotNone(match,ready)
+            client=Client(int(match[1]));self.assertEqual(client.register()[0],200)
+            pid=self.create(client=client)
+            status,job=client.call('/api/jobs',{'project_id':pid,'kind':'build'});self.assertEqual(status,201,job)
+            deadline=time.monotonic()+5
+            while not (fixture/'pipeline.pid').exists() and time.monotonic()<deadline:time.sleep(.02)
+            self.assertTrue((fixture/'pipeline.pid').exists(),'Fake pipeline did not start')
+            worker_pid=int((fixture/'pipeline.pid').read_text())
+            os.kill(worker_pid,0)  # The detached pipeline is really alive before termination.
+            started=time.monotonic();proc.send_signal(terminating_signal)
+            proc.wait(timeout=12)
+            self.assertEqual(proc.returncode,0,proc.stdout.read())
+            self.assertLess(time.monotonic()-started,10)
+            with self.assertRaises(ProcessLookupError):os.kill(worker_pid,0)
+            with sqlite3.connect(studio/'.data'/'studio.sqlite3') as db:
+                row=db.execute('SELECT status,ended FROM jobs WHERE id=?',(job['id'],)).fetchone()
+            self.assertIn(row[0],('cancelled','interrupted'));self.assertIsNotNone(row[1])
+            if not stubborn:self.assertEqual((fixture/'cleanup-complete').read_text(),'yes')
+        finally:
+            if proc.poll() is None:
+                proc.kill();proc.wait(timeout=5)
+            if proc.stdout:proc.stdout.close()
+            # Test failure cleanup targets only this fixture's process group.
+            if worker_pid:
+                try:os.killpg(worker_pid,signal.SIGKILL)
+                except ProcessLookupError:pass
+
+    @unittest.skipUnless(os.name=='posix','POSIX process-group shutdown test')
+    def test_cli_termination_cleans_detached_pipeline(self):
+        for signum in (signal.SIGTERM,signal.SIGINT,getattr(signal,'SIGHUP',signal.SIGTERM)):
+            with self.subTest(signal=signum):self.run_cli_shutdown_check(signum)
+
+    @unittest.skipUnless(os.name=='posix','POSIX process-group shutdown test')
+    def test_cli_shutdown_escalates_stubborn_pipeline(self):
+        self.run_cli_shutdown_check(signal.SIGTERM,stubborn=True)
 
 if __name__=='__main__':unittest.main()

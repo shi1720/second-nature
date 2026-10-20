@@ -4,7 +4,10 @@
 Entrant and project lead: **Shivam Gupta**  
 24 seconds · 576 frames · 24 fps · 1920 × 1080
 
-## Discord entry — paste with the film and WIP image attached
+## Discord entry — paste with the film link and WIP image attached
+
+**Forum title:** SECOND NATURE — Make every second grow.  
+**Tags:** Official Entry · Procedural & Code · Motion Design
 
 **SECOND NATURE — Make every second grow.**
 
@@ -54,7 +57,7 @@ Entrant and project lead: Shivam Gupta. AI-assisted concept, code, production au
 2. Create or sign in to a free RenderJuice account through the [official contest page](https://www.renderjuice.com/contests/speed). Complete any email verification using the account owner's real email.
 3. Follow that page's Discord invitation. In **#start-here**, select **Join contest** and provide the email associated with the RenderJuice account in the private form.
 4. Play the final MP4 from start to finish. Confirm duration, audio, legibility, and that the WIP attachment visibly shows Blender and the project. Keep source files and process evidence available.
-5. In **#contest-submissions**, attach the complete MP4 and at least one Blender WIP image; paste the entry text above. A public video link is an alternative if upload limits prevent attaching the MP4. Check the link while signed out.
+5. In the **#contest-submissions** forum, create a post with the **Official Entry**, **Procedural & Code** and **Motion Design** tags. Attach at least one Blender WIP image and paste the entry text above with the public video link. You may attach the complete MP4 instead if it fits the account's upload limit. Check the link while signed out.
 6. Confirm the post and attachments are accessible, save its permalink and receipt screenshot, and finish before **1 November 2026, 05:29 IST** (**31 October, 23:59 UTC**). Devpost's displayed 05:30 time is one minute later; use the official cutoff.
 7. Optionally mirror on Devpost. This does not replace the Discord entry. Community voting closes **4 November, 05:29 IST** (**3 November, 23:59 UTC**). Invite genuine viewers; do not automate reactions.
 

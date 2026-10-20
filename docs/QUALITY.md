@@ -12,7 +12,7 @@ SECOND NATURE · Shivam Gupta · 24 seconds · 24 fps · 576 frames.
 | Real studio integration | A request through the authenticated HTTP API built a separate blue-palette project in 8.8 seconds. Seed 42, hero #5AB8FF and accent #203C5A matched the build manifest; the saved Blender hash also matched. |
 | User isolation | The build owner could download the scene (HTTP 200). A second local account could not download it or start its jobs (HTTP 404) and could not see its project/history. |
 | Pipeline regression suite | 14 passing tests covering stale cache rejection, modified scene files, PNG CRC/truncation, invalid settings/ranges, lock recovery, and selective resume. Blender/FFmpeg are mocked in these unit tests. |
-| Studio regression suite | 6 passing HTTP integration tests covering authentication, CSRF, ownership, media paths/ranges, job prerequisites, concurrency, cancellation, and restart state. |
+| Studio regression suite | 8 passing HTTP integration tests covering authentication, CSRF, ownership, media paths/ranges, job prerequisites, concurrency, cancellation, and restart state. |
 | Real progress parsing | 14 JavaScript assertions exercise the pipeline's actual FRAME_DONE message format and malformed input handling. |
 | Motion preview | The full-length look preview was played in Chrome and sampled at the opening, chase, suspension and closing card. Camera boundary frames and growth stages were inspected separately. |
 | Delivery validation | source/verify_delivery.py independently counts and decodes the final movie, checks duration, codec, pixel format, stereo audio, frame rate, dimensions and fast-start metadata. The machine-readable final results are in film/verification.json. |

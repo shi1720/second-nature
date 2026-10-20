@@ -49,7 +49,7 @@ python3 pipeline.py assemble --config /path/to/config.json
 
 Expected outputs are `second-nature.blend`, `frames/*.png`, and `second-nature.mp4` in the configured output directory. User input cannot override the output path. Creating another production is the supported way to change configuration; existing configurations remain reproducible.
 
-One job can run at a time across all local accounts. Cancel terminates the job's process group, then forces shutdown if necessary after five seconds. Closing the browser leaves the server and its job running. Restarting the server marks previously unfinished jobs **interrupted**; it does not claim they completed or automatically resume them. Build/render/assemble can then be rerun as appropriate. The production pipeline owns render resumability and frame validation.
+One job can run at a time across all local accounts. Cancel terminates the job's process group, then forces shutdown if necessary after five seconds. Closing the browser leaves the server and its job running. Stopping the server with Ctrl+C, SIGTERM, or SIGHUP (including a terminal hangup on supported systems) stops job admission, cancels owned jobs, and gives worker cleanup an eight-second window before forcing remaining owned processes to stop. Unresolved jobs are recorded as interrupted. An uncatchable termination such as SIGKILL cannot run cleanup. Restarting the server marks previously unfinished jobs **interrupted**; it does not claim they completed or automatically resume them. Build/render/assemble can then be rerun as appropriate. The production pipeline owns render resumability and frame validation.
 
 ## Security and operating limits
 
@@ -65,7 +65,7 @@ Authentication state and logs are in `studio/.data/studio.sqlite3`; this directo
 python3 -m unittest discover -s studio/tests -v
 ```
 
-Tests use an isolated temporary directory and a fake pipeline; they do not launch Blender or touch real productions. They cover authentication, CSRF, project isolation, output-path injection, traversal, range playback, job prerequisites, job concurrency, cancellation, and persisted interruption status.
+Tests use an isolated temporary directory and a fake pipeline; they do not launch Blender or touch real productions. They cover authentication, CSRF, project isolation, output-path injection, traversal, range playback, job prerequisites, job concurrency, cancellation, persisted interruption status, and real server CLI shutdown for SIGINT/SIGTERM/SIGHUP. Shutdown tests launch only isolated fake pipelines and verify process cleanup and persisted terminal status, including forced termination of a process that ignores SIGTERM.
 
 The browser progress parser also has a small optional Node.js test (no packages required):
 

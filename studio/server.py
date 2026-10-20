@@ -20,6 +20,8 @@ class Studio:
         self.dbfile = self.data / 'studio.sqlite3'
         self.lock = threading.RLock()
         self.processes = {}
+        self.workers = {}
+        self.shutting_down = False
         self.attempts = {}
         with self.db() as db:
             db.executescript('''CREATE TABLE IF NOT EXISTS users(id TEXT PRIMARY KEY,email TEXT UNIQUE NOT NULL,password TEXT NOT NULL);
@@ -67,14 +69,17 @@ class Studio:
         folder = Path(json.loads(project['config'])['output_dir'])
         if kind == 'render' and not (folder/'second-nature.blend').is_file(): raise ValueError('Build the Blender scene before rendering.')
         if kind == 'assemble' and not any((folder/'frames').glob('*.png')): raise ValueError('Render frame images before assembling the film.')
-        with self.lock, self.db() as db:
-            active = db.execute("SELECT id FROM jobs WHERE status IN ('queued','running','cancelling')").fetchone()
-            if active: raise ValueError('Another production job is active. Wait or cancel it first.')
-            job_id = uuid.uuid4().hex
-            db.execute('INSERT INTO jobs VALUES(?,?,?,?,?,?,NULL)', (job_id, project['id'],kind,'queued','',time.time()))
-        thread = threading.Thread(target=self.run_job,args=(job_id,project,kind),daemon=True)
-        thread.start()
-        return job_id
+        with self.lock:
+            if self.shutting_down: raise ValueError('The studio is shutting down. Restart it before starting another job.')
+            with self.db() as db:
+                active = db.execute("SELECT id FROM jobs WHERE status IN ('queued','running','cancelling')").fetchone()
+                if active: raise ValueError('Another production job is active. Wait or cancel it first.')
+                job_id = uuid.uuid4().hex
+                db.execute('INSERT INTO jobs VALUES(?,?,?,?,?,?,NULL)', (job_id, project['id'],kind,'queued','',time.time()))
+            thread = threading.Thread(target=self.run_job,args=(job_id,project,kind),daemon=True)
+            self.workers[job_id] = thread
+            thread.start()
+            return job_id
     def update_job(self, job_id, **fields):
         with self.db() as db:
             db.execute('UPDATE jobs SET '+','.join(k+'=?' for k in fields)+' WHERE id=?', (*fields.values(),job_id))
@@ -91,6 +96,7 @@ class Studio:
                     status = db.execute('SELECT status FROM jobs WHERE id=?',(job_id,)).fetchone()['status']
                 if status == 'cancelling':
                     self.update_job(job_id,status='cancelled',ended=time.time()); return
+                if status not in ('queued','running'): return
                 proc = subprocess.Popen(command,cwd=self.base,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True,bufsize=1,start_new_session=True)
                 self.processes[job_id] = proc
                 self.update_job(job_id,status='running')
@@ -101,12 +107,18 @@ class Studio:
             with self.lock:
                 with self.db() as db:
                     status = db.execute('SELECT status FROM jobs WHERE id=?',(job_id,)).fetchone()['status']
-                self.update_job(job_id,status='cancelled' if status=='cancelling' else ('complete' if code==0 else 'failed'),ended=time.time())
+                final_status = 'cancelled' if status=='cancelling' else ('interrupted' if status=='interrupted' else ('complete' if code==0 else 'failed'))
+                self.update_job(job_id,status=final_status,ended=time.time())
         except Exception as exc:
-            self.update_job(job_id,status='failed',log=(log+'\n'+str(exc))[-30000:],ended=time.time())
+            with self.db() as db:
+                row = db.execute('SELECT status FROM jobs WHERE id=?',(job_id,)).fetchone()
+            final_status = 'cancelled' if row and row['status']=='cancelling' else ('interrupted' if row and row['status']=='interrupted' else 'failed')
+            self.update_job(job_id,status=final_status,log=(log+'\n'+str(exc))[-30000:],ended=time.time())
         finally:
             if proc and proc.stdout: proc.stdout.close()
-            with self.lock: self.processes.pop(job_id,None)
+            with self.lock:
+                self.processes.pop(job_id,None)
+                self.workers.pop(job_id,None)
     def cancel(self, job_id):
         with self.lock, self.db() as db:
             row = db.execute('SELECT status FROM jobs WHERE id=?',(job_id,)).fetchone()
@@ -122,6 +134,33 @@ class Studio:
                         try: os.killpg(proc.pid,signal.SIGKILL)
                         except ProcessLookupError: pass
                 threading.Thread(target=kill_later,daemon=True).start()
+
+    def shutdown(self, timeout=8):
+        """Stop admission, cancel owned jobs, and allow bounded worker cleanup."""
+        with self.lock:
+            self.shutting_down = True
+            with self.db() as db:
+                ids = [row['id'] for row in db.execute("SELECT id FROM jobs WHERE status IN ('queued','running','cancelling')")]
+            for job_id in ids:
+                try: self.cancel(job_id)
+                except ValueError: pass
+            workers = list(self.workers.values())
+        deadline = time.monotonic() + max(0, timeout)
+        for worker in workers:
+            worker.join(max(0, deadline-time.monotonic()))
+        # Normally cancellation escalates after five seconds. Enforce a final
+        # bound even if a worker has not received EOF from its process stream.
+        with self.lock: processes = list(self.processes.values())
+        for proc in processes:
+            if proc.poll() is None:
+                try: os.killpg(proc.pid,signal.SIGKILL)
+                except ProcessLookupError: pass
+                try: proc.wait(timeout=1)
+                except subprocess.TimeoutExpired: pass
+        for worker in workers:
+            if worker.is_alive(): worker.join(.25)
+        with self.db() as db:
+            db.execute("UPDATE jobs SET status='interrupted',ended=? WHERE status IN ('queued','running','cancelling')", (time.time(),))
 
 class Handler(BaseHTTPRequestHandler):
     server_version = 'SecondNatureStudio/1.0'
@@ -285,16 +324,31 @@ class Handler(BaseHTTPRequestHandler):
 def main():
     parser=argparse.ArgumentParser(description=__doc__); parser.add_argument('--port',type=int,default=8765); parser.add_argument('--open-browser',action='store_true'); args=parser.parse_args()
     server=ThreadingHTTPServer(('127.0.0.1',args.port),Handler); server.app=Studio()
-    print(f'SECOND NATURE Studio → http://127.0.0.1:{args.port}',flush=True)
+    server.timeout = .25
+    stopping = threading.Event()
+    previous_handlers = {}
+    def request_shutdown(signum, frame):
+        # Signal handlers only notify the normal control flow. They must not
+        # interrupt SQLite transactions or acquire locks held by workers.
+        stopping.set()
+    for name in ('SIGINT','SIGTERM','SIGHUP'):
+        sig = getattr(signal,name,None)
+        if sig is not None:
+            previous_handlers[sig] = signal.signal(sig,request_shutdown)
+    print(f'SECOND NATURE Studio → http://127.0.0.1:{server.server_port}',flush=True)
+    browser_timer = None
     if args.open_browser:
         import webbrowser
-        threading.Timer(.5,lambda: webbrowser.open(f'http://127.0.0.1:{args.port}')).start()
-    try: server.serve_forever()
+        browser_timer = threading.Timer(.5,lambda: webbrowser.open(f'http://127.0.0.1:{server.server_port}'))
+        browser_timer.daemon = True
+        browser_timer.start()
+    try:
+        while not stopping.is_set(): server.handle_request()
     except KeyboardInterrupt: pass
     finally:
-        with server.app.lock: ids=list(server.app.processes)
-        for jid in ids:
-            try: server.app.cancel(jid)
-            except ValueError: pass
-        server.server_close()
+        if browser_timer: browser_timer.cancel()
+        try: server.app.shutdown(timeout=8)
+        finally:
+            server.server_close()
+            for sig, handler in previous_handlers.items(): signal.signal(sig,handler)
 if __name__=='__main__': main()

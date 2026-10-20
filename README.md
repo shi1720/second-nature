@@ -28,7 +28,7 @@ Blender **4.5 LTS** and **FFmpeg** must be installed to produce variants. The cu
 export BLENDER_BIN='/Applications/Blender.app/Contents/MacOS/Blender'
 ```
 
-Python 3.10+ is recommended. NumPy and Pillow are used only for original sound synthesis and pixel-precise typography; the studio itself uses Python's standard library. Nothing sends production files to the cloud.
+Python 3.10+ is recommended. The tested Python 3.12 dependency versions are recorded in `requirements-lock.txt`. NumPy and Pillow are used only for original sound synthesis and pixel-precise typography; the studio itself uses Python's standard library. Nothing sends production files to the cloud.
 
 ## Produce a film from the command line
 
@@ -77,6 +77,8 @@ Regression tests cover corrupt/incomplete images, configuration and source chang
 ## Submission
 
 The package is **prepared, not officially submitted**. The official entry requires a RenderJuice account, Discord registration in **#start-here**, and a post with the film and WIP image in **#contest-submissions**. Devpost alone does not enter the contest. The official cutoff is **1 November 2026 at 05:29 IST**. Follow [the complete handoff](docs/ENTRY.md) and [official contest details](https://www.renderjuice.com/contests/speed).
+
+An optional 75-second picture edit and a [word-for-word narration](docs/NARRATION.md) are included for a making-of video. Add your recording with `source/add_voiceover.py`; the 24-second contest film itself needs no voiceover.
 
 The [commercial note](docs/COMMERCIAL.md) describes a narrow customer, competing tools, proposed pricing experiments and unvalidated assumptions. No customer traction, revenue, physical simulation, sponsor endorsement or guaranteed award is claimed.
 

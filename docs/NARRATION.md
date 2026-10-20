@@ -47,3 +47,15 @@ Capture actual UI and logs. Do not display invented timings, simulated cloud das
 | 15.25–24s | Growth and resolve | Stem and leaves emerge; staggered petals open; the camera gives the flower and closing line space |
 
 There is no literal countdown. The contrast between rapid travel and suspended stillness supplies the time pressure and release. Storyboard timings reflect the scripted 576-frame sequence; use the final render as the source of truth.
+
+## Ready-made picture edit
+
+`film/optional-making-of-no-voice.mp4` is a separate 75-second picture edit using the actual film, Blender WIP and studio evidence. Its source-code card is labelled as an illustrative excerpt; the complete executable implementation ships with the project. This longer edit is **not** the official 24-second contest animation.
+
+Record the script above in a quiet room in about 75 seconds, then run:
+
+```sh
+.venv/bin/python source/add_voiceover.py --voice /absolute/path/to/your-recording.m4a
+```
+
+The helper accepts a 60-90-second recording, applies a modest pitch-preserving tempo adjustment to fit the picture, normalizes the voice, and creates `film/optional-making-of-narrated.mp4`. It preserves your original recording and the silent edit. Listen to the completed narration before sharing it.
