@@ -1,0 +1,14 @@
+{
+  "version": "1.0.0",
+  "source_sha256": "8a5d4f431a799bac668645d3100efb256c3e698140ed58fb1894ad81f7624d23",
+  "settings": {
+    "seed": 1720,
+    "hero_color": "#FF763E",
+    "accent_color": "#154D58"
+  },
+  "settings_sha256": "421dd17cd1ea666f6b15a282fbe9b21632d84d72b6ffe0315390ead5a16dfc44",
+  "frames": 576,
+  "fps": 24,
+  "blend_sha256": "5b4aa79f48c67bc854b6990922f12aa161a719a55339622cf3725ed05019c0c9",
+  "built_at": 1792518477.8890738
+}

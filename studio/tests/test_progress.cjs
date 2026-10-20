@@ -1,0 +1,11 @@
+'use strict';
+const assert = require('node:assert/strict');
+const {parseRenderProgress: parse} = require('../static/progress.js');
+assert.deepEqual(parse('FRAME_DONE {"frame": 120, "completed": 8, "remaining": 32, "seconds": 2.1}'), {value:8,max:40});
+assert.deepEqual(parse('FRAME_DONE {"frame": 121, "completed": 9, "remaining": 31}\nFRAME_DONE {broken'), {value:9,max:40});
+assert.deepEqual(parse('FRAME_DONE null\nFRAME_DONE []\nFRAME_DONE {"frame":1,"completed": "5", "remaining":5}\nFrame 4/10'), {value:4,max:10});
+assert.deepEqual(parse('FRAME_DONE {"frame": 576,"completed":576,"remaining":0}'), {value:576,max:576});
+assert.deepEqual(parse('Frame 3 of 40\nFrame 4/40\nFrame 100/40\nFrame 1/0'), {value:4,max:40});
+assert.deepEqual(parse('Frame 1/576\nFRAME_DONE {"frame":500,"completed":2,"remaining":8}'), {value:2,max:10});
+for (const input of [null, undefined, '', 'Fra: 85', 'FRAME_DONE {"frame":1,"completed":-1,"remaining":9}', 'FRAME_DONE {"frame":1,"completed":0,"remaining":0}', 'FRAME_DONE {"frame":1,"completed":9007199254740991,"remaining":1}', 'FRAME_DONE {"frame":true,"completed":1,"remaining":9}']) assert.equal(parse(input), null);
+console.log('Render progress parser: 14 assertions passed.');

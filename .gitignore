@@ -1,0 +1,16 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+.venv/
+studio/.data/
+projects/
+film/frames*/
+film/*.log
+film/*.partial.*
+film/.pipeline.lock
+film/*-job.json
+film/*.blend1
+film/*.blend2
+film/opening.png
+film/closing.png
+film/resolved-config.json
