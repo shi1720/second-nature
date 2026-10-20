@@ -26,15 +26,15 @@ Approximately 75 seconds at a calm 145–150 words per minute. Read naturally, w
 
 | Approximate time | Picture | Purpose |
 | --- | --- | --- |
-| 0–8s | Final flower beauty shot, then seed close-up; tasteful “Shivam Gupta / SECOND NATURE” overlay | Establish creator, title, and visual promise |
+| 0–8s | Final flower and closing typography, then seed close-up | Establish creator, title, and visual promise |
 | 8–24s | Dry seed → droplet chase → loop → suspended drop → bloom; use actual rendered excerpts | Explain the story before discussing tools |
 | 24–30s | Hold the flower briefly, then show a Blender viewport of the full scene | Link the purpose of speed to the construction |
-| 30–45s | Actual bpy source beside Blender scene; show petal opening and visible keyframes | Prove procedural authorship and timing control |
-| 45–60s | Studio sign-in → palette/seed configuration → actual build/render logs → final playback | Demonstrate the real integrated workflow |
-| 60–69s | A clean WIP image and concise AI/asset credits | Make the process and assistance transparent |
+| 30–45s | Labelled illustrative code excerpt, then actual growth animation; full executable source is included separately | Explain the baked motion and staggered petal controls |
+| 45–60s | Actual local studio screen captures, including its workbench and process log | Show the supporting production interface and evidence |
+| 60–69s | AI, asset, tool and project-lead credit card | Make the process and assistance transparent |
 | 69–75s | Final bloom and “MAKE EVERY SECOND GROW.” | Resolve on the film's emotional image |
 
-Capture actual UI and logs. Do not display invented timings, simulated cloud dashboards, or an untested “completed” job. Record a fresh variant only when its build and playback have been verified. Match edit points to the recorded voice; the timings above are an edit guide, not a required cadence.
+The prepared edit uses real film excerpts and still captures of the Blender and studio interfaces; it does not claim to be a continuous screen recording. For a custom recut, capture actual UI and logs. Do not display invented timings, simulated cloud dashboards, or an untested “completed” job. Record a fresh variant only when its build and playback have been verified. Match edit points to the recorded voice; the timings above are an edit guide, not a required cadence.
 
 ## Film storyboard
 
