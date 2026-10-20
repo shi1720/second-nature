@@ -28,6 +28,7 @@ def build(settings):
           "--gcs-source-staging-dir", f"gs://{settings['sourceBucket']}/source",
           "--gcs-log-dir", f"gs://{settings['sourceBucket']}/logs")
     settings.pop("apiImageTag", None)
+    settings.pop("workerImageTag", None)
 
 
 def build_api(settings):
@@ -46,13 +47,33 @@ def build_api(settings):
     settings["apiImageTag"] = tag
 
 
+def build_worker(settings):
+    project, region = settings["project"], settings["region"]
+    paths = [ROOT / "pipeline.py", ROOT / "cloud" / "Dockerfile.worker", ROOT / "cloud" / "requirements.txt"]
+    paths += list((ROOT / "source").glob("*.py"))
+    paths += list((ROOT / "cloud").glob("*.py"))
+    paths += [path for path in (ROOT / "assets" / "fonts").rglob("*") if path.is_file()]
+    digest = hashlib.sha256()
+    for path in sorted(paths):
+        digest.update(path.relative_to(ROOT).as_posix().encode())
+        digest.update(path.read_bytes())
+    tag = "src-" + digest.hexdigest()[:16]
+    cloud("builds", "submit", str(ROOT), "--project", project, "--region", region,
+          "--config", str(ROOT / "cloud" / "infra" / "cloudbuild.worker.yaml"),
+          "--substitutions", f"_REGION={region},_WORKER_TAG={tag}",
+          "--service-account", f"projects/{project}/serviceAccounts/second-nature-builder@{project}.iam.gserviceaccount.com",
+          "--gcs-source-staging-dir", f"gs://{settings['sourceBucket']}/source",
+          "--gcs-log-dir", f"gs://{settings['sourceBucket']}/logs")
+    settings["workerImageTag"] = tag
+
+
 def deploy_job(settings):
     project, region, bucket = settings["project"], settings["region"], settings["bucket"]
     api, job = settings["apiService"], settings["renderJob"]
     image_prefix = f"{region}-docker.pkg.dev/{project}/second-nature"
     shared = f"GOOGLE_CLOUD_PROJECT={project},FIREBASE_PROJECT_ID={settings.get('firebaseProject', project)},AUTH_PROJECT_ID={settings.get('firebaseProject', project)},RENDER_BUCKET={bucket},RUN_REGION={region},RENDER_JOB={job}"
     cloud("run", "jobs", "deploy", job, "--project", project, "--region", region,
-          "--image", image_prefix + "/worker:latest", "--service-account", f"second-nature-worker@{project}.iam.gserviceaccount.com",
+          "--image", image_prefix + "/worker:" + settings.get("workerImageTag", "latest"), "--service-account", f"second-nature-worker@{project}.iam.gserviceaccount.com",
           "--cpu=8", "--memory=16Gi", "--task-timeout=7200s", "--max-retries=0", "--tasks=1", "--parallelism=1",
           "--command=python", "--args=-m,cloud.worker", "--set-env-vars", shared)
     for role in ("roles/run.jobsExecutorWithOverrides", "roles/run.viewer"):
@@ -123,7 +144,8 @@ def hosting(settings, public_dir):
                 "Content-Security-Policy": "default-src 'self'; script-src 'self' https://www.gstatic.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob:; media-src 'self' blob:; connect-src 'self' https://identitytoolkit.googleapis.com https://securetoken.googleapis.com " + settings.get("apiUrl", "") + "; frame-src https://" + settings["firebaseConfig"]["authDomain"] + "; base-uri 'self'; form-action 'self'; object-src 'none'; frame-ancestors 'none'",
             }},
             {"glob": "/config.js", "headers": {"Cache-Control": "no-store"}},
-            {"glob": "/index.html", "headers": {"Cache-Control": "no-cache"}},
+            *[{"glob": filename, "headers": {"Cache-Control": "no-cache"}}
+              for filename in ("/", "/index.html", "/app.js", "/state.mjs", "/style.css")],
             {"glob": "/assets/**", "headers": {"Cache-Control": "public, max-age=3600"}},
         ],
     }
@@ -145,7 +167,7 @@ def hosting(settings, public_dir):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("stage", choices=("build", "build-api", "job", "api", "services", "hosting", "all"))
+    parser.add_argument("stage", choices=("build", "build-api", "build-worker", "job", "api", "services", "hosting", "all"))
     parser.add_argument("--settings", default=str(ROOT / "cloud" / "deployment.json"))
     parser.add_argument("--public-dir", default=str(ROOT / "web" / "dist"))
     args = parser.parse_args()
@@ -156,6 +178,9 @@ if __name__ == "__main__":
         settings_path.write_text(json.dumps(settings, indent=2) + "\n")
     if args.stage == "build-api":
         build_api(settings)
+        settings_path.write_text(json.dumps(settings, indent=2) + "\n")
+    if args.stage == "build-worker":
+        build_worker(settings)
         settings_path.write_text(json.dumps(settings, indent=2) + "\n")
     if args.stage == "job":
         deploy_job(settings)

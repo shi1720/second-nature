@@ -44,3 +44,23 @@ These are internal review observations, not official contest scores or audience-
 The studio is a local creator workstation application. It is not deployed as an internet service and does not include billing, account recovery or cloud workers. Rendering is local; no RenderJuice API call or sponsor endorsement is claimed. The source uses scripted geometric motion, not a physical simulation. Different GPU backends may produce minor pixel differences even with the same production settings.
 
 The optional 75-second making-of picture edit is separate from the 24-second official animation. The supplied narration may be recorded by Shivam; the contest film requires no spoken voice.
+
+## Final master delivery
+
+The final 1080p master passed all nine independent media checks in `film/verification.json`: 24.000 seconds, 576 decoded frames at 24 fps, H.264/yuv420p, AAC stereo at 48 kHz, fast-start metadata and an error-free full decode. It is 14,484,028 bytes. The SHA-256 is recorded in `film/delivery.json`.
+
+Measured encoded audio is -15.77 LUFS integrated and -2.24 dB true peak. A finished-render retry reported zero remaining frames and returned without starting Blender.
+
+Before assembly, the cache guard detected that opening the project for the WIP capture had saved a different viewport-state copy. The original Blender backup matched the build manifest's SHA-256 exactly. That exact original was restored, preserving the matching source and all rendered frames; the guard was not bypassed. The separate viewport copy remains an intermediate, outside the delivery package.
+
+## Hosted studio
+
+The Firebase site is `https://second-nature-studio.web.app`. Its public page, configuration, security headers, Firebase guest sign-in and saved palette production have been checked in the browser. A real Cloud Run production is being exercised separately from the unit suites. The deployment receipt distinguishes infrastructure checks from completed render acceptance; do not treat an available API as a completed render.
+
+The cloud suite contains 14 passing tests. The web state suite covers resumed frame counts, malformed progress, project validation, job labels, safe error messages and tightly scoped artifact addresses. The hosted account-switch review also led to epoch guards for pending requests and private playback cleanup. Unchanged production controls now remain mounted during polling.
+
+### Cloud startup correction and recorded QA waiver
+
+The first hosted production stopped before Blender launched: a local-tool fallback path indexed a nonexistent ancestor when the pipeline was installed at `/app`. The fallback now handles shallow container paths, and a regression test covers that layout. The worker image also checks the configured Blender executable, actual headless Blender startup and FFmpeg during its build.
+
+The failed job and its original log remain intact. An explicit one-time operator adjustment restored its single unused render-start charge in the isolated QA fixture's global, account and network counters. The adjustment used a generation-match transaction and left the public limits at 3/2/2. The sanitized receipt is retained in the working QA evidence; this adjustment is not evidence of a successful cloud render.

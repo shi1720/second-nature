@@ -90,7 +90,7 @@ def configure(args):
             operation = REST.request("POST", f"https://firebase.googleapis.com/v1beta1/projects/{project}:addFirebase", {})
             REST.wait(operation, "https://firebase.googleapis.com/v1beta1")
         print("Firebase resources enabled.")
-    
+
         if args.configure_auth:
             existing_apps = REST.request("GET", f"https://firebase.googleapis.com/v1beta1/projects/{project}/webApps").get("apps", [])
             if any(app.get("displayName") != "Second Nature Studio" for app in existing_apps):
@@ -105,7 +105,7 @@ def configure(args):
                 raise SystemExit("Initialize Firebase Authentication using Get started in the Firebase console, then rerun. Identity Platform initialization is a different paid operation.") from None
             policy = {"passwordPolicyConfig": {"passwordPolicyEnforcementState": "ENFORCE", "passwordPolicyVersions": [{"customStrengthOptions": {"minPasswordLength": 12, "maxPasswordLength": 4096}}]}}
             REST.request("PATCH", f"https://identitytoolkit.googleapis.com/admin/v2/projects/{project}/config?" + query(updateMask="passwordPolicyConfig"), policy)
-    
+
         try:
             REST.request("GET", f"https://firebasehosting.googleapis.com/v1beta1/projects/{project}/sites/{site}")
         except ApiError as error:

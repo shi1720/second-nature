@@ -41,7 +41,7 @@ python3 cloud/infra/deploy.py services
 python3 cloud/infra/deploy.py hosting
 ```
 
-Cloud Build creates the API and worker images from the shipped Dockerfiles. Upload rules omit local Python environments, account state, rendered assets, and common credential files. The builder can access only its new source/log bucket and container repository. The API and worker can read and write only their new artifact bucket. The API additionally invokes/cancels its own rendering job and reads its own rate-limit salt from Secret Manager.
+Cloud Build creates the API and worker images from the shipped Dockerfiles. For a focused worker change, run `python3 cloud/infra/deploy.py build-worker` and then `python3 cloud/infra/deploy.py job`; the worker rebuild uses a source hash tag and cached Blender layers, and runs a real headless Blender and FFmpeg startup check before deployment. `build-api` followed by `api` performs the corresponding API-only update. Upload rules omit local Python environments, account state, rendered assets, and common credential files. The builder can access only its new source/log bucket and container repository. The API and worker can read and write only their new artifact bucket. The API additionally invokes/cancels its own rendering job and reads its own rate-limit salt from Secret Manager.
 
 Before Hosting publication, stage the verified film and public images in `web/dist/assets/`. The release writes `config.js`, applies security headers, and uses Google's Hosting REST version/upload/finalize/release flow. Same-project deployments can use an `/api/**` rewrite; this split deployment uses the actual API URL. Publishing static assets alone does not prove that login or rendering works.
 

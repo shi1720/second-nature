@@ -97,6 +97,14 @@ class PipelineSafetyTests(unittest.TestCase):
         renderer.assert_not_called()
         self.assertEqual(before, {p.name: p.read_bytes() for p in (self.out / "frames").glob("*.png")})
 
+    def test_container_root_can_use_configured_blender(self):
+        executable = self.root / "blender"
+        executable.write_text("fixture executable\n")
+        with patch.object(pipeline, "ROOT", Path("/app")), \
+                patch.dict(os.environ, {"BLENDER_BIN": str(executable)}), \
+                patch.object(pipeline.shutil, "which", return_value=None):
+            self.assertEqual(pipeline.blender_bin(), str(executable.resolve()))
+
     def test_complete_current_sequence_verifies_and_can_reach_assembly(self):
         self.build()
         self.render_frames(end=576)

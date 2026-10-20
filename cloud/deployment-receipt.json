@@ -1,0 +1,27 @@
+{
+  "verifiedAt": "2026-10-20T19:06:14.985381+00:00",
+  "hostingUrl": "https://second-nature-studio.web.app",
+  "firebaseProject": "second-nature-studio",
+  "runtimeProject": "gen-lang-client-0444960702",
+  "apiUrl": "https://second-nature-api-wh46bdeima-uc.a.run.app",
+  "apiRevision": "second-nature-api-00001-zcc",
+  "hostingVersion": "sites/second-nature-studio/versions/17e0304628143dad",
+  "hostingRelease": "sites/second-nature-studio/releases/1792523067818000",
+  "checks": {
+    "websiteHttp200": true,
+    "publicConfigHttp200": true,
+    "hostingSecurityHeaders": true,
+    "apiHealthHttp200": true,
+    "unauthenticatedProjectsRejected401": true,
+    "hostingOriginCorsAllowed": true,
+    "unrelatedOriginCorsRejected": true
+  },
+  "healthPath": "/api/healthz",
+  "renderWorkflowVerified": false,
+  "renderNote": "Worker bootstrap path fixed and actual Blender/FFmpeg container startup verified. Browser render/cancel/resume verification remains pending.",
+  "serverCredentialsInPublicConfig": false,
+  "workerJobGeneration": 2,
+  "workerImage": "us-central1-docker.pkg.dev/gen-lang-client-0444960702/second-nature/worker:src-87389f26af036945",
+  "workerBuild": "d5a2533c-e0eb-4052-8fbd-32f4df5649ca",
+  "workerStartupSmokeVerified": true
+}

@@ -11,4 +11,5 @@ COPY source /app/source
 COPY assets/fonts /app/assets/fonts
 COPY cloud/*.py /app/cloud/
 USER 10001
+RUN python -c "import pipeline; assert pipeline.blender_bin() == '/opt/blender/blender'" && /opt/blender/blender --background --factory-startup --python-exit-code 1 --python-expr "import bpy; assert bpy.app.version[:2] == (4, 5); print('Blender runtime smoke check passed')" && ffmpeg -version > /dev/null
 CMD ["python","-m","cloud.worker"]

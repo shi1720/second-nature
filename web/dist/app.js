@@ -25,6 +25,7 @@ const state = {
   fetchEpoch: 0,
 };
 let toastTimer;
+let projectListKey = null;
 function toast(message) {
   $("toast").textContent = message;
   $("toast").hidden = false;
@@ -210,12 +211,32 @@ function action(label, handler, kind = "secondary", disabled = false) {
   return button;
 }
 function renderProjects() {
+  // Polling updates frame counts frequently. Keep unchanged production controls
+  // mounted so keyboard focus and pointer clicks survive those updates.
+  const nextKey = JSON.stringify({
+    uid: state.user?.uid,
+    projects: state.projects.map((p) => [
+      p.id,
+      p.name,
+      p.seed,
+      p.hero_color,
+      p.accent_color,
+      p.artifacts,
+    ]),
+    jobs: [...state.jobs.entries()].map(([id, jobs]) => [
+      id,
+      jobs.map((j) => [j.id, j.status, j.stage, j.action]),
+    ]),
+  });
+  if (nextKey === projectListKey) return;
+  projectListKey = nextKey;
   const list = $("project-list");
   list.replaceChildren();
   $("project-count").textContent = state.user
     ? `${state.projects.length} production${state.projects.length === 1 ? "" : "s"}`
     : "Your own color of motion";
   if (!state.projects.length) {
+    projectListKey = null;
     const box = el("div", { class: "empty" });
     box.append(
       el("span", { class: "empty-symbol", "aria-hidden": "true" }, "◈"),

@@ -1,0 +1,14 @@
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args: ['pull', '${_REGION}-docker.pkg.dev/$PROJECT_ID/second-nature/worker:latest']
+  - name: gcr.io/cloud-builders/docker
+    args: ['build', '--cache-from', '${_REGION}-docker.pkg.dev/$PROJECT_ID/second-nature/worker:latest', '-f', 'cloud/Dockerfile.worker', '-t', '${_REGION}-docker.pkg.dev/$PROJECT_ID/second-nature/worker:${_WORKER_TAG}', '.']
+images:
+  - '${_REGION}-docker.pkg.dev/$PROJECT_ID/second-nature/worker:${_WORKER_TAG}'
+timeout: 1800s
+options:
+  logging: GCS_ONLY
+  machineType: E2_HIGHCPU_8
+substitutions:
+  _REGION: us-central1
+  _WORKER_TAG: manual-release

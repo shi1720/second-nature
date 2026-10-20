@@ -1,59 +1,45 @@
 ## Inspiration
 
-A race becomes more memorable when arrival matters. SECOND NATURE starts with a dry seed before introducing its moving hero: one luminous amber drop. The seed gives the audience a reason to follow the journey. Gates, precision rails and a vertical loop build momentum; a suspended breath, a fall and an unfolding flower give it purpose.
+A race becomes more memorable when arrival matters. SECOND NATURE begins with a dry seed, giving the audience a reason to follow one luminous amber drop. Gates, rails and a vertical loop build momentum. A held breath, a fall and an unfolding flower give it purpose: **Make every second grow.**
 
-The idea is simple: **Make every second grow.** Speed becomes a way to bring something to life.
-
-The supporting studio grew from a practical creative problem. After a visual direction is approved, small teams often need another palette, a controlled variation or an interrupted render finished. The same care that makes a film work should also make its production repeatable.
+The studio addresses a related creative problem. After approving a visual direction, small teams still need palette variations, consistent detail and interrupted renders finished. A carefully directed film should have a repeatable production process.
 
 ## What it does
 
-SECOND NATURE is a complete 24-second Blender film: 576 frames at 24 fps, with an original synthesized soundtrack. A following camera and repeated accelerator gates establish speed. Two passes around a vertical loop make the route visible. Eased braking, a held drop and staggered flower petals create contrast and a clear ending.
+The entry is a complete 24-second Blender film: 576 frames at 24 fps, with an original synthesized soundtrack. A following camera and repeated gates establish speed. Two loop passes, eased braking, suspension and staggered petals create distinct timing and a clear ending.
 
-The accompanying web studio lets a creator explore the film, enter a guest workspace or sign in, choose a palette and detail seed, and save a production. Its workflow connects those settings to Blender build, render and assembly jobs, with frame progress and process logs. Finished productions can be played in the browser and downloaded as an MP4 or editable Blender scene. Cancellation and saved checkpoints support resuming interrupted work.
-
-Cloud variants cover the complete story at 540p. The original film is delivered at 1080p. The controls deliberately preserve the film's composition and timing while varying the drop, enamel palette and seeded soil detail.
+The supporting web studio connects guest or email workspaces, palette and soil-seed controls, saved productions and Blender jobs. Creators can follow frame progress and logs, cancel or resume work, then play and download the MP4 or editable scene. Cloud variants cover the complete story at 540p; the original film is 1080p.
 
 ## How we built it
 
-Blender Python constructs the geometry, node-based materials, lights, motion paths and camera edit. Procedural meshes and curves form the rails, gates, analytic droplet, machined planter, seed, leaves and flower. Individually hinged petal whorls open with staggered timing; Fibonacci placement supplies the pollen detail. Motion is baked into the saved scene, and the font is packed, so playback does not depend on Python autorun.
+Blender Python generates geometry, materials, lighting, paths and camera animation. Separate petal hinges unfold in staggered whorls; Fibonacci placement supplies pollen detail. Baked keyframes and a packed font keep the saved scene playable without Python autorun.
 
-The pipeline writes frames atomically and checks dimensions, PNG chunk CRCs and the end marker before reusing them. Cache identity covers the configuration, scene source, renderer source, saved Blender file and quality profile. NumPy generates the original soundtrack mathematically; Pillow supplies precise title typography; FFmpeg assembles the movie and audio.
+The pipeline writes frames atomically and validates dimensions, PNG CRCs and the end marker before reuse. Cache identity includes settings, scene source, renderer source, saved Blender file and quality profile. NumPy synthesizes the soundtrack, Pillow supplies typography, and FFmpeg assembles delivery.
 
-Firebase Hosting serves the studio. Firebase Authentication supplies guest and email workspaces, and Firestore stores production and job records. A Cloud Run API verifies identity and ownership before dispatching Blender workers or serving private artifacts from Cloud Storage. The web workbench reads actual job state and frame reports. Shared render limits keep the public workflow bounded.
-
-The original 1080p film was rendered locally. The hosted workflow runs palette variants on the studio's own cloud workers; no RenderJuice rendering integration is claimed.
-
-Entrant and project lead: **Shivam Gupta**. OpenAI Codex assisted with concept development, code, automation, documentation and review. The film's geometry, materials and synthesized audio were created for this project. Typography uses Space Grotesk under SIL OFL 1.1. The separate product demonstration uses a disclosed stock synthetic narrator. No stock models, image textures, recorded music or generative video were used in the film. Its motion is scripted keyframe animation, not a physical simulation.
+Firebase Hosting and Authentication serve the studio and its workspaces. Private Cloud Storage holds production records, artifacts and checkpoints; object-generation checks protect shared updates. A Cloud Run API verifies identity and ownership before dispatching Blender workers or serving downloads. The original film was rendered locally; cloud workers produce studio variants. No RenderJuice integration is claimed.
 
 ## Challenges we ran into
 
-A fast object can disappear at the top of a loop. The wide shot needed enough headroom to preserve the silhouette throughout the route. A single camera jumping between shots could also contaminate motion blur, so five independent shot cameras hold their own boundary poses.
+The drop needed enough headroom throughout its loop. Camera jumps could contaminate motion blur, so five independent shot cameras now hold their boundary poses. A quaternion and scale blend eases the transition from stretched travel to upright suspension. Lighting revisions recovered flower detail.
 
-The emotional transition needed just as much attention as the race. The drop initially snapped from a stretched travelling pose into upright suspension. A quaternion and scale blend now eases its braking. Bright flower highlights also obscured pollen detail, prompting a lighting and material revision.
-
-Production reliability introduced another set of problems: avoiding stale frames after changes, stopping a renderer safely, retaining checkpoints, isolating users' files and keeping interface state consistent when accounts change. These concerns shaped the pipeline, worker lifecycle, artifact authorization and browser state handling.
+Production raised different challenges: stale frames after edits, safe cancellation, checkpoints, private downloads and browser requests finishing after an account change. Those failure paths shaped the pipeline and hosted workflow.
 
 ## Accomplishments we are proud of
 
-The film tells its story without dialogue: a need, a journey, a pause and a visible result. Its visual language stays consistent across the machine and the flower, and the final Blender scene remains editable.
+The film communicates a need, journey and result without dialogue. Its machine and flower share a consistent visual language, while the Blender project stays editable. Procedural controls support the direction: repeated geometry reveals speed, and staggered petals give growth its rhythm.
 
-The procedural system serves that direction rather than replacing it. Repeated geometry makes speed readable; staggered petal hinges make growth feel deliberate; fixed camera composition keeps palette variations coherent.
+A real local interruption-and-resume check preserved existing frames. Regression tests cover cache integrity, selective rendering, ownership and failure handling; mocked tests are distinguished from actual rendering evidence.
 
-The project also includes the less visible production work: an actual interruption-and-resume check on the local render, source and frame integrity checks, authenticated project access, a browser workbench and regression tests for failure paths. Tests distinguish mocked worker behavior from actual rendering evidence. Source, disclosures and process documentation travel with the work.
+Entrant and project lead: **Shivam Gupta**. OpenAI Codex assisted with concept, code, automation, documentation and review. The film uses original geometry, materials and synthesized audio, plus Space Grotesk under SIL OFL 1.1. No stock models, textures, recorded music or generative video were used. Motion is scripted, not a physical simulation. The separate demonstration uses a disclosed synthetic narrator.
 
 ## What we learned
 
-The seed needed to come first. Establishing the reason for the journey made the fast motion easier to care about, and the pause before impact gave the ending room to land.
+The seed needed to come first. Establishing why arrival matters made the fast motion easier to care about; the pause gave the ending room to land.
 
-Reproducibility is part of creative control. A deterministic seed is useful only when the scene, render settings and saved outputs remain connected. An honest progress indicator is useful only when it reflects the worker's actual reports. Clear ownership and recovery behavior matter when a personal script becomes a shared tool.
-
-We also learned to keep the commercial claim narrow. A beautiful example and a working workflow do not establish customer demand. The useful next question is whether small creative teams repeatedly need controlled variations of an approved film, and whether this process saves them revision time.
+Reproducibility is creative control. Seeds, source, settings and outputs must stay connected. Progress must reflect actual worker reports. Ownership and recovery become essential when a personal script becomes a shared tool.
 
 ## What's next
 
-Start with motion designers and small studios that produce several versions of an approved visual idea. Interview them about recent work, demonstrate a real palette change, and measure setup, revision, rendering and support time during paid pilots. No customer traction, revenue or measured time savings are claimed yet.
+Test the commercial hypothesis with motion designers and small studios that need variations of an approved film. Interviews and paid pilots should measure setup, revision, rendering and support time. No customer traction, revenue or measured savings are claimed.
 
-The next product controls should follow that evidence: editable end copy, aspect-ratio composition or a small library of carefully directed film systems. Each needs visual review; a crop or a larger prompt box does not replace direction.
-
-Operationally, the priority is reliable rendering within a clear budget, useful recovery when a worker stops, and readable production history. An optional RenderJuice adapter could follow validated API access and costs. The goal remains the same: a crafted visual story, with a process a creator can confidently repeat.
+Let that evidence guide editable end copy, aspect-ratio composition or additional directed film systems. Keep reliable rendering, clear budgets and useful recovery central to the product.

@@ -27,7 +27,10 @@ def load_config(path):
     c['output_dir']=str(Path(output).expanduser().resolve());return c
 
 def blender_bin(explicit=None):
-    candidates=[explicit,os.getenv('BLENDER_BIN'),shutil.which('blender'),'/Applications/Blender.app/Contents/MacOS/Blender',str(ROOT.parents[1]/'work/tools/Blender.app/Contents/MacOS/Blender')]
+    candidates=[explicit,os.getenv('BLENDER_BIN'),shutil.which('blender'),'/Applications/Blender.app/Contents/MacOS/Blender']
+    # The portable workstation fallback is optional. Containers can place this
+    # project at /app, which has only one ancestor; do not index beyond it.
+    if len(ROOT.parents)>1:candidates.append(str(ROOT.parents[1]/'work/tools/Blender.app/Contents/MacOS/Blender'))
     for p in candidates:
         if p and Path(p).is_file():return str(Path(p).resolve())
     raise RuntimeError('Blender 4.5 LTS is required. Install Blender and set BLENDER_BIN to its executable.')

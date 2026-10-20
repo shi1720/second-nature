@@ -17,5 +17,9 @@
   },
   "backendProvisioned": true,
   "apiImageTag": "src-461a0aef41153121",
-  "apiUrl": "https://second-nature-api-wh46bdeima-uc.a.run.app"
+  "apiUrl": "https://second-nature-api-wh46bdeima-uc.a.run.app",
+  "hostingVersion": "sites/second-nature-studio/versions/d00f8599f5933eb7",
+  "hostingRelease": "sites/second-nature-studio/releases/1792524298378000",
+  "hostingUrl": "https://second-nature-studio.web.app",
+  "workerImageTag": "src-87389f26af036945"
 }
