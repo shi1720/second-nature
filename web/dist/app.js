@@ -5,6 +5,7 @@ import {
   validProject,
   safeMessage,
   artifactURL,
+  renderAvailability,
 } from "./state.mjs";
 const $ = (id) => document.getElementById(id),
   config = window.SECOND_NATURE_CONFIG || {},
@@ -16,11 +17,14 @@ const state = {
   projects: [],
   jobs: new Map(),
   selectedJob: null,
+  quota: null,
   register: false,
   poll: null,
   refreshing: false,
   authReady: false,
   pendingNew: false,
+  pendingGuestExit: null,
+  pendingRenderAgain: null,
   blobUrl: null,
   fetchEpoch: 0,
 };
@@ -51,6 +55,8 @@ function openDialog(id) {
 }
 function closeDialog(id) {
   $(id).close();
+  if (id === "guest-exit-dialog") state.pendingGuestExit = null;
+  if (id === "render-again-dialog") state.pendingRenderAgain = null;
   if (id === "player-dialog") {
     const player = $("variant-player");
     player.pause();
@@ -127,8 +133,27 @@ function openNew() {
     openDialog("auth-dialog");
     return;
   }
+  state.pendingNew = false;
   $("project-error").textContent = "";
   openDialog("project-dialog");
+}
+function offerGuestExit(kind) {
+  if (!state.user?.isAnonymous) return;
+  state.pendingGuestExit = { kind, uid: state.user.uid };
+  const switching = kind === "signin";
+  $("guest-exit-title").textContent = switching
+    ? "Switch workspaces?"
+    : "Before you leave.";
+  $("guest-exit-note").textContent = switching
+    ? "Signing in opens a different workspace and removes access to your guest productions. To keep this guest work, create an account with an email that does not already have a workspace."
+    : "Guest work is linked to this browser session. Signing out removes your access. Create an account to keep your productions across devices.";
+  $("guest-keep").textContent = switching
+    ? "Keep this guest workspace"
+    : "Keep my workspace";
+  $("guest-leave").textContent = switching
+    ? "Switch to the existing workspace"
+    : "Sign out without keeping access";
+  openDialog("guest-exit-dialog");
 }
 function authMode(register) {
   state.register = register;
@@ -211,10 +236,17 @@ function action(label, handler, kind = "secondary", disabled = false) {
   return button;
 }
 function renderProjects() {
+  const activeJob = [...state.jobs.values()]
+    .flat()
+    .find((j) => ACTIVE.has(j.status));
+  const availability = renderAvailability(state.quota, Boolean(activeJob));
+  $("capacity-note").hidden = !state.user;
+  $("capacity-note").textContent = availability.message;
   // Polling updates frame counts frequently. Keep unchanged production controls
   // mounted so keyboard focus and pointer clicks survive those updates.
   const nextKey = JSON.stringify({
     uid: state.user?.uid,
+    availability,
     projects: state.projects.map((p) => [
       p.id,
       p.name,
@@ -236,7 +268,6 @@ function renderProjects() {
     ? `${state.projects.length} production${state.projects.length === 1 ? "" : "s"}`
     : "Your own color of motion";
   if (!state.projects.length) {
-    projectListKey = null;
     const box = el("div", { class: "empty" });
     box.append(
       el("span", { class: "empty-symbol", "aria-hidden": "true" }, "◈"),
@@ -269,9 +300,6 @@ function renderProjects() {
     list.append(box);
     return;
   }
-  const activeJob = [...state.jobs.values()]
-    .flat()
-    .find((j) => ACTIVE.has(j.status));
   for (const project of state.projects) {
     const row = el("article", { class: "project-row" }),
       swatch = el("span", { class: "project-swatch", "aria-hidden": "true" });
@@ -306,7 +334,7 @@ function renderProjects() {
           resume ? "Resume production" : "Create film",
           () => startJob(project, resume ? job : null),
           "primary",
-          !!activeJob,
+          !availability.canRender,
         ),
       );
     if (job) {
@@ -323,6 +351,15 @@ function renderProjects() {
     }
     if (artifacts.movie)
       actions.append(action("Download MP4", () => download(project, "movie")));
+    if (artifacts.movie)
+      actions.append(
+        action(
+          "Create film again",
+          () => offerRenderAgain(project),
+          "secondary",
+          !availability.canRender,
+        ),
+      );
     if (artifacts.blend)
       actions.append(
         action("Blender scene ↓", () => download(project, "blend")),
@@ -337,13 +374,17 @@ async function refresh() {
   state.refreshing = epoch;
   const userId = state.user.uid;
   try {
-    const data = await api("/v1/projects");
+    const [data, account] = await Promise.all([
+      api("/v1/projects"),
+      api("/v1/me"),
+    ]);
     const projects = data.projects || [];
     const results = await Promise.allSettled(
       projects.map((p) => api("/v1/projects/" + encodeURIComponent(p.id))),
     );
     if (epoch !== state.fetchEpoch || state.user?.uid !== userId) return;
     state.projects = projects;
+    state.quota = account.quota || null;
     results.forEach((r, i) => {
       if (r.status === "fulfilled") {
         state.jobs.set(
@@ -369,6 +410,7 @@ async function refresh() {
     if (epoch === state.fetchEpoch) {
       $("connection").textContent = "Reconnecting";
       if (!state.projects.length) {
+        projectListKey = null;
         const box = el("div", { class: "error-state" }, safeMessage(error));
         box.append(action("Try again", () => refresh()));
         $("project-list").replaceChildren(box);
@@ -396,6 +438,17 @@ async function startJob(project, resumeJob) {
   );
   $("workbench").scrollIntoView({ behavior: "smooth" });
   await refresh();
+}
+function offerRenderAgain(project) {
+  if (!state.user) throw new Error("Sign in to use this production.");
+  state.pendingRenderAgain = {
+    projectId: project.id,
+    uid: state.user.uid,
+    epoch: state.fetchEpoch,
+  };
+  $("render-again-name").textContent = project.name;
+  $("render-again-error").textContent = "";
+  openDialog("render-again-dialog");
 }
 async function artifactBlob(project, kind) {
   const user = state.user,
@@ -465,6 +518,37 @@ $("player-dialog").addEventListener("cancel", () => {
     state.blobUrl = null;
   }
 });
+$("guest-exit-dialog").addEventListener("cancel", () => {
+  state.pendingGuestExit = null;
+});
+$("render-again-dialog").addEventListener("cancel", () => {
+  state.pendingRenderAgain = null;
+});
+$("render-again-confirm").addEventListener("click", async () => {
+  const pending = state.pendingRenderAgain;
+  const button = $("render-again-confirm");
+  busy(button, true);
+  $("render-again-error").textContent = "";
+  try {
+    if (
+      !pending ||
+      pending.uid !== state.user?.uid ||
+      pending.epoch !== state.fetchEpoch
+    )
+      throw new Error("The workspace changed. Open this production again.");
+    const project = state.projects.find((item) => item.id === pending.projectId);
+    if (!project) throw new Error("This production is no longer available.");
+    const active = [...state.jobs.values()].flat().some((job) => ACTIVE.has(job.status));
+    const availability = renderAvailability(state.quota, active);
+    if (!availability.canRender) throw new Error(availability.message);
+    await startJob(project, null);
+    closeDialog("render-again-dialog");
+  } catch (error) {
+    $("render-again-error").textContent = safeMessage(error);
+  } finally {
+    busy(button, false);
+  }
+});
 $("auth-open").addEventListener("click", () => {
   authMode(!!state.user?.isAnonymous);
   openDialog("auth-dialog");
@@ -481,6 +565,12 @@ $("watch-film").addEventListener("click", async () => {
     toast("Press Play on the film to begin.");
   }
 });
+const filmPlayers = ["featured-film", "palette-study", "variant-player"].map($);
+for (const player of filmPlayers)
+  player.addEventListener("play", () => {
+    for (const other of filmPlayers)
+      if (other !== player) other.pause();
+  });
 for (const id of ["guest-start", "guest-auth"])
   $(id).addEventListener("click", async () => {
     const b = $(id);
@@ -505,13 +595,26 @@ async function signOut() {
   }
 }
 $("signout").addEventListener("click", () => {
-  if (state.user?.isAnonymous) openDialog("guest-exit-dialog");
+  if (state.user?.isAnonymous) offerGuestExit("signout");
   else signOut();
 });
-$("guest-leave").addEventListener("click", signOut);
+$("guest-leave").addEventListener("click", async () => {
+  const pending = state.pendingGuestExit;
+  if (!pending || pending.uid !== state.user?.uid || !state.user.isAnonymous) {
+    closeDialog("guest-exit-dialog");
+    return;
+  }
+  if (pending.kind === "signin") {
+    closeDialog("guest-exit-dialog");
+    await submitAuth({ confirmedGuestUid: pending.uid });
+  } else await signOut();
+});
 $("guest-keep").addEventListener("click", () => {
+  const switching = state.pendingGuestExit?.kind === "signin";
   closeDialog("guest-exit-dialog");
   authMode(true);
+  if (switching)
+    $("auth-note").textContent = "Keep this guest work with an email that does not already have a workspace.";
   openDialog("auth-dialog");
 });
 $("password-reset").addEventListener("click", async () => {
@@ -533,15 +636,24 @@ $("password-reset").addEventListener("click", async () => {
     busy(button, false);
   }
 });
-$("auth-form").addEventListener("submit", async (event) => {
-  event.preventDefault();
+async function submitAuth({ confirmedGuestUid = null } = {}) {
   const button = $("auth-submit");
-  busy(button, true);
   $("auth-error").textContent = "";
   try {
     requireReady();
+    if (
+      confirmedGuestUid &&
+      (state.user?.uid !== confirmedGuestUid || !state.user.isAnonymous || state.register)
+    )
+      throw new Error("The workspace changed. Please try that step again.");
+    if (!state.register && state.user?.isAnonymous && !confirmedGuestUid) {
+      offerGuestExit("signin");
+      return;
+    }
+    busy(button, true);
     const email = $("email").value.trim(),
       password = $("password").value;
+    const previousUid = state.user?.uid;
     let credential;
     if (state.register) {
       if (state.user?.isAnonymous) {
@@ -561,6 +673,7 @@ $("auth-form").addEventListener("submit", async (event) => {
         email,
         password,
       );
+    if (previousUid !== credential.user.uid) resetProductionDraft();
     state.user = credential.user;
     updateAccount();
     $("password").value = "";
@@ -575,6 +688,10 @@ $("auth-form").addEventListener("submit", async (event) => {
   } finally {
     busy(button, false);
   }
+}
+$("auth-form").addEventListener("submit", async (event) => {
+  event.preventDefault();
+  await submitAuth();
 });
 $("project-form").addEventListener("submit", async (event) => {
   event.preventDefault();
@@ -605,6 +722,19 @@ $("project-form").addEventListener("submit", async (event) => {
     busy(button, false);
   }
 });
+function resetProductionDraft() {
+  $("project-name").value = "";
+  $("seed").value = "42";
+  $("hero-color").value = "#FF763E";
+  $("accent-color").value = "#154D58";
+  $("project-error").textContent = "";
+  colorLabels();
+  document.querySelectorAll("[data-palette]").forEach((button) => {
+    const selected = button.dataset.palette === "#FF763E,#154D58";
+    button.classList.toggle("selected", selected);
+    button.setAttribute("aria-pressed", String(selected));
+  });
+}
 function colorLabels() {
   $("hero-hex").textContent = $("hero-color").value.toUpperCase();
   $("accent-hex").textContent = $("accent-color").value.toUpperCase();
@@ -676,10 +806,14 @@ async function init() {
     sdk.onAuthStateChanged(state.auth, async (user) => {
       const epoch = ++state.fetchEpoch;
       state.user = user;
+      if (!user) resetProductionDraft();
       state.projects = [];
+      state.quota = null;
       state.jobs.clear();
       state.selectedJob = null;
       closeDialog("player-dialog");
+      closeDialog("guest-exit-dialog");
+      closeDialog("render-again-dialog");
       updateAccount();
       renderProjects();
       showJob(null);

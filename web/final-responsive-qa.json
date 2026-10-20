@@ -1,0 +1,36 @@
+{
+  "checked_at": "2026-10-20T20:44:44.552Z",
+  "passed": true,
+  "sizes": [
+    {
+      "overflow": false,
+      "scrollWidth": 320,
+      "studyWidth": 284,
+      "width": 320
+    },
+    {
+      "overflow": false,
+      "scrollWidth": 390,
+      "studyWidth": 354,
+      "width": 390
+    },
+    {
+      "overflow": false,
+      "scrollWidth": 768,
+      "studyWidth": 722,
+      "width": 768
+    },
+    {
+      "overflow": false,
+      "scrollWidth": 1280,
+      "studyWidth": 522.6171875,
+      "width": 1280
+    },
+    {
+      "overflow": false,
+      "scrollWidth": 1920,
+      "studyWidth": 863.8515625,
+      "width": 1920
+    }
+  ]
+}

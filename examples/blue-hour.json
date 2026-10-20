@@ -1,0 +1,8 @@
+{
+  "name": "Blue hour",
+  "seed": 42,
+  "hero_color": "#5AB8FF",
+  "accent_color": "#203C5A",
+  "profile": "preview",
+  "output_dir": "./projects/blue-hour"
+}

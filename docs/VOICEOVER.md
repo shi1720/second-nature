@@ -19,8 +19,12 @@ python3 -m venv .voice-venv
 .voice-venv/bin/python source/synthesize_voiceover.py \
   --text docs/studio-demo-script.txt \
   --output film/studio-demo-narration.wav \
-  --target-duration 80
+  --target-duration 80 \
+  --speed 0.84
 ```
+
+The speed setting matches the prepared narration; its measured native reading
+needs only a modest final tempo adjustment to fit 80 seconds.
 
 Install FFmpeg separately. English pronunciation fallback also uses espeak-ng;
 on macOS it can be installed with `brew install espeak-ng`. The first model

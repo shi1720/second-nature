@@ -1,0 +1,12 @@
+{
+  "url": "https://second-nature-studio.web.app/",
+  "featuredFilm": {
+    "currentTime": 24,
+    "duration": 24,
+    "ended": true,
+    "error": null,
+    "height": 1080,
+    "width": 1920
+  },
+  "capture": "actual 26-second browser screencast; 596 JPEG frames"
+}

@@ -1,0 +1,165 @@
+{
+  "schema_version": 1,
+  "site_url": "https://second-nature-studio.web.app",
+  "api_url": "https://second-nature-api-359201230061.us-central1.run.app",
+  "status": "accepted",
+  "full_verified": true,
+  "acceptance_started_at": "2026-10-20T19:28:15.934441+00:00",
+  "test_suites": {
+    "cloud_unit_tests_passed": 21,
+    "pipeline_regression_tests_passed": 15,
+    "local_studio_tests_passed": 8,
+    "delivery_packaging_tests_passed": 4,
+    "python_tests_passed_total": 48
+  },
+  "startup_correction": {
+    "failed_job_id": "09fd6b236b5b4e61a7cf1441effa436d",
+    "status_preserved": "failed",
+    "before_blender_started": true,
+    "cause": "The local-tool fallback indexed a nonexistent ancestor at /app.",
+    "fix": "Safe ancestor fallback plus an actual headless Blender and FFmpeg image-build smoke check.",
+    "one_time_qa_render_charge_waiver": {
+      "at": "2026-10-20T19:12:56.497684+00:00",
+      "render_starts_recredited": 1,
+      "scopes": [
+        "global",
+        "account",
+        "network"
+      ],
+      "public_caps_unchanged": {
+        "global": 3,
+        "account": 2,
+        "network": 2
+      }
+    }
+  },
+  "cancellation": {
+    "job_id": "a89cb76042a942c997f9d8d26dc8bcba",
+    "project_id": "a133af2cd2c2470094ae3d9bae5eba6f",
+    "status": "cancelled",
+    "execution_stopped": true,
+    "global_lease_released": true,
+    "checkpoint_pngs": 17,
+    "first_five_checksums_and_generations_unchanged": true
+  },
+  "resume": {
+    "job_id": "4716fc110aa74881acb075f354893ea6",
+    "project_id": "a133af2cd2c2470094ae3d9bae5eba6f",
+    "resume_from": "a89cb76042a942c997f9d8d26dc8bcba",
+    "saved_build_reused": true,
+    "render_start": {
+      "event": "render_start",
+      "profile": "preview",
+      "remaining": 559,
+      "total": 576
+    },
+    "restored_saved_frames": 17,
+    "initial_resumed_frame": 18,
+    "first_17_checksums_and_generations_unchanged": true
+  },
+  "delivery_validation": {
+    "movie_downloaded": true,
+    "all_576_remote_frames_present": true,
+    "first_17_remote_generations_unchanged": true,
+    "movie_hash_matches_delivery_manifest": true,
+    "independent_full_decode_passed": true,
+    "bytes": 5992881,
+    "sha256": "5cd337506434399910c4f03e49d0daa196a08f076fc8cd0fb03c9fa13dfac5d9",
+    "checks": {
+      "duration_24_seconds": true,
+      "frames_576": true,
+      "fps_24": true,
+      "h264_video": true,
+      "yuv420p": true,
+      "aac_stereo_48k": true,
+      "resolution": true,
+      "fast_start": true,
+      "full_decode_without_errors": true
+    },
+    "media": {
+      "duration_seconds": 24.0,
+      "width": 960,
+      "height": 540,
+      "decoded_frames": 576,
+      "fps": "24/1"
+    },
+    "published_movie": "film/blue-hour-preview.mp4",
+    "published_delivery_manifest": "film/blue-hour-delivery.json",
+    "published_independent_verification": "film/blue-hour-verification.json"
+  },
+  "milestones": [
+    {
+      "frame_threshold": 100,
+      "whole_frames_observed": 101,
+      "at": "2026-10-20T19:37:33.163865+00:00"
+    },
+    {
+      "frame_threshold": 300,
+      "whole_frames_observed": 305,
+      "at": "2026-10-20T20:03:14.812497+00:00"
+    },
+    {
+      "frame_threshold": 500,
+      "whole_frames_observed": 506,
+      "at": "2026-10-20T20:27:47.212846+00:00"
+    },
+    {
+      "frame_threshold": 576,
+      "whole_frames_observed": 576,
+      "at": "2026-10-20T20:36:59.510839+00:00"
+    }
+  ],
+  "quality": {
+    "profile": "preview",
+    "width": 960,
+    "height": 540,
+    "samples": 16,
+    "fps": 24,
+    "frames": 576,
+    "device_reported_by_worker": "CPU"
+  },
+  "updated_at": "2026-10-20T20:38:15.305961+00:00",
+  "current": {
+    "job_id": "4716fc110aa74881acb075f354893ea6",
+    "project_id": "a133af2cd2c2470094ae3d9bae5eba6f",
+    "status": "complete",
+    "stage": "complete",
+    "whole_story_frames_completed": 576,
+    "worker_batch": {
+      "completed": 576,
+      "total": 576
+    },
+    "observed_at": "2026-10-20T20:38:01.249427+00:00"
+  },
+  "accepted_at": "2026-10-20T20:38:09.145177+00:00",
+  "blender_scene_download": {
+    "verified": true,
+    "artifact": "second-nature.blend",
+    "source": "Authenticated hosted browser download",
+    "project_id": "a133af2cd2c2470094ae3d9bae5eba6f",
+    "bytes": 28518913,
+    "sha256": "55b42a6650bb42f0a07846e7bd2a395e0f806ee7399f5b04b4f9b5ba1b1aee4c",
+    "matches_cloud_build_manifest": true,
+    "matches_gcs_object_checksum": true,
+    "gcs_generation": "1792523941950149",
+    "recorded_at": "2026-10-20T19:42:51.281633+00:00"
+  },
+  "worker_completion": {
+    "job_id": "4716fc110aa74881acb075f354893ea6",
+    "status": "complete",
+    "stage": "complete",
+    "execution_stopped": true,
+    "execution_succeeded_count": 1,
+    "execution_failed_count": 0,
+    "execution_running_count": 0,
+    "global_lease_released": true
+  },
+  "hosted_browser_acceptance": {
+    "private_full_playback": "web/private-playback-qa.json",
+    "mp4_download_hash": "cloud/movie-download-qa.json",
+    "blend_download_hash": "cloud/blender-download-qa.json",
+    "blend_open_and_palette": "cloud/scene-download-qa.json",
+    "completed_ui": "stills/studio-complete.png",
+    "passed": true
+  }
+}

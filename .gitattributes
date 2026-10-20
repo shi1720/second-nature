@@ -1,0 +1,12 @@
+*.pdf binary
+*.blend binary
+*.mp4 binary
+*.wav binary
+*.png binary
+*.jpg binary
+*.ttf binary
+# Subtitle blocks intentionally end with a blank separator.
+*.srt whitespace=-blank-at-eof
+*.vtt whitespace=-blank-at-eof
+# Preserve the upstream license notice verbatim, including its line endings.
+web/dist/assets/OFL.txt -whitespace

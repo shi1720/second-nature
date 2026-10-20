@@ -134,6 +134,8 @@ class Repository:
         return job
     def quota(self,uid,ip_hash):
         limits=self.read()['limits'];day=day_key();global_day=limits.get('global-'+day,{});user_day=limits.get('user-'+owner_key(uid)+'-'+day,{});active=limits.get('global',{})
+        network_day=limits.get('ip-'+ip_hash+'-'+day,{})
         return {'global_render_remaining':max(0,int(os.getenv('MAX_DAILY_RENDERS','3'))-global_day.get('renders',0)),
                 'user_render_remaining':max(0,int(os.getenv('MAX_USER_DAILY_RENDERS','2'))-user_day.get('renders',0)),
+                'network_render_remaining':max(0,int(os.getenv('MAX_IP_DAILY_RENDERS','2'))-network_day.get('renders',0)),
                 'global_job_active':bool(active.get('active_job') and active.get('lease_until',0)>time.time()),'resets_at':'00:00 UTC','profile':'preview'}

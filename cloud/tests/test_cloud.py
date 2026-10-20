@@ -113,6 +113,19 @@ class QuotaTests(unittest.TestCase):
         third=self.repo.create_project('three',validate_config({}))
         with self.assertRaises(Problem) as caught:self.repo.reserve_job('three',third['id'],'all','preview','same-network')
         self.assertEqual(caught.exception.status,429)
+    def test_quota_reports_exhausted_network_without_exposing_its_hash(self):
+        with patch.dict(os.environ,{'MAX_DAILY_RENDERS':'3','MAX_USER_DAILY_RENDERS':'2','MAX_IP_DAILY_RENDERS':'2'}):
+            for uid in ('first-network-user','second-network-user'):
+                project=self.repo.create_project(uid,validate_config({}))
+                job=self.repo.reserve_job(uid,project['id'],'all','preview','private-network-hash')
+                self.repo.finish(job['id'],'complete')
+            quota=self.repo.quota('third-network-user','private-network-hash')
+            self.assertEqual(quota['global_render_remaining'],1)
+            self.assertEqual(quota['user_render_remaining'],2)
+            self.assertEqual(quota['network_render_remaining'],0)
+            self.assertFalse(quota['global_job_active'])
+            self.assertNotIn('private-network-hash',json.dumps(quota))
+            self.assertEqual(self.repo.quota('third-network-user','other-network')['network_render_remaining'],2)
     def test_global_budget_and_lease_recovery(self):
         with patch.dict(os.environ,{'MAX_USER_DAILY_RENDERS':'10','MAX_IP_DAILY_RENDERS':'10'}):
             for _ in range(3):

@@ -1,0 +1,62 @@
+{
+  "checked_at": "2026-10-20T20:46:57.036328+00:00",
+  "passed": true,
+  "dependency_fingerprints_present": true,
+  "curated_api_urls_staged": true,
+  "checks": [
+    {
+      "path": "/",
+      "status": 200,
+      "resolved_url": "https://second-nature-studio.web.app/",
+      "type": "text/html; charset=utf-8",
+      "length": null,
+      "cache": "no-cache",
+      "csp": "default-src 'self'; script-src 'self' https://www.gstatic.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob:; media-src 'self' blob: https://second-nature-api-wh46bdeima-uc.a.run.app; connect-src 'self' https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://second-nature-api-wh46bdeima-uc.a.run.app; frame-src https://second-nature-studio.firebaseapp.com; base-uri 'self'; form-action 'self'; object-src 'none'; frame-ancestors 'none'"
+    },
+    {
+      "path": "/assets/second-nature.mp4",
+      "status": 200,
+      "resolved_url": "https://second-nature-api-wh46bdeima-uc.a.run.app/api/v1/showcase/original.mp4",
+      "type": "video/mp4",
+      "length": "14484028",
+      "cache": "public, max-age=3600",
+      "csp": null
+    },
+    {
+      "path": "/assets/blue-hour-preview.mp4",
+      "status": 200,
+      "resolved_url": "https://second-nature-api-wh46bdeima-uc.a.run.app/api/v1/showcase/blue-hour.mp4",
+      "type": "video/mp4",
+      "length": "5992881",
+      "cache": "public, max-age=3600",
+      "csp": null
+    },
+    {
+      "path": "/assets/studio-demo.mp4",
+      "status": 200,
+      "resolved_url": "https://second-nature-api-wh46bdeima-uc.a.run.app/api/v1/showcase/studio-demo.mp4",
+      "type": "video/mp4",
+      "length": "23776600",
+      "cache": "public, max-age=3600",
+      "csp": null
+    },
+    {
+      "path": "/assets/blue-hour-poster.jpg",
+      "status": 200,
+      "resolved_url": "https://second-nature-studio.web.app/assets/blue-hour-poster.jpg",
+      "type": "image/jpeg",
+      "length": "54820",
+      "cache": "public, max-age=3600",
+      "csp": null
+    },
+    {
+      "path": "/assets/OFL.txt",
+      "status": 200,
+      "resolved_url": "https://second-nature-studio.web.app/assets/OFL.txt",
+      "type": "text/plain; charset=utf-8",
+      "length": "4495",
+      "cache": "public, max-age=3600",
+      "csp": null
+    }
+  ]
+}

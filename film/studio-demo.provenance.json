@@ -1,0 +1,224 @@
+{
+  "title": "Second Nature Studio",
+  "duration_seconds": 80,
+  "fps": 24,
+  "width": 1920,
+  "height": 1080,
+  "video_sha256": "78f57cf3e5a05e846e918936f288cc0392e8028aec780198c82cea069e4066ba",
+  "voice": "film/studio-demo-narration.wav",
+  "voice_sha256": "5450af72d8a81df6ead2192775bc04155fa1eb19043438ac1e12f0a11db4c33c",
+  "synthetic_narrator": "Kokoro af_heart, stock synthetic voice, no cloning or impersonation",
+  "captions": "film/studio-demo-narration.srt",
+  "caption_sha256": "68a5d5fa6f3666ef3207e5ec83acfe8452f4f082f040651c76acbb69b2000810",
+  "edit_type": "Programmatically composed picture edit, not a continuous screen recording",
+  "edit_disclosure": "Production stages edited for time. Actual UI captures and film excerpts; no simulated cursor or fabricated completed jobs. Capture stages come from separate real moments.",
+  "audio": "Narration only. Source film audio is not mixed into the product demonstration.",
+  "sources": [
+    {
+      "shot": "intro",
+      "start_frame": 0,
+      "end_frame_exclusive": 203,
+      "source": "stills/studio.png",
+      "source_sha256": "4685f628bcd966b0d145db67088ac9f2da8e8188192daadff90e704abfcd83a6",
+      "layout": "ui",
+      "context": "01 / THE STUDIO",
+      "source_start_seconds": 0
+    },
+    {
+      "shot": "seed",
+      "start_frame": 203,
+      "end_frame_exclusive": 266,
+      "source": "film/second-nature.mp4",
+      "source_sha256": "89d6c9e5a03b87450dc6138276d81b3a92b7b439f6485d3256c1db0dfc5587a7",
+      "layout": "film",
+      "context": "THE ORIGINAL / LOCALLY RENDERED",
+      "source_start_seconds": 0
+    },
+    {
+      "shot": "chase",
+      "start_frame": 266,
+      "end_frame_exclusive": 296,
+      "source": "film/second-nature.mp4",
+      "source_sha256": "89d6c9e5a03b87450dc6138276d81b3a92b7b439f6485d3256c1db0dfc5587a7",
+      "layout": "film",
+      "context": "THE ORIGINAL / 1080P",
+      "source_start_seconds": 3.1
+    },
+    {
+      "shot": "loop",
+      "start_frame": 296,
+      "end_frame_exclusive": 326,
+      "source": "film/second-nature.mp4",
+      "source_sha256": "89d6c9e5a03b87450dc6138276d81b3a92b7b439f6485d3256c1db0dfc5587a7",
+      "layout": "film",
+      "context": "THE ORIGINAL / 1080P",
+      "source_start_seconds": 7.1
+    },
+    {
+      "shot": "arrival",
+      "start_frame": 326,
+      "end_frame_exclusive": 409,
+      "source": "film/second-nature.mp4",
+      "source_sha256": "89d6c9e5a03b87450dc6138276d81b3a92b7b439f6485d3256c1db0dfc5587a7",
+      "layout": "film",
+      "context": "THE ORIGINAL / 1080P",
+      "source_start_seconds": 11.65
+    },
+    {
+      "shot": "bloom",
+      "start_frame": 409,
+      "end_frame_exclusive": 443,
+      "source": "film/second-nature.mp4",
+      "source_sha256": "89d6c9e5a03b87450dc6138276d81b3a92b7b439f6485d3256c1db0dfc5587a7",
+      "layout": "film",
+      "context": "THE ORIGINAL / 1080P",
+      "source_start_seconds": 17.05
+    },
+    {
+      "shot": "account",
+      "start_frame": 443,
+      "end_frame_exclusive": 533,
+      "source": "stills/studio-account.png",
+      "source_sha256": "4d787c304e74c0faaf11645cc86f008fd1df87b1377390fbc0ac999e711c17ad",
+      "layout": "ui",
+      "context": "02 / KEEP YOUR WORKSPACE",
+      "source_start_seconds": 0
+    },
+    {
+      "shot": "guest",
+      "start_frame": 533,
+      "end_frame_exclusive": 593,
+      "source": "stills/studio-mobile.png",
+      "source_sha256": "3488fe3022896bdd6efa09aff44eea7b86f31336194fbce3fe455667e401fff2",
+      "layout": "mobile",
+      "context": "YOUR WORKSPACE / ACROSS DEVICES",
+      "source_start_seconds": 0
+    },
+    {
+      "shot": "palette",
+      "start_frame": 593,
+      "end_frame_exclusive": 706,
+      "source": "assets/demo/palette.mp4",
+      "source_sha256": "0a2ead7a5b3bb0cf2f566177e2f92a7b0d64c3985ef753b37b6c81e45538965e",
+      "layout": "ui-video",
+      "context": "ACTUAL BROWSER CAPTURE",
+      "source_start_seconds": 0,
+      "capture_provenance": "assets/demo/palette.provenance.json",
+      "capture_provenance_sha256": "cf9b37c98a37f4944a069805876591e73d0745fa924990d6b8135f814400ce20",
+      "capture_timing": "Included actual capture MP4 plays at original timing once; final real frame held if needed, no repeated actions"
+    },
+    {
+      "shot": "save",
+      "start_frame": 706,
+      "end_frame_exclusive": 860,
+      "source": "stills/studio-running.png",
+      "source_sha256": "8784e03033e72b4b9ccd9fc5e6fe44f941557340851d92305d27a743a12820d3",
+      "layout": "ui",
+      "context": "SAVED PRODUCTION / BLUE HOUR",
+      "source_start_seconds": 0
+    },
+    {
+      "shot": "blender",
+      "start_frame": 860,
+      "end_frame_exclusive": 943,
+      "source": "stills/blender-wip.png",
+      "source_sha256": "1b3d9516ab239078f66422b6f8a58057ba9148879e79ca6702c9986ba57269c9",
+      "layout": "ui",
+      "context": "03 / EDITABLE BLENDER SCENE",
+      "source_start_seconds": 0
+    },
+    {
+      "shot": "running",
+      "start_frame": 943,
+      "end_frame_exclusive": 1048,
+      "source": "stills/studio-running.png",
+      "source_sha256": "8784e03033e72b4b9ccd9fc5e6fe44f941557340851d92305d27a743a12820d3",
+      "layout": "ui",
+      "context": "ACTUAL CLOUD WORKBENCH",
+      "source_start_seconds": 0
+    },
+    {
+      "shot": "progress",
+      "start_frame": 1048,
+      "end_frame_exclusive": 1122,
+      "source": "assets/demo/progress.mp4",
+      "source_sha256": "ddd157f5f415f465bb3cc74f2def99ce05208e4c9e4ce7c520398d11b629de49",
+      "layout": "ui-video",
+      "context": "ACTUAL BROWSER CAPTURE",
+      "source_start_seconds": 0,
+      "capture_provenance": "assets/demo/progress.provenance.json",
+      "capture_provenance_sha256": "579961bc5852bb9daf2ae90b90c1bc405af06a0f78ea0de6ec59a3290e1988eb",
+      "capture_timing": "Included actual capture MP4 plays at original timing once; final real frame held if needed, no repeated actions"
+    },
+    {
+      "shot": "cancelled",
+      "start_frame": 1122,
+      "end_frame_exclusive": 1197,
+      "source": "stills/studio-cancelled.png",
+      "source_sha256": "f4ee118007fe297c34ff673303a3ed0661a15aa91a1eb69ea57b0a2b7df14063",
+      "layout": "ui",
+      "context": "EARLIER CANCELLATION TEST / 17 FRAMES SAVED",
+      "source_start_seconds": 0
+    },
+    {
+      "shot": "resumed",
+      "start_frame": 1197,
+      "end_frame_exclusive": 1318,
+      "source": "stills/studio-running.png",
+      "source_sha256": "8784e03033e72b4b9ccd9fc5e6fe44f941557340851d92305d27a743a12820d3",
+      "layout": "ui",
+      "context": "ACTUAL RESUMED PRODUCTION",
+      "source_start_seconds": 0
+    },
+    {
+      "shot": "complete",
+      "start_frame": 1318,
+      "end_frame_exclusive": 1406,
+      "source": "stills/studio-complete.png",
+      "source_sha256": "3bcbed48e0470e1f431e7908daf2018dff1f756d0a0e5ac3cdecc1b17b52d671",
+      "layout": "ui",
+      "context": "04 / VERIFIED CLOUD DELIVERY",
+      "source_start_seconds": 0
+    },
+    {
+      "shot": "blue-hour",
+      "start_frame": 1406,
+      "end_frame_exclusive": 1529,
+      "source": "film/blue-hour-preview.mp4",
+      "source_sha256": "5cd337506434399910c4f03e49d0daa196a08f076fc8cd0fb03c9fa13dfac5d9",
+      "layout": "film",
+      "context": "BLUE HOUR / ACTUAL CLOUD EXPORT / 540P",
+      "source_start_seconds": 2.2
+    },
+    {
+      "shot": "retention",
+      "start_frame": 1529,
+      "end_frame_exclusive": 1614,
+      "source": "stills/studio-complete.png",
+      "source_sha256": "3bcbed48e0470e1f431e7908daf2018dff1f756d0a0e5ac3cdecc1b17b52d671",
+      "layout": "ui",
+      "context": "GENERATED EXPORTS / SEVEN-DAY LIFECYCLE",
+      "source_start_seconds": 0
+    },
+    {
+      "shot": "credits",
+      "start_frame": 1614,
+      "end_frame_exclusive": 1879,
+      "source": "stills/bloom.jpg",
+      "source_sha256": "6c32013c3d2f44f440832ed5ae9bd79a0398c4cf635f554ce0d81472bad799fb",
+      "layout": "credits",
+      "context": "CREATED FOR SECOND NATURE",
+      "source_start_seconds": 0
+    },
+    {
+      "shot": "closing",
+      "start_frame": 1879,
+      "end_frame_exclusive": 1920,
+      "source": "stills/poster.jpg",
+      "source_sha256": "06bdbfd7fccf8bc8a627344e7970a06e2c8b8a73a7bd4dd7aff986e35edfb035",
+      "layout": "closing",
+      "context": "SECOND NATURE STUDIO",
+      "source_start_seconds": 0
+    }
+  ]
+}

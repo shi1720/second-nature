@@ -1,0 +1,83 @@
+[
+  {
+    "closeTarget": {
+      "height": 44,
+      "width": 44
+    },
+    "dialogHeight": 600,
+    "dialogScrollable": true,
+    "dialogTop": 20,
+    "dialogWidth": 286,
+    "height": 640,
+    "presetTargets": [
+      {
+        "height": 44,
+        "width": 82.5
+      },
+      {
+        "height": 44,
+        "width": 91.2890625
+      },
+      {
+        "height": 44,
+        "width": 98.078125
+      }
+    ],
+    "scrollWidth": 320,
+    "width": 320
+  },
+  {
+    "closeTarget": {
+      "height": 44,
+      "width": 44
+    },
+    "dialogHeight": 766.4765625,
+    "dialogScrollable": false,
+    "dialogTop": 38.7578125,
+    "dialogWidth": 356,
+    "height": 844,
+    "presetTargets": [
+      {
+        "height": 44,
+        "width": 82.5
+      },
+      {
+        "height": 44,
+        "width": 91.2890625
+      },
+      {
+        "height": 44,
+        "width": 98.078125
+      }
+    ],
+    "scrollWidth": 390,
+    "width": 390
+  },
+  {
+    "closeTarget": {
+      "height": 44,
+      "width": 44
+    },
+    "dialogHeight": 350,
+    "dialogScrollable": true,
+    "dialogTop": 20,
+    "dialogWidth": 500,
+    "height": 390,
+    "presetTargets": [
+      {
+        "height": 44,
+        "width": 84.5
+      },
+      {
+        "height": 44,
+        "width": 93.2890625
+      },
+      {
+        "height": 44,
+        "width": 100.078125
+      }
+    ],
+    "scrollWidth": 844,
+    "width": 844
+  }
+]

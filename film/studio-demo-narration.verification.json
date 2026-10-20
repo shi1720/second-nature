@@ -1,0 +1,30 @@
+{
+  "passed": true,
+  "checks": {
+    "duration_exactly_80_seconds": true,
+    "stereo_48khz_pcm16": true,
+    "172_timed_words": true,
+    "28_caption_cues": true,
+    "timestamps_in_range": true,
+    "no_silence_at_least_1_2_seconds": true,
+    "voice_loudness_near_minus16_lufs": true,
+    "true_peak_below_minus1_5_dbtp": true
+  },
+  "media": {
+    "sample_rate": 48000,
+    "channels": 2,
+    "sample_width_bytes": 2,
+    "frames": 3840000,
+    "duration_seconds": 80.0
+  },
+  "measured_integrated_lufs": -16.43,
+  "measured_true_peak_dbtp": -4.5,
+  "measured_loudness_range_lu": 2.4,
+  "silence_check": {
+    "threshold_db": -40,
+    "minimum_duration_seconds": 1.2,
+    "detected": false
+  },
+  "audio_sha256": "5450af72d8a81df6ead2192775bc04155fa1eb19043438ac1e12f0a11db4c33c",
+  "scope": "Technical audio/caption validation. Word timings are model predictions, not independently forced-aligned."
+}

@@ -1,0 +1,30 @@
+{
+  "bucket": "second-nature-studio-render-assets",
+  "publicBucket": false,
+  "files": {
+    "original.mp4": {
+      "object": "showcase/original.mp4",
+      "size": 14484028,
+      "sha256": "89d6c9e5a03b87450dc6138276d81b3a92b7b439f6485d3256c1db0dfc5587a7",
+      "md5": "llpYjHuipwo5FlQQR4O1Rg==",
+      "generation": "1792528891966203",
+      "verified": true
+    },
+    "blue-hour.mp4": {
+      "object": "showcase/blue-hour.mp4",
+      "size": 5992881,
+      "sha256": "5cd337506434399910c4f03e49d0daa196a08f076fc8cd0fb03c9fa13dfac5d9",
+      "md5": "uYn12LDFmTSM9Ilw7EEV0g==",
+      "generation": "1792528895181781",
+      "verified": true
+    },
+    "studio-demo.mp4": {
+      "object": "showcase/studio-demo.mp4",
+      "size": 23776600,
+      "sha256": "78f57cf3e5a05e846e918936f288cc0392e8028aec780198c82cea069e4066ba",
+      "md5": "5t09NTDCL32TCZhuxnqHyQ==",
+      "generation": "1792528901561138",
+      "verified": true
+    }
+  }
+}

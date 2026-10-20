@@ -1,46 +1,50 @@
-# SECOND NATURE Studio - commercial thesis
+# SECOND NATURE Studio: commercial thesis
 
-**A repeatable Blender production workflow for small creative teams that need several polished variations of one visual idea.**
+**A directed Blender film system for small creative teams that need controlled variations of an approved idea.**
 
-The film is the contest entry. The studio is a useful production tool and a commercial hypothesis; there are no claimed customers, revenue, paid pilots, or measured market demand.
+[Hosted studio](https://second-nature-studio.web.app) · [Public source](https://github.com/shi1720/second-nature)
+
+The original film is complete. The hosted workflow has exercised real rendering, cancellation and resume; its first full cloud delivery check is still pending. This is a commercial hypothesis with no claimed customers, revenue, paid pilots or measured demand. [Current testing record](TESTING.md)
 
 ## Customer and problem
 
-Start with freelance motion designers and studios of two to ten people making short launch films for products, materials, and sustainability campaigns. A likely pain point is the expensive gap between an approved visual direction and the requested variants: new colors, altered procedural detail, revised typography, and a rerender after an interruption. Validate that problem through actual recent projects before expanding the software.
+Start with freelance motion designers and studios of two to ten people making short product, material or sustainability films. The proposed problem is the gap between an approved visual direction and requested variants: new colors, consistent procedural detail, an editable source file and a rerender after interruption. Validate it through recent real projects.
 
-SECOND NATURE provides an initial authored visual system: a kinetic journey that resolves into growth. Its current controls vary palette and deterministic seed. It does not yet import arbitrary products, generate any story from a prompt, or make every film format automatically.
+SECOND NATURE currently offers one authored story: a kinetic journey that resolves into growth. Its controls change the drop and enamel palette and a deterministic soil seed. Story, duration, typography and composition are fixed. It is not arbitrary text-to-video, product import or a universal film generator.
 
 ## What exists
 
-The standard-library Python studio runs on the creator's computer, binds to loopback, and provides local accounts, production configuration, job management, logs, and playback. It calls the same build/render/assemble pipeline used for the film. Source, scene files, rendered frames, and production records stay local. Rendering uses installed Blender; assembly uses FFmpeg. Some pipeline tasks also use NumPy and Pillow.
+The public app provides Firebase guest and email workspaces, saved configurations, a workbench and a dedicated Cloud Run Blender workflow. Private Cloud Storage holds metadata, artifacts and fingerprinted frame checkpoints. Compare-and-swap updates protect shared reservations and quotas. There is no Firestore dependency. A separate local studio and command-line pipeline are also included.
 
-This is a local authenticated workstation application. It has no hosted deployment, billing, email verification, password recovery, shared cloud workers, or internet service guarantee. The standard-library description applies to the web server, not the entire graphics toolchain. Operational and security limits are documented in the studio README.
+The original film was rendered locally at 1080p. Hosted variants render the full 24 seconds at 540p. Guest identity persists in the same browser and can be linked to an email account. Generated files expire under a seven-day lifecycle; this is not archival storage. End-to-end cloud export, playback and download must pass the [acceptance checklist](TESTING.md) before presenting the hosted workflow as fully verified.
+
+The shared public worker admits one active job, three render/all starts globally, two per account and two per client network per UTC day. Failed or cancelled starts count; resume consumes another start. These limits manage exposure but are not a hard billing cap. The operator pays execution and storage costs, and an 80-minute CPU run is an approximate planning figure, not a delivery guarantee or measured unit-cost claim.
 
 ## Competitive context
 
-| Alternative | Existing value | Our proposed reason to choose this workflow |
+| Alternative | Established value | Proposed reason to choose this workflow |
 | --- | --- | --- |
-| A designer's existing Blender scene and scripts | Full creative freedom; no need to adopt another interface | An already authored film system with constrained controls, production records, and recovery from interrupted work |
-| Cavalry | Procedural 2D motion design, real-time feedback, and data-driven animation; its current official site offers individual use free | A different deliverable: editable, lit 3D Blender scenes and an authored cinematic progression. Do not compete on procedural animation alone. |
-| RenderJuice | Cloud GPU rendering, project checking, monitoring, review, and downloads | A potential complementary render destination after a scene is authored. This package currently renders locally and has no RenderJuice API integration. |
+| An existing Blender scene and scripts | Full creative freedom and familiar tools | A ready-directed film system, constrained controls, visible production records and recoverable rendering |
+| Cavalry | Procedural 2D animation, real-time interaction and data-driven sequences; free individual use | Editable, lit Blender 3D scenes with a specific cinematic progression |
+| RenderJuice | Cloud GPU rendering, project checks, monitoring, review and downloads | A potential complementary render destination after authoring; this package currently uses its own workers and has no RenderJuice integration |
 
-Sources: [Cavalry's official product page](https://cavalry.studio/en/) and [RenderJuice's official product page](https://www.renderjuice.com/), checked 20 October 2026. Comparisons describe positioning, not measured superiority or identical feature sets.
+Product descriptions checked on 21 October 2026: [Cavalry official site](https://cavalry.studio/en/) and [RenderJuice official site](https://www.renderjuice.com/). These are positioning comparisons, not measured superiority or identical feature sets.
 
-The present code is not a moat. A defensible business would need a recognizable library of well-directed film systems, reliable production behavior, client-specific integrations, and evidence that creators return to use them. A single template and login screen do not establish that.
+The current code is not a moat. A defensible business would need a recognizable library of directed systems, dependable production behavior, useful client integrations and evidence of repeat use. One template and a login screen do not establish that.
 
-## Offer and pricing experiment
+## Offer and pricing experiments
 
-Begin as an assisted production service rather than charging for an unvalidated subscription. Test **US$250** for a palette-adapted 24-second version of this film, one review round, and a clearly scoped delivery agreement. Separately test **US$79** for an editable local template license with documentation and limited setup support. These are proposed test prices, not market benchmarks or an offer already sold. Confirm project and dependency licensing before selling a source package.
+Begin with assisted production. Test **US$250** for one palette-adapted 24-second film, one review round and a scoped delivery agreement. Separately test **US$79** for an editable local template license with documentation and limited setup support. These are proposed experiments, not observed market prices or completed sales. Confirm project and dependency licensing before selling a source package.
 
-For each pilot, record actual direction/editing hours, setup time, render time, support time, revision count, and compute spend. Calculate contribution as price minus compute, transaction fees, and labor at a stated internal hourly rate. At $250, two hours valued at $50/hour and a $20 compute allowance leave $130 before overhead and taxes; that illustration is an assumption, not a margin result. Local rendering still consumes hardware, electricity, and time.
+Record actual direction, revision, setup and support hours; render duration; compute and storage charges; failures; and repeat use. Contribution is price minus execution, transaction fees and labor at a stated internal rate. For illustration, a $250 project with two hours at $50/hour and a $20 compute allowance leaves $130 before overhead and taxes. Those inputs are assumptions, not measured margins. The public app's admission limits do not prove that a paid offer is profitable.
 
-Interview ten relevant creators about their last variant-heavy project. Demonstrate the real film and a visible palette change. Seek three paid pilots, with permission to record outcomes. Proceed toward a product only if repeat use and measured time savings survive revisions. If customers mostly request unrelated bespoke scenes, retain the tool as an internal studio accelerator.
+Interview ten relevant creators about their last variant-heavy project. Seek three paid pilots and permission to record outcomes. Continue toward a product only if repeat use and measured revision savings survive actual client feedback. If customers mainly request unrelated bespoke scenes, keep the system as an internal production tool.
 
-## Next steps after the contest
+## Next decisions
 
-1. Validate the narrow variant-production problem and willingness to pay.
-2. Measure render performance and interrupted-job recovery on customer hardware.
-3. Add only the most requested control: editable end copy, aspect-ratio composition, or product placement. Each needs visual review; cropping is not a substitute for composition.
-4. Explore an optional RenderJuice adapter after validating API access, costs, user authorization, and the ability to preserve job evidence.
+1. Complete cloud delivery acceptance, then measure cost and recovery on representative jobs.
+2. Validate demand for this specific variant workflow before expanding the template library.
+3. Add the most requested control, such as end copy or a separately composed aspect ratio, with visual review.
+4. Explore a RenderJuice adapter only after validating API access, pricing and user authorization.
 
-Keep the contest presentation centered on the film. The commercial case is strongest when the repeatable process visibly improves a beautiful result.
+The film earns attention; dependable repeat production must earn continued use.

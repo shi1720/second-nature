@@ -1,0 +1,65 @@
+{
+  "checkedAt": "2026-10-20T19:54:00.076082+00:00",
+  "firebaseProject": "second-nature-studio",
+  "scope": "Fresh disposable anonymous account upgraded to email/password; read-only API identity checks; no jobs",
+  "linkingEndpoint": "accounts:signUp with existing idToken (email enumeration protection compatible)",
+  "documentation": "https://docs.cloud.google.com/identity-platform/docs/admin/email-enumeration-protection",
+  "legacyRouteObservation": {
+    "endpoint": "accounts:update",
+    "httpStatus": 400,
+    "errorCode": "OPERATION_NOT_ALLOWED",
+    "fixtureCleanup": "deleted",
+    "interpretation": "Legacy linking endpoint blocked by email enumeration protection; supported signUp linking tested below."
+  },
+  "checks": {
+    "anonymousRegistration": {
+      "passed": true,
+      "httpStatus": 200
+    },
+    "anonymousIdentity": {
+      "passed": true,
+      "httpStatus": 200,
+      "identityMatchesAnonymous": true,
+      "anonymous": true
+    },
+    "linkEmailPasswordToAnonymous": {
+      "passed": true,
+      "httpStatus": 200,
+      "identityPreserved": true,
+      "passwordLengthAtLeast12": true,
+      "errorCode": null
+    },
+    "emailPasswordSignInPreservesIdentity": {
+      "passed": true,
+      "httpStatus": 200,
+      "identityPreserved": true
+    },
+    "upgradedIdentity": {
+      "passed": true,
+      "httpStatus": 200,
+      "identityPreserved": true,
+      "anonymous": false
+    },
+    "upgradedWorkspaceEmpty": {
+      "passed": true,
+      "httpStatus": 200,
+      "projectCount": 0
+    },
+    "disposableAccountDeleted": {
+      "passed": true,
+      "httpStatus": 200
+    }
+  },
+  "credentialsStored": false,
+  "jobsCreated": 0,
+  "existingWorkspaceModified": false,
+  "fixtureCleanup": "deleted",
+  "failedChecks": [],
+  "passed": true,
+  "sdkCompatibility": {
+    "checked": true,
+    "version": "12.19.0",
+    "source": "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js",
+    "emailCredentialLinkUsesSignUpWithExistingIdToken": true
+  }
+}

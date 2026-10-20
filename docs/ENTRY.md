@@ -1,12 +1,12 @@
 # SECOND NATURE
 
-**Make every second grow.**  
-Entrant and project lead: **Shivam Gupta**  
+**Make every second grow.**
+Entrant and project lead: **Shivam Gupta**
 24 seconds · 576 frames · 24 fps · 1920 × 1080
 
 ## Discord entry - paste with the film link and WIP image attached
 
-**Forum title:** SECOND NATURE - Make every second grow.  
+**Forum title:** SECOND NATURE - Make every second grow.
 **Tags:** Official Entry · Procedural & Code · Motion Design
 
 **SECOND NATURE - Make every second grow.**
@@ -15,39 +15,27 @@ A dry seed waits. A luminous amber drop races through a precision world of gates
 
 My interpretation of **Speed** is purposeful motion. Acceleration gives the journey energy; the pause at the end gives it meaning. The fastest moment matters because of what it makes possible.
 
-**Entrant / project lead:** Shivam Gupta  
+**Entrant / project lead:** Shivam Gupta
 **Format:** 24 seconds, 24 fps, 1920 × 1080; original synthesized soundtrack.
 
-**Programmatic workflow:** Blender Python generates the geometry, materials, lighting, motion paths, camera animation, and staggered petal unfolding. Motion is baked into keyframes; it is scripted animation, not a physics simulation. A reproducible local pipeline builds the scene, renders frames, resumes interrupted renders, and assembles the film. A local authenticated studio manages palette and seed variants and production jobs.
+**Programmatic workflow:** Blender Python generates the geometry, materials, lighting, motion paths, camera animation, and staggered petal unfolding. Motion is baked into keyframes; it is scripted animation, not a physics simulation. A reproducible local pipeline builds the scene, renders frames, resumes interrupted renders, and assembles the film. A Firebase-hosted studio manages private guest or email workspaces, palette and seed variants, and real Blender jobs on Cloud Run. Checkpoints allow interrupted work to resume. Cloud variants cover the full story at 540p; the original film was rendered locally at 1080p.
 
 **AI / asset disclosure:** OpenAI Codex assisted with concept development, code, production automation, documentation, and review. Geometry, materials, and synthesized audio were generated specifically for this project; no stock models, textures, music, or generative video were used. Typography uses Space Grotesk by the Space Grotesk Project Authors, licensed under SIL OFL 1.1. Production tools include Blender, Python, FFmpeg, NumPy, and Pillow. This entry does not claim RenderJuice cloud rendering or a physical simulation.
 
 The attached image shows the Blender work in progress. Please consider the film for the Major Awards, Best Procedural & Programmatic Animation, and Best Motion Design.
 
+**Watch the complete film:** https://second-nature-studio.web.app/assets/second-nature.mp4
+
+**Open the studio:** https://second-nature-studio.web.app
+
+**Source and production notes:** https://github.com/shi1720/second-nature
+
 ## Optional Devpost mirror
 
-**Project name:** SECOND NATURE  
+**Project name:** SECOND NATURE
 **Tagline:** One drop. A world in motion. A reason to arrive.
 
-### Inspiration
-
-Speed is usually shown as a contest to go faster. SECOND NATURE asks what the journey is for. A tiny seed establishes the need; an amber drop supplies the momentum. A brief suspension separates the machine's precision from the flower's soft release. The ending turns acceleration into something worth arriving for.
-
-### What it does
-
-The deliverable is a complete 24-second Blender film accompanied by its editable scene, source, soundtrack, WIP evidence, and reproducible production pipeline. The supporting local studio lets a creator sign in, choose a palette and seed, and manage build, render, and assembly jobs.
-
-### How it is built
-
-The scene is constructed through Blender's bpy API. Procedural meshes and curves form the track, gates, droplet, seed, and flower. Explicit keyframes control travel, deformation, camera movement, and staggered petal opening. The soundtrack is synthesized programmatically. FFmpeg assembles the rendered sequence, score, and typography. Configuration and build metadata preserve the relationship between a production and its source.
-
-### What makes it different
-
-The same system handles the film's frantic travel and its quiet payoff. Reproducibility serves art direction: a palette variation or an interrupted render can be handled without rebuilding a scene manually. The film remains the main work; the studio makes the process repeatable.
-
-### Credits and disclosure
-
-Entrant and project lead: Shivam Gupta. AI-assisted concept, code, production automation, documentation, and review using OpenAI Codex. Original procedural geometry, materials, and synthesized audio. Space Grotesk: Space Grotesk Project Authors, SIL OFL 1.1. Tools: Blender, Python, FFmpeg, NumPy, Pillow. No stock models, textures, music, or generative video. Scripted keyframe animation; no physical simulation claim. No RenderJuice cloud rendering claim.
+Use the seven-section story in `docs/DEVPOST.md`. Use the complete 24-second film as the primary video; the separate 80-second studio demonstration is supporting material. The demonstration uses a disclosed synthetic stock narrator and captions.
 
 ## Submission actions
 

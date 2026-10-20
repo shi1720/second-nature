@@ -1,0 +1,21 @@
+{
+  "title": "SECOND NATURE",
+  "entrant": "Shivam Gupta",
+  "duration_seconds": 24,
+  "frames": 576,
+  "fps": 24,
+  "width": 960,
+  "height": 540,
+  "bytes": 5992881,
+  "sha256": "5cd337506434399910c4f03e49d0daa196a08f076fc8cd0fb03c9fa13dfac5d9",
+  "profile": "preview",
+  "variant": "Blue hour",
+  "seed": 42,
+  "hero_color": "#5AB8FF",
+  "accent_color": "#203C5A",
+  "source": "Actual resumed Cloud Run Blender CPU render",
+  "job_id": "4716fc110aa74881acb075f354893ea6",
+  "project_id": "a133af2cd2c2470094ae3d9bae5eba6f",
+  "checkpoint_frames": 576,
+  "samples": 16
+}

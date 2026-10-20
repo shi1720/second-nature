@@ -1,0 +1,47 @@
+{
+  "checked_at": "2026-10-20T20:46:17.404Z",
+  "site": "https://second-nature-studio.web.app",
+  "movies": [
+    {
+      "currentTime": 24,
+      "duration": 24,
+      "ended": true,
+      "error": null,
+      "height": 1080,
+      "id": "featured-film",
+      "src": "https://second-nature-api-wh46bdeima-uc.a.run.app/api/v1/showcase/original.mp4",
+      "width": 1920
+    },
+    {
+      "currentTime": 24,
+      "duration": 24,
+      "ended": true,
+      "error": null,
+      "height": 540,
+      "id": "palette-study",
+      "src": "https://second-nature-api-wh46bdeima-uc.a.run.app/api/v1/showcase/blue-hour.mp4",
+      "width": 960
+    },
+    {
+      "currentTime": 80,
+      "duration": 80,
+      "ended": true,
+      "error": null,
+      "height": 1080,
+      "id": "studio-guide",
+      "src": "https://second-nature-api-wh46bdeima-uc.a.run.app/api/v1/showcase/studio-demo.mp4",
+      "width": 1920
+    }
+  ],
+  "mutual_pause_observed": true,
+  "original_played_signed_out": true,
+  "passed": true,
+  "native_demo_seek": {
+    "method": "Native video scrubber Home then Right keyboard controls, after complete playback",
+    "currentTime": 0.8,
+    "duration": 80,
+    "error": null,
+    "paused": true,
+    "passed": true
+  }
+}

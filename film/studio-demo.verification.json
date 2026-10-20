@@ -1,0 +1,41 @@
+{
+  "passed": true,
+  "checks": {
+    "duration_80s": true,
+    "frames_1920": true,
+    "fps24": true,
+    "1080p": true,
+    "h264_yuv420p": true,
+    "aac_stereo_48khz": true,
+    "fast_start": true,
+    "full_decode": true
+  },
+  "media": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "codec_type": "video",
+        "width": 1920,
+        "height": 1080,
+        "pix_fmt": "yuv420p",
+        "r_frame_rate": "24/1",
+        "nb_read_frames": "1920"
+      },
+      {
+        "codec_name": "aac",
+        "codec_type": "audio",
+        "sample_rate": "48000",
+        "channels": 2,
+        "r_frame_rate": "0/0",
+        "nb_read_frames": "3750"
+      }
+    ],
+    "format": {
+      "duration": "80.000000"
+    }
+  },
+  "sha256": "78f57cf3e5a05e846e918936f288cc0392e8028aec780198c82cea069e4066ba",
+  "decode_error": null
+}

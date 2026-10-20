@@ -1,0 +1,104 @@
+{
+  "checked_at": "2026-10-20T20:42:38.069706+00:00",
+  "api": "https://second-nature-api-wh46bdeima-uc.a.run.app",
+  "passed": true,
+  "checks": [
+    {
+      "file": "original.mp4",
+      "method": "HEAD",
+      "range": null,
+      "status": 200,
+      "content_type": "video/mp4",
+      "length": "14484028",
+      "cache": "public, max-age=3600",
+      "content_range": null
+    },
+    {
+      "file": "original.mp4",
+      "method": "GET",
+      "range": "bytes=0-31",
+      "status": 206,
+      "content_type": "video/mp4",
+      "length": "32",
+      "cache": "public, max-age=3600",
+      "content_range": "bytes 0-31/14484028"
+    },
+    {
+      "file": "original.mp4",
+      "method": "GET",
+      "range": "bytes=999999999999-",
+      "status": 416,
+      "content_range": "bytes */14484028"
+    },
+    {
+      "file": "blue-hour.mp4",
+      "method": "HEAD",
+      "range": null,
+      "status": 200,
+      "content_type": "video/mp4",
+      "length": "5992881",
+      "cache": "public, max-age=3600",
+      "content_range": null
+    },
+    {
+      "file": "blue-hour.mp4",
+      "method": "GET",
+      "range": "bytes=0-31",
+      "status": 206,
+      "content_type": "video/mp4",
+      "length": "32",
+      "cache": "public, max-age=3600",
+      "content_range": "bytes 0-31/5992881"
+    },
+    {
+      "file": "blue-hour.mp4",
+      "method": "GET",
+      "range": "bytes=999999999999-",
+      "status": 416,
+      "content_range": "bytes */5992881"
+    },
+    {
+      "file": "studio-demo.mp4",
+      "method": "HEAD",
+      "range": null,
+      "status": 200,
+      "content_type": "video/mp4",
+      "length": "23776600",
+      "cache": "public, max-age=3600",
+      "content_range": null
+    },
+    {
+      "file": "studio-demo.mp4",
+      "method": "GET",
+      "range": "bytes=0-31",
+      "status": 206,
+      "content_type": "video/mp4",
+      "length": "32",
+      "cache": "public, max-age=3600",
+      "content_range": "bytes 0-31/23776600"
+    },
+    {
+      "file": "studio-demo.mp4",
+      "method": "GET",
+      "range": "bytes=999999999999-",
+      "status": 416,
+      "content_range": "bytes */23776600"
+    },
+    {
+      "path": "/api/healthz",
+      "status": 200
+    },
+    {
+      "path": "/v1/projects",
+      "status": 401
+    },
+    {
+      "path": "/api/v1/showcase/private.mp4",
+      "status": 404
+    },
+    {
+      "path": "/api/v1/showcase/users%2Fprivate.mp4",
+      "status": 404
+    }
+  ]
+}

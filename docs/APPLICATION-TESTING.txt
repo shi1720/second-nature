@@ -1,0 +1,7 @@
+Open https://second-nature-studio.web.app. Play the featured 24-second film immediately. The Blue hour study and captioned studio guide demonstrate the actual workflow without consuming render capacity.
+
+To test a new production, continue as a guest or create an email workspace with a password of at least 12 characters. Enter a production name, choose a palette and detail seed, then save. Refresh to confirm persistence. Select Create film when capacity is available. Blender builds, renders all 576 frames and assembles the 24-second 540p movie in the cloud. A full CPU production can take over an hour and continues when the tab is closed. After completion, play the custom variant and download its MP4 and editable Blender scene.
+
+One worker is shared. Daily render-start limits are 3 globally, 2 per account and 2 per network, resetting at 00:00 UTC. Failed, cancelled and resumed starts count. Use cancellation only if needed; resume reuses valid saved frames. These admission limits are not a monetary billing cap. Exports and frame caches expire after seven days, so download files to keep. Guest-to-email linking retains the workspace; signing out of an unlinked guest can lose access. No visitor API key or payment is required.
+
+Detailed reproducible checks and live acceptance evidence: https://github.com/shi1720/second-nature/blob/main/docs/TESTING.md

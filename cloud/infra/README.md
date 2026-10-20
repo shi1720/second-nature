@@ -60,3 +60,26 @@ Test guest sign-in, email/password account creation and login, project creation,
 Inspect or cancel only this application's Cloud Run executions. Review billing reports and consider a project budget notification where appropriate; budget alerts do not stop spending. Server credentials, browser session tokens, local account state, and private metadata must stay out of Git, source archives, and Hosting assets.
 
 Sources: [Hosting REST deployments](https://firebase.google.com/docs/hosting/api-deploy), [Cloud Run job execution](https://docs.cloud.google.com/run/docs/execute/jobs), [Cloud Run roles](https://docs.cloud.google.com/iam/docs/roles-permissions/run), [Firebase password policy](https://docs.cloud.google.com/identity-platform/docs/password-policy).
+
+
+## Curated public movies without Spark media bandwidth
+
+Firebase's [pricing table](https://firebase.google.com/pricing) currently lists 360 MB/day for Spark Hosting, while its [Hosting quota guide](https://firebase.google.com/docs/hosting/usage-quotas-pricing) lists 10 GB/month and warns that exceeding the free allowance can disable Spark sites. Both CDN hits and misses count. The deployment conservatively keeps video transfer on the already billed runtime project. This is paid delivery subject to Cloud Run and network pricing, not a free or unlimited CDN.
+
+After all three movies pass acceptance, upload only those operator-selected files:
+
+```sh
+python3 cloud/infra/deploy.py showcase \
+  --original film/second-nature.mp4 \
+  --blue-hour /absolute/path/to/accepted-blue-hour.mp4 \
+  --studio-demo /absolute/path/to/completed-studio-demo.mp4
+python3 cloud/infra/deploy.py build-api
+python3 cloud/infra/deploy.py api
+python3 cloud/infra/deploy.py hosting
+```
+
+Do not deploy during an active acceptance render. `showcase` validates all inputs before starting, uploads exactly `showcase/original.mp4`, `showcase/blue-hour.mp4` and `showcase/studio-demo.mp4`, then verifies each GCS object's reported size and MD5 against the local bytes. A SHA-256 and generation receipt is saved in `cloud/showcase-upload.json`. No credentials enter this receipt; no user objects or bucket access policies are changed.
+
+The public API exposes GET and HEAD at `/api/v1/showcase/{filename}` for those three literal filenames only. It supports bounded single byte ranges and one-hour public caching. Missing or unlisted movies return 404; private production endpoints still require Firebase authentication. The bucket remains private. The seven-day lifecycle rule applies only to `users/`, so these accepted showcase copies remain available.
+
+Once the verified upload receipt is present, Hosting publication stages absolute API media URLs and an exact media origin in CSP, excludes MP4 files from its upload, and redirects the three earlier `/assets/*.mp4` URLs to the curated endpoints. Local `web/dist/index.html` retains its relative asset URLs for offline copies. Verify public playback, seeking, HEAD/Range headers and the legacy film redirect after deployment. The public media route does not consume render starts; its network transfer is billed separately from render admission limits.

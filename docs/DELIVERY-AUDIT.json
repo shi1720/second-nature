@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "audited_at_ist": "2026-10-21T02:20:23.451494+05:30",
+  "status": "delivery media, hosted acceptance and source hygiene verified; archive and external submissions pending",
+  "scope": "Read-only reconciliation of shipped source, documents, media hashes, browser/HTTP receipts and packaging preflight. Only this audit JSON was updated. No browser/cloud mutations, render, source change, archive build or repeat regression suite was performed.",
+  "relative_markdown_links": {
+    "checked": 42,
+    "missing": [],
+    "case_mismatches": [],
+    "outside_delivery_root": []
+  },
+  "expected_pending_deliverables": [],
+  "expected_pending_hosted_assets": [],
+  "copy_checks": {
+    "em_dash_files": [],
+    "stale_75_second_or_pending_cloud_claim_files": [],
+    "hackathon_word_in_app_or_demo_copy_files": [],
+    "authorship": "Shivam Gupta is credited as entrant and project lead; Codex assistance is disclosed without invented personal editing claims.",
+    "publication_status": "Prepared YouTube copy, Devpost mirror and official Discord entry remain unclaimed."
+  },
+  "credential_scan": {
+    "eligible_text_files_scanned": 108,
+    "credential_pattern_present": false,
+    "matching_filenames": [],
+    "values_printed": false,
+    "scope": "Eligible packager inventory, including source, documents, configuration, captions and browser/HTTP receipts. Ignored environments, caches, runtime databases, user projects and private operator notes were not read. Public Firebase web configuration is not a privileged credential.",
+    "nonfixture_credential_candidate_present": false,
+    "private_operator_notes_outside_repository_and_package": true
+  },
+  "licensing": {
+    "font_full_OFL_included": true,
+    "hosted_font_matches_licensed_source": true,
+    "hosted_OFL_copy_present": true,
+    "voice_attribution_and_Apache_2_model_license_reference_present": true,
+    "voice_clone_claimed": false,
+    "model_weights_bundled": false,
+    "external_tools_not_vendored": true,
+    "hosted_OFL_matches_licensed_source": true
+  },
+  "reproduction": {
+    "demo_script_root_relative": true,
+    "demo_uses_shipped_capture_MP4s_not_raw_work_JPEGs": true,
+    "demo_timeline_frames": 1920,
+    "demo_duration_seconds": 80,
+    "approved_voice_and_caption_guards_passed": true,
+    "render_gate_correctly_rejects_pending_cloud_QA": true,
+    "dossier_source_relative_and_shipped_still_fallbacks_present": true,
+    "voice_command_speed_corrected_to_0_84": true,
+    "demo_provenance_references_hash_checked": 24,
+    "demo_provenance_missing_or_mismatched_files": [],
+    "demo_timeline_contiguous": true,
+    "finished_media_packaging_preflight": "passed against the accepted original, cloud variant and demo hashes"
+  },
+  "approved_hygiene_fixes": [
+    "docs/VOICEOVER.md reproduces the approved speed setting.",
+    ".gitignore and .gcloudignore cover documented voice/tool environments, caches, environment files and private keys.",
+    ".dockerignore excludes runtime data and media while retaining pipeline, Python source, cloud code and licensed fonts."
+  ],
+  "packaging": {
+    "portable_tools_packager_present": true,
+    "full_media_and_cloud_acceptance_gate_present": true,
+    "credential_name_and_content_rejection_present": true,
+    "cache_database_symlink_exclusion_present": true,
+    "stream_SHA_inventory_and_atomic_archive_replace_present": true,
+    "archive_not_built_during_audit": true,
+    "finished_media_gate_currently_passes": true,
+    "accepted_original_demo_and_cloud_variant_hashes_bound": true,
+    "eligible_inventory_checked_without_building_archive": true,
+    "final_archive_pending": true,
+    "private_operator_note_outside_repository": true
+  },
+  "regression_test_inventory_from_AST": {
+    "python_tests": 48,
+    "by_folder": {
+      "tests": 19,
+      "studio/tests": 8,
+      "cloud/tests": 21
+    },
+    "root_breakdown": {
+      "pipeline": 15,
+      "delivery_packaging": 4
+    },
+    "hosted_state_assertions": 44,
+    "mocked_account_flow_scenarios": 9,
+    "mocked_account_behavior_checks": 32,
+    "local_progress_parser_assertions": 14,
+    "counts_from": "Python AST inventory and recorded suite evidence; JavaScript behavior inventory reconciled to current test source and documentation.",
+    "suites_rerun": false
+  },
+  "remaining_review_items": [
+    "Build the final archive from the frozen source, verify its inventory and SHA-256, then record its receipt. No final ZIP was present during this audit.",
+    "Commit and publish the frozen source and finished delivery records through the parent workflow.",
+    "YouTube uploads, Devpost mirroring and official RenderJuice account/form/Discord submission remain pending fresh confirmation and actual service receipts. Prepared copy and a hosted film are not a submitted contest entry."
+  ],
+  "build_context_pattern_checks": {
+    ".gcloudignore": {
+      "static_pattern_check": "gitwildmatch-compatible pattern evaluation, not an image build",
+      "needed_worker_files_preserved": true,
+      "private_cache_examples_excluded": true
+    },
+    ".dockerignore": {
+      "static_pattern_check": "gitwildmatch-compatible pattern evaluation, not an image build",
+      "needed_worker_files_preserved": true,
+      "private_cache_examples_excluded": true
+    }
+  },
+  "eligible_packaging_files_at_audit": 160,
+  "accepted_delivery_evidence": {
+    "original": {
+      "movie": "film/second-nature.mp4",
+      "delivery": "film/delivery.json",
+      "verification": "film/verification.json",
+      "sha256_matches": true,
+      "checks_passed": 9,
+      "duration_seconds": 24,
+      "frames": 576,
+      "resolution": "1920x1080"
+    },
+    "cloud_variant": {
+      "movie": "film/blue-hour-preview.mp4",
+      "delivery": "film/blue-hour-delivery.json",
+      "verification": "film/blue-hour-verification.json",
+      "acceptance": "cloud/qa-report.json",
+      "sha256_matches": true,
+      "checks_passed": 9,
+      "duration_seconds": 24,
+      "frames": 576,
+      "resolution": "960x540",
+      "cancelled_saved_frames": 17,
+      "resume_started_at_frame": 18,
+      "all_576_remote_frames_verified": true,
+      "actual_private_browser_playback_and_downloads": true
+    },
+    "studio_demo": {
+      "movie": "film/studio-demo.mp4",
+      "verification": "film/studio-demo.verification.json",
+      "audio_qa": "film/studio-demo-audio-qa.json",
+      "provenance": "film/studio-demo.provenance.json",
+      "sha256_matches": true,
+      "checks_passed": 8,
+      "duration_seconds": 80,
+      "frames": 1920,
+      "resolution": "1920x1080",
+      "encoded_integrated_lufs": -16.44,
+      "encoded_true_peak_dbtp": -4.5,
+      "burned_caption_visual_samples": 8,
+      "synthetic_voice_disclosed": true,
+      "edit_is_not_claimed_as_continuous_screen_recording": true
+    },
+    "completed_ui": "stills/studio-complete.png"
+  },
+  "hosted_acceptance_evidence": {
+    "showcase_upload": {
+      "receipt": "cloud/showcase-upload.json",
+      "curated_files": 3,
+      "remote_size_md5_and_local_sha256_verified": true,
+      "bucket_remains_private": true,
+      "public_mapping_restricted_to_literal_showcase_files": true
+    },
+    "showcase_http": {
+      "receipt": "cloud/showcase-http-qa.json",
+      "checks_passed": 13,
+      "head_200_range_206_invalid_range_416_verified": true,
+      "unknown_names_and_traversal_rejected": true,
+      "private_project_endpoint_requires_authentication": true
+    },
+    "public_playback": {
+      "receipt": "web/showcase-playback-qa.json",
+      "all_three_movies_reached_actual_end": true,
+      "media_errors": null,
+      "original_played_while_signed_out": true,
+      "mutual_pause_observed": true,
+      "native_demo_seek": {
+        "passed": true,
+        "scope": "Studio guide only; native scrubber Home then Right after playback",
+        "observed_time_seconds": 0.8,
+        "duration_seconds": 80,
+        "media_error": null
+      }
+    },
+    "private_signout": {
+      "receipt": "web/signout-qa.json",
+      "guest_loss_warning_observed": true,
+      "old_productions_hidden": true,
+      "private_media_source_cleared": true,
+      "unsaved_draft_reset": true,
+      "new_guest_sees_no_old_productions": true
+    },
+    "responsive": {
+      "receipt": "web/final-responsive-qa.json",
+      "horizontal_overflow": false,
+      "widths_checked": [
+        320,
+        390,
+        768,
+        1280,
+        1920
+      ]
+    },
+    "http_and_licenses": {
+      "receipt": "web/final-http-qa.json",
+      "legacy_video_redirects_passed": true,
+      "media_csp_scoped_to_api_origin": true,
+      "dependency_fingerprints_present": true,
+      "hosted_full_OFL_accessible": true
+    },
+    "email_and_ownership_rest": {
+      "receipt": "cloud/auth-qa-report.json",
+      "checks_passed": 13,
+      "disposable_account_deleted": true,
+      "jobs_created": 0
+    },
+    "guest_upgrade_rest": {
+      "receipt": "cloud/guest-upgrade-qa-report.json",
+      "checks_passed": 7,
+      "uid_preserved": true,
+      "disposable_account_deleted": true,
+      "jobs_created": 0
+    }
+  }
+}

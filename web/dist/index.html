@@ -100,10 +100,7 @@
           <div class="hero-copy">
             <div>
               <p class="eyebrow">ONE DROP. A REASON TO ARRIVE.</p>
-              <h2>
-                Speed becomes<br />
-                <em>second nature.</em>
-              </h2>
+              <h2>Speed becomes <em>second nature.</em></h2>
               <p>
                 An amber drop races through a precision world. A breath of
                 stillness. A fall. A flower.
@@ -130,6 +127,7 @@
           </div>
           <span id="project-count" class="muted">Your own color of motion</span>
         </div>
+        <p id="capacity-note" class="capacity-note" role="status" hidden></p>
         <div id="project-list" class="project-list">
           <div class="empty">
             <span class="empty-symbol" aria-hidden="true">◈</span>
@@ -251,6 +249,31 @@
           <a href="/assets/blender-wip.png" target="_blank" rel="noopener"
             >Inside the Blender scene ↗</a
           >
+        </div>
+      </section>
+      <section class="studio-study" aria-labelledby="study-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">A PALETTE STUDY / BLUE HOUR</p>
+            <h2 id="study-title">Same story. A different feeling.</h2>
+          </div>
+          <span class="muted">An actual studio production</span>
+        </div>
+        <div class="study-grid">
+          <video id="palette-study" controls playsinline preload="metadata"
+            poster="/assets/blue-hour-poster.jpg" aria-label="Blue hour, complete cloud-rendered palette study">
+            <source src="/assets/blue-hour-preview.mp4" type="video/mp4" />
+            <track kind="captions" src="/assets/film.en.vtt" srclang="en" label="English captions" />
+          </video>
+          <div class="study-copy">
+            <p class="eyebrow">24 SECONDS / CLOUD RENDER / 540P</p>
+            <h3>From warm amber to cool blue.</h3>
+            <p>One approved direction can carry a new atmosphere. This complete
+              variant uses the studio's Blue hour palette and the same detail seed.
+              Watch the result now, then shape your own production.</p>
+            <a class="button primary" href="/assets/studio-demo.mp4" target="_blank" rel="noopener">Watch the studio guide ↗</a>
+            <p class="study-guide-note">80 seconds, with narration and captions.</p>
+          </div>
         </div>
       </section>
       <footer>
@@ -406,6 +429,32 @@
         </button>
       </form>
     </dialog>
+    <dialog id="render-again-dialog" aria-labelledby="render-again-title">
+      <div class="dialog-top">
+        <p class="eyebrow">A FRESH EXPORT</p>
+        <button
+          class="close"
+          data-close="render-again-dialog"
+          aria-label="Close production restart"
+        >
+          ×
+        </button>
+      </div>
+      <h2 id="render-again-title">Create this film again?</h2>
+      <p id="render-again-name" class="dialog-note"></p>
+      <p>
+        Exports and saved frames expire after seven days. Starting again uses one
+        daily render slot. Available production files are reused; missing frames
+        are rendered again.
+      </p>
+      <p id="render-again-error" class="form-error" role="alert"></p>
+      <button id="render-again-confirm" class="button primary wide">
+        Use one render slot and create again
+      </button>
+      <button class="text-button wide" data-close="render-again-dialog">
+        Keep the current production
+      </button>
+    </dialog>
     <dialog
       id="player-dialog"
       class="player-dialog"
@@ -441,7 +490,7 @@
         </button>
       </div>
       <h2 id="guest-exit-title">Before you leave.</h2>
-      <p class="dialog-note">
+      <p class="dialog-note" id="guest-exit-note">
         Guest work is linked to this browser session. Signing out removes your
         access. Create an account to keep your productions across devices.
       </p>
@@ -471,8 +520,8 @@
         scripted and baked into the Blender scene.
       </p>
       <p>
-        Space Grotesk by Florian Karsten is used under SIL Open Font License
-        1.1. Blender, Python and FFmpeg power production. Rendering uses this
+        Space Grotesk by Florian Karsten is used under
+        <a href="/assets/OFL.txt" target="_blank" rel="noopener">SIL Open Font License 1.1</a>. Blender, Python and FFmpeg power production. Rendering uses this
         studio's own cloud workers.
       </p>
       <p>

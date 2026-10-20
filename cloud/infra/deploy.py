@@ -3,13 +3,19 @@
 from __future__ import annotations
 
 import argparse
+import base64
 import gzip
 import hashlib
 import json
 import subprocess
+import uuid
+from urllib.parse import urlsplit
 from pathlib import Path
 
-from google_rest import GoogleRest, query
+try:
+    from .google_rest import GoogleRest, query
+except ImportError:
+    from google_rest import GoogleRest, query
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -104,6 +110,57 @@ def services(settings):
     deploy_job(settings)
     deploy_api(settings)
 
+SHOWCASE_SOURCES = {
+    'original.mp4': '/assets/second-nature.mp4',
+    'blue-hour.mp4': '/assets/blue-hour-preview.mp4',
+    'studio-demo.mp4': '/assets/studio-demo.mp4',
+}
+
+def upload_showcase(settings, paths):
+    """Operator-only upload of exactly three curated movies, never user objects."""
+    if set(paths)!=set(SHOWCASE_SOURCES):
+        raise ValueError('Provide exactly original.mp4, blue-hour.mp4 and studio-demo.mp4.')
+    prepared={}
+    for name,value in paths.items():
+        path=Path(value)
+        if path.is_symlink() or not path.is_file() or path.suffix.lower()!='.mp4':
+            raise ValueError('Showcase inputs must be regular MP4 files.')
+        body=path.read_bytes()
+        if len(body)<12 or body[4:8]!=b'ftyp':raise ValueError('Showcase input is not an MP4 container.')
+        prepared[name]=(body,hashlib.sha256(body).hexdigest(),base64.b64encode(hashlib.md5(body,usedforsecurity=False).digest()).decode())
+    api=GoogleRest(settings['project']);receipt={}
+    for name,(body,sha256,md5) in prepared.items():
+        key='showcase/'+name
+        metadata={'name':key,'contentType':'video/mp4','cacheControl':'public, max-age=3600','metadata':{'sha256':sha256}}
+        boundary='showcase-'+uuid.uuid4().hex
+        payload=(f'--{boundary}\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n'.encode()+json.dumps(metadata).encode()+
+                 f'\r\n--{boundary}\r\nContent-Type: video/mp4\r\n\r\n'.encode()+body+f'\r\n--{boundary}--\r\n'.encode())
+        result=api.request('POST',f"https://storage.googleapis.com/upload/storage/v1/b/{settings['bucket']}/o?"+query(uploadType='multipart',name=key),
+                           raw=payload,content_type='multipart/related; boundary='+boundary)
+        if result.get('name')!=key or int(result.get('size',-1))!=len(body) or result.get('md5Hash')!=md5:
+            raise RuntimeError('Uploaded showcase checksum verification failed.')
+        receipt[name]={'object':key,'size':len(body),'sha256':sha256,'md5':md5,'generation':result.get('generation'),'verified':True}
+    settings['showcaseUploaded']=receipt
+    (ROOT/'cloud'/'showcase-upload.json').write_text(json.dumps({'bucket':settings['bucket'],'publicBucket':False,'files':receipt},indent=2)+'\n')
+    print('Three curated showcase movies uploaded and verified; private user objects were not accessed.')
+
+
+def stage_showcase(index,settings):
+    if not settings.get('showcaseUploaded'):return index,[],None
+    if set(settings['showcaseUploaded'])!=set(SHOWCASE_SOURCES):raise ValueError('All three verified showcase uploads are required.')
+    parsed=urlsplit(settings.get('apiUrl',''))
+    if parsed.scheme!='https' or not parsed.hostname or parsed.username or parsed.password or parsed.path not in ('','/') or parsed.query or parsed.fragment:
+        raise ValueError('Showcase requires a configured HTTPS API origin.')
+    origin=parsed.scheme+'://'+parsed.netloc
+    redirects=[]
+    for filename,asset in SHOWCASE_SOURCES.items():
+        record=settings['showcaseUploaded'][filename]
+        if record.get('object')!='showcase/'+filename or record.get('verified') is not True:raise ValueError('Showcase upload receipt is invalid.')
+        public_url=origin+'/api/v1/showcase/'+filename
+        index=index.replace('"'+asset+'"','"'+public_url+'"')
+        redirects.append({'glob':asset,'location':public_url,'statusCode':302})
+    return index,redirects,origin
+
 def hosting(settings, public_dir):
     project, site, region = settings["project"], settings["site"], settings["region"]
     firebase_project = settings.get("firebaseProject", project)
@@ -119,21 +176,38 @@ def hosting(settings, public_dir):
     )
     files = {}
     bodies = {}
+    # New HTML must not reuse an older release's still-fresh module or stylesheet.
+    # Fingerprint dependencies from the leaves upward without changing dev sources.
+    staged = {}
+    state_hash = hashlib.sha256((public_dir / "state.mjs").read_bytes()).hexdigest()[:16]
+    app = (public_dir / "app.js").read_text().replace(
+        '"./state.mjs"', f'"./state.mjs?v={state_hash}"')
+    staged["app.js"] = app.encode()
+    app_hash = hashlib.sha256(staged["app.js"]).hexdigest()[:16]
+    css_hash = hashlib.sha256((public_dir / "style.css").read_bytes()).hexdigest()[:16]
+    index = (public_dir / "index.html").read_text().replace(
+        'src="/app.js"', f'src="/app.js?v={app_hash}"').replace(
+        'href="/style.css"', f'href="/style.css?v={css_hash}"')
+    index, media_redirects, media_origin = stage_showcase(index, settings)
+    staged["index.html"] = index.encode()
     for path in sorted(public_dir.rglob("*")):
         if not path.is_file():
             continue
         relative = path.relative_to(public_dir)
+        if media_origin and path.suffix.lower() == ".mp4":
+            continue
         if any(part.startswith(".") for part in relative.parts):
             continue
         if path.is_symlink() or not path.resolve().is_relative_to(public_dir):
             raise ValueError("Hosting assets must be regular files inside the public directory")
         if path.suffix.lower() in (".pem", ".p12", ".key", ".sqlite3", ".env"):
             raise ValueError("Credential or state file rejected from Hosting assets")
-        body = gzip.compress(path.read_bytes(), mtime=0)
+        body = gzip.compress(staged.get(relative.as_posix(), path.read_bytes()), mtime=0)
         digest = hashlib.sha256(body).hexdigest()
         files["/" + relative.as_posix()] = digest
         bodies[digest] = body
     hosting_config = {
+        "redirects": media_redirects,
         "rewrites": [
             *([{ "glob": "/api/**", "run": {"serviceId": settings["apiService"], "region": region}}] if firebase_project == project else []),
             {"glob": "**", "path": "/index.html"},
@@ -141,7 +215,7 @@ def hosting(settings, public_dir):
         "headers": [
             {"glob": "**", "headers": {
                 "X-Content-Type-Options": "nosniff", "Referrer-Policy": "strict-origin-when-cross-origin", "X-Frame-Options": "DENY",
-                "Content-Security-Policy": "default-src 'self'; script-src 'self' https://www.gstatic.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob:; media-src 'self' blob:; connect-src 'self' https://identitytoolkit.googleapis.com https://securetoken.googleapis.com " + settings.get("apiUrl", "") + "; frame-src https://" + settings["firebaseConfig"]["authDomain"] + "; base-uri 'self'; form-action 'self'; object-src 'none'; frame-ancestors 'none'",
+                "Content-Security-Policy": "default-src 'self'; script-src 'self' https://www.gstatic.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob:; media-src 'self' blob: " + (media_origin or "") + "; connect-src 'self' https://identitytoolkit.googleapis.com https://securetoken.googleapis.com " + settings.get("apiUrl", "") + "; frame-src https://" + settings["firebaseConfig"]["authDomain"] + "; base-uri 'self'; form-action 'self'; object-src 'none'; frame-ancestors 'none'",
             }},
             {"glob": "/config.js", "headers": {"Cache-Control": "no-store"}},
             *[{"glob": filename, "headers": {"Cache-Control": "no-cache"}}
@@ -167,12 +241,20 @@ def hosting(settings, public_dir):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("stage", choices=("build", "build-api", "build-worker", "job", "api", "services", "hosting", "all"))
+    parser.add_argument("stage", choices=("build", "build-api", "build-worker", "job", "api", "services", "showcase", "hosting", "all"))
     parser.add_argument("--settings", default=str(ROOT / "cloud" / "deployment.json"))
     parser.add_argument("--public-dir", default=str(ROOT / "web" / "dist"))
+    parser.add_argument("--original", help="Verified original MP4 for the curated showcase")
+    parser.add_argument("--blue-hour", help="Accepted cloud palette MP4 for the curated showcase")
+    parser.add_argument("--studio-demo", help="Completed narrated demonstration MP4 for the curated showcase")
     args = parser.parse_args()
     settings_path = Path(args.settings)
     settings = json.loads(settings_path.read_text())
+    if args.stage == "showcase":
+        if not all((args.original,args.blue_hour,args.studio_demo)):
+            parser.error("showcase requires --original, --blue-hour and --studio-demo")
+        upload_showcase(settings,{'original.mp4':args.original,'blue-hour.mp4':args.blue_hour,'studio-demo.mp4':args.studio_demo})
+        settings_path.write_text(json.dumps(settings,indent=2)+"\n")
     if args.stage in ("build", "all"):
         build(settings)
         settings_path.write_text(json.dumps(settings, indent=2) + "\n")

@@ -1,0 +1,15 @@
+{
+  "model": "hexgrad/Kokoro-82M",
+  "library": "kokoro==0.9.4",
+  "voice": "af_heart",
+  "model_license": "Apache-2.0",
+  "synthetic_narrator": true,
+  "voice_cloning": false,
+  "transcript": "Second Nature gives small creative teams a repeatable way to turn one visual idea into a finished film.\nStart with the featured animation. A single drop races through a precision machine, pauses above a waiting seed, and brings it to life.\nContinue as a guest, or create an account to keep your workspace across devices. Name a production, choose the drop and enamel colors, and set a detail seed for consistent soil.\nSave the production, then select Create film. Blender builds and lights the editable scene, renders the complete story in the cloud, and assembles the movie.\nThe workbench shows actual frame progress and production logs. Cancel safely if needed, then resume from completed frames instead of starting again.\nOnce finished, play the film in your browser and download the video or Blender scene. Download the files you want to keep; cloud exports remain available for seven days.\nCreated by Shivam Gupta with AI assistance, Second Nature connects a carefully directed visual story to a repeatable production workflow.\nMake every second grow.",
+  "transcript_sha256": "e820ff93e2edb08a45673378945a533e089eb7e62c55c6ef3517f083e532c826",
+  "duration_seconds": 80.0,
+  "synthesis_speed": 0.84,
+  "tempo_adjustment": 0.930044,
+  "timing_method": "Model-predicted token durations, adjusted for silence trimming and final tempo",
+  "audio_sha256": "5450af72d8a81df6ead2192775bc04155fa1eb19043438ac1e12f0a11db4c33c"
+}

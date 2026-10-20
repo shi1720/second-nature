@@ -5,6 +5,7 @@ import {
   jobLabel,
   safeMessage,
   artifactURL,
+  renderAvailability,
 } from "../dist/state.mjs";
 assert.equal(
   progressView({ progress: { completed: 288, total: 576 } }).percent,
@@ -64,6 +65,62 @@ for (const change of [
 ])
   assert.equal(validProject({ ...good, ...change }), false);
 assert.equal(jobLabel({ status: "failed" }), "Needs attention");
+assert.equal(
+  renderAvailability(
+    {
+      global_render_remaining: 2,
+      user_render_remaining: 1,
+      global_job_active: false,
+    },
+    false,
+  ).canRender,
+  true,
+);
+assert.equal(
+  renderAvailability(
+    {
+      global_render_remaining: 2,
+      user_render_remaining: 1,
+      global_job_active: true,
+    },
+    false,
+  ).canRender,
+  false,
+);
+assert.equal(
+  renderAvailability(
+    { global_render_remaining: 0, user_render_remaining: 1 },
+    false,
+  ).canRender,
+  false,
+);
+assert.equal(
+  renderAvailability(
+    { global_render_remaining: 2, user_render_remaining: 0 },
+    false,
+  ).canRender,
+  false,
+);
+assert.equal(
+  renderAvailability(
+    { global_render_remaining: 2, user_render_remaining: 1 },
+    true,
+  ).canRender,
+  false,
+);
+assert.match(renderAvailability(null, true).message, /continues in the cloud/);
+assert.equal(renderAvailability(null, false).canRender, false);
+assert.match(renderAvailability(null, false).message, /Checking/);
+const blockedNetwork = renderAvailability(
+  { global_render_remaining: 1, user_render_remaining: 2, network_render_remaining: 0, global_job_active: false },
+  false,
+);
+assert.equal(blockedNetwork.canRender, false);
+assert.match(blockedNetwork.message, /network.*00:00 UTC/);
+assert.equal(renderAvailability(
+  { global_render_remaining: 1, user_render_remaining: 2, network_render_remaining: 1, global_job_active: false },
+  false,
+).canRender, true);
 assert.equal(jobLabel({ status: "complete" }), "Film ready");
 assert.equal(
   safeMessage({ code: "auth/invalid-credential" }),

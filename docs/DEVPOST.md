@@ -28,7 +28,7 @@ Production raised different challenges: stale frames after edits, safe cancellat
 
 The film communicates a need, journey and result without dialogue. Its machine and flower share a consistent visual language, while the Blender project stays editable. Procedural controls support the direction: repeated geometry reveals speed, and staggered petals give growth its rhythm.
 
-A real local interruption-and-resume check preserved existing frames. Regression tests cover cache integrity, selective rendering, ownership and failure handling; mocked tests are distinguished from actual rendering evidence.
+Real local interruption-and-resume checks preserved existing frames. A hosted cancellation saved 17 completed frames; the resumed worker validated the same Blender build and began at frame 18. Regression tests cover cache integrity, selective rendering, ownership and failure handling; mocked tests are distinguished from actual rendering evidence.
 
 Entrant and project lead: **Shivam Gupta**. OpenAI Codex assisted with concept, code, automation, documentation and review. The film uses original geometry, materials and synthesized audio, plus Space Grotesk under SIL OFL 1.1. No stock models, textures, recorded music or generative video were used. Motion is scripted, not a physical simulation. The separate demonstration uses a disclosed synthetic narrator.
 

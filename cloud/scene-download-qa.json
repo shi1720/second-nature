@@ -1,0 +1,13 @@
+{
+  "objects": 595,
+  "fps": 24,
+  "frame_start": 1,
+  "frame_end": 576,
+  "camera_cuts": 5,
+  "drop_color": "#5AB8FF",
+  "enamel_color": "#203C5A",
+  "packed_font_count": 1,
+  "actions": 110,
+  "python_autorun_disabled": true,
+  "passed": true
+}

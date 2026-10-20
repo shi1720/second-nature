@@ -1,0 +1,8 @@
+Second Nature gives small creative teams a repeatable way to turn one visual idea into a finished film.
+Start with the featured animation. A single drop races through a precision machine, pauses above a waiting seed, and brings it to life.
+Continue as a guest, or create an account to keep your workspace across devices. Name a production, choose the drop and enamel colors, and set a detail seed for consistent soil.
+Save the production, then select Create film. Blender builds and lights the editable scene, renders the complete story in the cloud, and assembles the movie.
+The workbench shows actual frame progress and production logs. Cancel safely if needed, then resume from completed frames instead of starting again.
+Once finished, play the film in your browser and download the video or Blender scene. Download the files you want to keep; cloud exports remain available for seven days.
+Created by Shivam Gupta with AI assistance, Second Nature connects a carefully directed visual story to a repeatable production workflow.
+Make every second grow.

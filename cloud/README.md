@@ -18,11 +18,13 @@ Token revocation is not queried through privileged Firebase Admin user APIs in t
 
 ## API contract
 
+Use `/api/healthz` for the deployed Cloud Run health check. `/healthz` is also an application alias, but Google Front End can intercept that root path.
+
 All `/v1` routes require `Authorization: Bearer <Firebase ID token>`. Hosting rewrites may also reach identical routes under `/api/v1`. Direct Cloud Run URLs work with the configured Hosting CORS origins. Errors return `{"error":"human-readable explanation"}` with an appropriate HTTP status. Timestamps use UTC ISO 8601 strings.
 
 | Method and path | Behavior |
 | --- | --- |
-| `GET /healthz` or `HEAD /healthz` | Public process health |
+| `GET /api/healthz` or `HEAD /api/healthz` | Public deployed process health |
 | `GET /v1/me` | Identity type and current render budget |
 | `GET /v1/projects` | `{projects: [...]}` for the caller only |
 | `POST /v1/projects` | Create immutable configuration; returns the project |

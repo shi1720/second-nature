@@ -1,0 +1,8 @@
+{
+  "checked_at": "2026-10-20T20:38:48.073771+00:00",
+  "method": "Actual hosted Download MP4 button, Chrome file download, SHA-256 comparison",
+  "movie_bytes": 5992881,
+  "sha256": "5cd337506434399910c4f03e49d0daa196a08f076fc8cd0fb03c9fa13dfac5d9",
+  "matches_accepted_cloud_delivery": true,
+  "passed": true
+}

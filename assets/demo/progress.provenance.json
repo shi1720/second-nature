@@ -1,0 +1,51 @@
+{
+  "source_kind": "Actual browser CDP screencast",
+  "capture_name": "progress",
+  "native_capture_duration_seconds": 7.0807530879974365,
+  "capture_started_at_unix": 1792525381.868973,
+  "output_duration_seconds": 7.125,
+  "output_frames": 171,
+  "output_fps": 24,
+  "clock_rule": "For each24fps output timestamp, display latest actually observed source frame. Last observed frame held for remaining fraction. No interpolated UI, synthetic cursor, repeated action or fabricated state.",
+  "width": 1920,
+  "height": 1022,
+  "source_manifest_sha256": "5ad634b0486229f03368467979181c935746a4998a411c7fd04df2f58ea711c1",
+  "frames": [
+    {
+      "file": "000000.jpg",
+      "relative_time_seconds": 0.0,
+      "sha256": "7e70f8e010d25dea06f1644ce38410ebce4171e87625597aa71d126a85ce831f"
+    },
+    {
+      "file": "000001.jpg",
+      "relative_time_seconds": 0.1524648666381836,
+      "sha256": "88a61f0e7bbe757c3c114cade144d4043010b6e620ce19ef03d66ebb6f8de6f1"
+    },
+    {
+      "file": "000002.jpg",
+      "relative_time_seconds": 0.17430591583251953,
+      "sha256": "c691ca4609e87e1a934b3f53b2b921c40a8bf2dad831d8e59f845d42201a6756"
+    },
+    {
+      "file": "000003.jpg",
+      "relative_time_seconds": 0.1849980354309082,
+      "sha256": "519127c5dcb07fc7aed0236cf6dc769085d784a83a5f855a554aed1890b2735f"
+    },
+    {
+      "file": "000004.jpg",
+      "relative_time_seconds": 0.25225090980529785,
+      "sha256": "9913272d74b4e4cc98d6c71107e1e968a099fc2fa276c9e7a791d14156630a2c"
+    },
+    {
+      "file": "000005.jpg",
+      "relative_time_seconds": 0.44963908195495605,
+      "sha256": "bf3a0e87a8be6f320a037782afec41e71c522f65d40793b402e13c20af5598f5"
+    },
+    {
+      "file": "000006.jpg",
+      "relative_time_seconds": 7.0807530879974365,
+      "sha256": "bf3a0e87a8be6f320a037782afec41e71c522f65d40793b402e13c20af5598f5"
+    }
+  ],
+  "video_sha256": "ddd157f5f415f465bb3cc74f2def99ce05208e4c9e4ce7c520398d11b629de49"
+}

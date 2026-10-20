@@ -1,12 +1,12 @@
 {
-  "verifiedAt": "2026-10-20T19:06:14.985381+00:00",
+  "verifiedAt": "2026-10-20T20:47:44.152234+00:00",
   "hostingUrl": "https://second-nature-studio.web.app",
   "firebaseProject": "second-nature-studio",
   "runtimeProject": "gen-lang-client-0444960702",
   "apiUrl": "https://second-nature-api-wh46bdeima-uc.a.run.app",
-  "apiRevision": "second-nature-api-00001-zcc",
-  "hostingVersion": "sites/second-nature-studio/versions/17e0304628143dad",
-  "hostingRelease": "sites/second-nature-studio/releases/1792523067818000",
+  "apiRevision": "second-nature-api-00002-spb",
+  "hostingVersion": "sites/second-nature-studio/versions/8fee86a902bde127",
+  "hostingRelease": "sites/second-nature-studio/releases/1792528947265000",
   "checks": {
     "websiteHttp200": true,
     "publicConfigHttp200": true,
@@ -17,11 +17,24 @@
     "unrelatedOriginCorsRejected": true
   },
   "healthPath": "/api/healthz",
-  "renderWorkflowVerified": false,
-  "renderNote": "Worker bootstrap path fixed and actual Blender/FFmpeg container startup verified. Browser render/cancel/resume verification remains pending.",
+  "renderWorkflowVerified": true,
+  "renderNote": "Complete Blue hour production accepted: 576 frames, cancellation and 17-frame checkpoint recovery, actual 24-second private browser playback, matching MP4 download and inspected editable scene.",
   "serverCredentialsInPublicConfig": false,
   "workerJobGeneration": 2,
   "workerImage": "us-central1-docker.pkg.dev/gen-lang-client-0444960702/second-nature/worker:src-87389f26af036945",
   "workerBuild": "d5a2533c-e0eb-4052-8fbd-32f4df5649ca",
-  "workerStartupSmokeVerified": true
+  "workerStartupSmokeVerified": true,
+  "apiImageTag": "src-ebf211c144dc1cac",
+  "apiBuild": "b18b2623-5941-48e1-9a10-04d3f2aa4dd5",
+  "publicShowcaseVerified": true,
+  "evidence": [
+    "cloud/qa-report.json",
+    "cloud/showcase-upload.json",
+    "cloud/showcase-http-qa.json",
+    "web/private-playback-qa.json",
+    "web/showcase-playback-qa.json",
+    "web/signout-qa.json",
+    "web/final-responsive-qa.json",
+    "web/final-http-qa.json"
+  ]
 }

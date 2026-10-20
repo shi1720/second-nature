@@ -1,0 +1,9 @@
+{
+  "scope": "Live browser guest-to-existing-account warning and keep-guest path only; no credential submitted to Firebase",
+  "warningShown": true,
+  "keepReturnedToAccountLinking": true,
+  "guestWorkspacePreserved": true,
+  "savedProductionCount": 2,
+  "activeRenderUnaffected": true,
+  "credentialsClearedAfterTest": true
+}

@@ -1,0 +1,20 @@
+{
+  "checked_at": "2026-10-20T20:43:37.845019+00:00",
+  "movie": "studio-demo.mp4",
+  "passed": true,
+  "encoded_audio_integrated_lufs": -16.44,
+  "encoded_true_peak_dbtp": -4.5,
+  "encoded_lra_lu": 2.5,
+  "silence_at_least_1_2s_at_minus40db": false,
+  "burned_caption_visual_samples_seconds": [
+    1,
+    10,
+    25.5,
+    32,
+    48,
+    56,
+    61,
+    72
+  ],
+  "caption_scope": "Technical and sampled visual review. Timings derive from the approved synthesis model, not independent forced alignment."
+}

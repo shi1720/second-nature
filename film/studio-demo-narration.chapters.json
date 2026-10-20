@@ -1,0 +1,42 @@
+[
+  {
+    "title": "Introduction",
+    "start": 0.204,
+    "end": 8.465
+  },
+  {
+    "title": "Featured film",
+    "start": 8.465,
+    "end": 18.456
+  },
+  {
+    "title": "Guest and palette",
+    "start": 18.456,
+    "end": 32.275
+  },
+  {
+    "title": "Create film",
+    "start": 32.275,
+    "end": 43.646
+  },
+  {
+    "title": "Progress and resume",
+    "start": 43.646,
+    "end": 54.907
+  },
+  {
+    "title": "Playback and downloads",
+    "start": 54.907,
+    "end": 67.269
+  },
+  {
+    "title": "Credits",
+    "start": 67.269,
+    "end": 78.298
+  },
+  {
+    "title": "Closing",
+    "start": 78.298,
+    "end": 80
+  }
+]

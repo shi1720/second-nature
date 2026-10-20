@@ -1,0 +1,12 @@
+{
+  "verified": true,
+  "artifact": "second-nature.blend",
+  "source": "Authenticated hosted browser download",
+  "project_id": "a133af2cd2c2470094ae3d9bae5eba6f",
+  "bytes": 28518913,
+  "sha256": "55b42a6650bb42f0a07846e7bd2a395e0f806ee7399f5b04b4f9b5ba1b1aee4c",
+  "matches_cloud_build_manifest": true,
+  "matches_gcs_object_checksum": true,
+  "gcs_generation": "1792523941950149",
+  "recorded_at": "2026-10-20T19:42:51.281633+00:00"
+}

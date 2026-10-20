@@ -1,0 +1,73 @@
+{
+  "checkedAt": "2026-10-20T19:38:18.207512+00:00",
+  "firebaseProject": "second-nature-studio",
+  "apiUrl": "https://second-nature-api-wh46bdeima-uc.a.run.app",
+  "scope": "Disposable email/password account; read-only API ownership checks; no render jobs",
+  "checks": {
+    "emailPasswordRegistration": {
+      "passed": true,
+      "httpStatus": 200,
+      "passwordLengthAtLeast12": true
+    },
+    "emailPasswordSignIn": {
+      "passed": true,
+      "httpStatus": 200,
+      "identityMatchesRegistration": true
+    },
+    "authenticatedIdentity": {
+      "passed": true,
+      "httpStatus": 200,
+      "anonymous": false,
+      "identityMatchesRegistration": true
+    },
+    "newAccountEmptyWorkspace": {
+      "passed": true,
+      "httpStatus": 200,
+      "projectCount": 0
+    },
+    "otherOwnerProject": {
+      "passed": true,
+      "httpStatus": 404
+    },
+    "otherOwnerMovieMetadata": {
+      "passed": true,
+      "httpStatus": 404
+    },
+    "otherOwnerMovieContent": {
+      "passed": true,
+      "httpStatus": 404
+    },
+    "otherOwnerBlendMetadata": {
+      "passed": true,
+      "httpStatus": 404
+    },
+    "unauthenticatedProjectsRejected": {
+      "passed": true,
+      "httpStatus": 401
+    },
+    "invalidTokenRejected": {
+      "passed": true,
+      "httpStatus": 401
+    },
+    "foreignCorsRejected": {
+      "passed": true,
+      "httpStatus": 400,
+      "originAllowed": false
+    },
+    "disposableAccountDeleted": {
+      "passed": true,
+      "httpStatus": 200
+    },
+    "hostingCorsAllowed": {
+      "passed": true,
+      "httpStatus": 200,
+      "originAllowed": true
+    }
+  },
+  "fixtureCleanup": "deleted",
+  "passed": true,
+  "failedChecks": [],
+  "credentialsStored": false,
+  "jobsCreated": 0,
+  "existingWorkspaceModified": false
+}

@@ -1,0 +1,42 @@
+{
+  "home": {
+    "status": 200,
+    "type": "text/html; charset=utf-8",
+    "cache_control": "no-cache",
+    "content_range": null,
+    "nosniff": "nosniff",
+    "frame_options": "DENY"
+  },
+  "film_range": {
+    "status": 206,
+    "type": "video/mp4",
+    "cache_control": "public, max-age=3600",
+    "content_range": "bytes 0-1023/14484028",
+    "nosniff": "nosniff",
+    "frame_options": "DENY"
+  },
+  "script": {
+    "status": 200,
+    "type": "text/javascript; charset=utf-8",
+    "cache_control": "no-cache",
+    "content_range": null,
+    "nosniff": "nosniff",
+    "frame_options": "DENY"
+  },
+  "module": {
+    "status": 200,
+    "type": "text/javascript; charset=utf-8",
+    "cache_control": "no-cache",
+    "content_range": null,
+    "nosniff": "nosniff",
+    "frame_options": "DENY"
+  },
+  "font": {
+    "status": 200,
+    "type": "font/ttf",
+    "cache_control": "public, max-age=3600",
+    "content_range": null,
+    "nosniff": "nosniff",
+    "frame_options": "DENY"
+  }
+}

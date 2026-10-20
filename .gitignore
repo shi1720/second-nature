@@ -14,3 +14,35 @@ film/*.blend2
 film/opening.png
 film/closing.png
 film/resolved-config.json
+
+.demo-build/
+
+# Local tool environments and caches
+.voice-venv/
+.docs-venv/
+.format-venv/
+.venv*/
+*-venv/
+venv/
+node_modules/
+.pytest_cache/
+.cache/
+.voice-models/
+
+# Local credentials and private keys
+.env
+.env.*
+!.env.example
+!.env.template
+*.pem
+*.p12
+*.pfx
+*.key
+id_rsa
+id_ed25519
+application_default_credentials.json
+*credentials*.json
+client_secret*.json
+service-account*.json
+service_account*.json
+*-service-account.json

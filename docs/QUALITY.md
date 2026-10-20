@@ -11,7 +11,7 @@ SECOND NATURE · Shivam Gupta · 24 seconds · 24 fps · 576 frames.
 | Real interruption and resume | The active render was terminated with SIGTERM. Its Blender child stopped, the pipeline exited with code 130, and the project lock cleared. SHA-256 checks confirmed all 76 frames recorded before interruption were unchanged. The resumed job found 77 complete frames and began at frame 78. |
 | Real studio integration | A request through the authenticated HTTP API built a separate blue-palette project in 8.8 seconds. Seed 42, hero #5AB8FF and accent #203C5A matched the build manifest; the saved Blender hash also matched. |
 | User isolation | The build owner could download the scene (HTTP 200). A second local account could not download it or start its jobs (HTTP 404) and could not see its project/history. |
-| Pipeline regression suite | 14 passing tests covering stale cache rejection, modified scene files, PNG CRC/truncation, invalid settings/ranges, lock recovery, and selective resume. Blender/FFmpeg are mocked in these unit tests. |
+| Pipeline regression suite | 15 passing tests covering stale cache rejection, modified scene files, PNG CRC/truncation, invalid settings/ranges, lock recovery, and selective resume. Blender/FFmpeg are mocked in these unit tests. |
 | Studio regression suite | 8 passing HTTP integration tests covering authentication, CSRF, ownership, media paths/ranges, job prerequisites, concurrency, cancellation, and restart state. |
 | Real progress parsing | 14 JavaScript assertions exercise the pipeline's actual FRAME_DONE message format and malformed input handling. |
 | Motion preview | The full-length look preview was played in Chrome and sampled at the opening, chase, suspension and closing card. Camera boundary frames and growth stages were inspected separately. |
@@ -41,9 +41,9 @@ These are internal review observations, not official contest scores or audience-
 
 ## Practical scope
 
-The studio is a local creator workstation application. It is not deployed as an internet service and does not include billing, account recovery or cloud workers. Rendering is local; no RenderJuice API call or sponsor endorsement is claimed. The source uses scripted geometric motion, not a physical simulation. Different GPU backends may produce minor pixel differences even with the same production settings.
+The public studio is hosted on Firebase with guest and email authentication, password recovery, private project storage and bounded Cloud Run Blender workers. It supports one directed film system with palette and soil-seed variants. It does not provide arbitrary text-to-video, billing or unrestricted cloud rendering. Rendering costs are operator funded; application admission limits are not a hard billing cap. No RenderJuice API call or sponsor endorsement is claimed. Motion is scripted, not a physical simulation. Different GPU backends may produce minor pixel differences.
 
-The optional 75-second making-of picture edit is separate from the 24-second official animation. The supplied narration may be recorded by Shivam; the contest film requires no spoken voice.
+The 80-second narrated studio demonstration is separate from the 24-second animation. It uses a disclosed stock synthetic voice, captions and actual product screens. The contest film requires no spoken voice. Cloud delivery and the final demonstration have passed their separate checks. The guide is exactly 80 seconds, 1,920 frames and 1080p, with all eight media checks and a full decode passing. Its encoded audio measures -16.44 LUFS and -4.5 dB true peak, with no silence of at least 1.2 seconds at -40 dB. Eight burned-caption samples were inspected; their timings derive from the approved synthesis model, not independent forced alignment. The guide is now public in the app, separate from the original film.
 
 ## Final master delivery
 
@@ -55,12 +55,40 @@ Before assembly, the cache guard detected that opening the project for the WIP c
 
 ## Hosted studio
 
-The Firebase site is `https://second-nature-studio.web.app`. Its public page, configuration, security headers, Firebase guest sign-in and saved palette production have been checked in the browser. A real Cloud Run production is being exercised separately from the unit suites. The deployment receipt distinguishes infrastructure checks from completed render acceptance; do not treat an available API as a completed render.
+The Firebase site is `https://second-nature-studio.web.app`. Its public page, configuration, security headers, Firebase guest sign-in and saved palette production have been checked in the browser. The real Cloud Run production is now accepted separately from the unit suites. All 576 remote frames were verified and the resulting 24-second 540p film passed all nine independent media checks. The deployment receipt remains infrastructure evidence; the accepted render evidence is in `cloud/qa-report.json`.
 
-The cloud suite contains 14 passing tests. The web state suite covers resumed frame counts, malformed progress, project validation, job labels, safe error messages and tightly scoped artifact addresses. The hosted account-switch review also led to epoch guards for pending requests and private playback cleanup. Unchanged production controls now remain mounted during polling.
+The cloud suite contains 21 passing tests. The web state suite covers resumed frame counts, malformed progress, project validation, job labels, safe error messages and tightly scoped artifact addresses. The hosted account-switch review also led to epoch guards for pending requests and private playback cleanup. Unchanged production controls now remain mounted during polling. Nine mocked account-flow scenarios (32 behavior checks) exercise guest preservation, explicit workspace-switch confirmation, stale identity guards and confirmed film regeneration. The state suite has 44 assertions, including unknown and exhausted network capacity. Separate live REST suites passed 13 account/isolation checks and 7 guest-upgrade checks; disposable accounts were deleted and no jobs were started by these checks.
 
 ### Cloud startup correction and recorded QA waiver
 
 The first hosted production stopped before Blender launched: a local-tool fallback path indexed a nonexistent ancestor when the pipeline was installed at `/app`. The fallback now handles shallow container paths, and a regression test covers that layout. The worker image also checks the configured Blender executable, actual headless Blender startup and FFmpeg during its build.
 
 The failed job and its original log remain intact. An explicit one-time operator adjustment restored its single unused render-start charge in the isolated QA fixture's global, account and network counters. The adjustment used a generation-match transaction and left the public limits at 3/2/2. The sanitized receipt is retained in the working QA evidence; this adjustment is not evidence of a successful cloud render.
+
+### Live browser and account checks
+
+The hosted frontend passed horizontal-overflow checks at 390, 768, 1280 and 1920 pixels. The heading remains correctly spaced at every breakpoint. A saved guest workspace survived reload, and an additional palette production was saved without dispatching a worker. Content fingerprints now connect HTML, JavaScript modules and styles so an older cached release cannot hide updated controls.
+
+Thirteen live REST checks verified Firebase email/password signup and sign-in, authenticated identity, empty new workspaces, cross-owner project and artifact rejection, token rejection and restricted CORS. The disposable account was deleted. See `cloud/auth-qa-report.json`; these checks created no render jobs.
+
+A real browser download produced the private Blender scene. The complete cloud production is accepted in `cloud/qa-report.json`. Its first 17 restored frames retained their original checksums and generations, all 576 frames were present, and the execution finished successfully and released its global reservation. No pre-rendered local frames were injected into the cloud production. The authenticated browser played the accepted 960 x 540 film to its actual 24-second end with no media error (`web/private-playback-qa.json`). The real Download MP4 button produced 5,992,881 bytes with SHA-256 `5cd337506434399910c4f03e49d0daa196a08f076fc8cd0fb03c9fa13dfac5d9`, matching the delivery manifest (`cloud/movie-download-qa.json`).
+
+Live REST tests have established private ownership rejection. The final real-browser sign-out check also passed: the guest warning appeared, the old production view and private movie source cleared, and the unsaved draft reset. A new guest saw no old productions. This browser evidence is recorded separately from REST access-control tests in `web/signout-qa.json`.
+
+### Delivery utility checks
+
+Four packaging tests verify credential and database exclusion, symlink/cache rejection, changed archive content even when ZIP CRCs are valid, and refusal to package unfinished media. The resulting Python total is 48: 15 pipeline, 4 packaging, 8 local-studio and 21 cloud tests. The package manifest records every shipped file's size and SHA-256; the finished ZIP is read back and checked before replacing an earlier archive.
+
+The optional voice-replacement helper was exercised with an 80-second picture fixture and the approved narration. It produced an 80-second stereo export and rejected the 24-second film without writing an output. The source-only dossier rebuilt successfully without the frame cache, and all four PDF pages were rendered and checked visually.
+
+The authenticated browser's downloaded cloud scene also opened successfully in real Blender with Python autorun disabled. It contains 595 objects, five camera cuts, 110 baked actions and a packed font. Material inspection recovered the configured #5AB8FF drop and #203C5A enamel exactly. This check does not render another frame or modify the downloaded scene. Evidence: `cloud/scene-download-qa.json`.
+
+## Deployed public showcase offload
+
+A separate deployed public API route serves exactly three operator-curated films: the original, the accepted Blue hour study and the studio demonstration. It accepts no user ID, project ID, bucket or arbitrary object path. Private user production routes retain owner authentication and no-store responses. The storage bucket stays private, and its seven-day deletion rule applies to `users/`, not the curated `showcase/` prefix.
+
+The published Hosting release uses direct HTTPS API movie URLs, includes the media origin in CSP, and omits large MP4 copies from Firebase Hosting. All three curated uploads passed remote size/MD5 verification (`cloud/showcase-upload.json`). Thirteen live HTTP checks passed for HEAD, valid and invalid ranges, unknown names, traversal and private-route authentication (`cloud/showcase-http-qa.json`). Six focused automated showcase tests are included in the 21 cloud and 48 total Python tests.
+
+The public original, Blue hour and guide reached their actual 24-second, 24-second and 80-second ends with no media errors. Original playback while signed out and mutual pause between players were also observed (`web/showcase-playback-qa.json`). The final layout has no horizontal overflow at 320, 390, 768, 1280 or 1920 pixels (`web/final-responsive-qa.json`). The public study and guide are complete; YouTube upload, Devpost mirroring and official contest submission remain unclaimed external actions.
+
+The separate [internal rubric review](JUDGING-REVIEW.md) records strengths, risks and presentation advice. Its subjective score is not an official contest result.

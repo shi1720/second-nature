@@ -1,0 +1,42 @@
+{
+  "movie": "blue-hour-preview.mp4",
+  "checks": {
+    "duration_24_seconds": true,
+    "frames_576": true,
+    "fps_24": true,
+    "h264_video": true,
+    "yuv420p": true,
+    "aac_stereo_48k": true,
+    "resolution": true,
+    "fast_start": true,
+    "full_decode_without_errors": true
+  },
+  "media": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "codec_type": "video",
+        "width": 960,
+        "height": 540,
+        "pix_fmt": "yuv420p",
+        "r_frame_rate": "24/1",
+        "nb_read_frames": "576"
+      },
+      {
+        "codec_name": "aac",
+        "codec_type": "audio",
+        "sample_rate": "48000",
+        "channels": 2,
+        "r_frame_rate": "0/0",
+        "nb_read_frames": "1125"
+      }
+    ],
+    "format": {
+      "duration": "24.000000",
+      "size": "5992881"
+    }
+  },
+  "passed": true
+}

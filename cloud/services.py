@@ -4,6 +4,14 @@ from datetime import timedelta
 from google.cloud import run_v2, storage
 from .domain import ARTIFACT_FILES, MIME_TYPES, Problem, storage_prefix
 
+SHOWCASE_FILES = frozenset(('original.mp4', 'blue-hour.mp4', 'studio-demo.mp4'))
+
+def showcase_key(filename):
+    # A literal allowlist is the public/private boundary. Never accept a prefix,
+    # project ID, user ID, bucket name or arbitrary object path from a caller.
+    if filename not in SHOWCASE_FILES:raise Problem(404,'Showcase film not found.')
+    return 'showcase/'+filename
+
 class Launcher:
     def __init__(self, client=None, executions=None):
         self.client=client or run_v2.JobsClient()
@@ -37,3 +45,12 @@ class Artifacts:
             if isinstance(exc,NotFound):raise Problem(404,'This artifact is unavailable. It may not have been produced yet, or its seven-day storage period may have ended.') from exc
             raise
         return blob,{'size':blob.size,'content_type':MIME_TYPES[kind],'updated_at':blob.updated.isoformat() if blob.updated else None}
+
+    def describe_showcase(self,filename):
+        blob=self.bucket.blob(showcase_key(filename))
+        try:blob.reload()
+        except Exception as exc:
+            from google.api_core.exceptions import NotFound
+            if isinstance(exc,NotFound):raise Problem(404,'This showcase film is not available yet.') from exc
+            raise
+        return blob,{'size':blob.size,'content_type':'video/mp4'}

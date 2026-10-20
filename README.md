@@ -2,17 +2,44 @@
 
 **Make every second grow.**
 
-A 24-second procedural Blender film by **Shivam Gupta**, created for the RenderJuice Speed contest. A single luminous drop races through a precision machine to a dry seed. Acceleration gives way to a held breath, a fall, and a flower.
+A 24-second procedural Blender film and a repeatable production studio by **Shivam Gupta**. One luminous drop races through a precision machine toward a dry seed. Acceleration gives way to a held breath, a fall and a flower.
 
 ![SECOND NATURE](stills/poster.jpg)
 
-[Watch the complete 1080p film](film/second-nature.mp4) · [Blender source](film/second-nature.blend) · [Entry text and disclosures](docs/ENTRY.md) · [Optional narration](docs/NARRATION.md)
+[Open the studio](https://second-nature-studio.web.app) · [Watch the original 1080p film](film/second-nature.mp4) · [Editable Blender scene](film/second-nature.blend) · [Public source](https://github.com/shi1720/second-nature)
 
-The film is the entry. The accompanying **local production studio** makes it repeatable: sign in, create a palette variant, build a scene, resume a render, and assemble a finished movie. No paid service or API key is required. It is a creator workstation tool; a hosted multi-tenant service is a future product, not a claim about this release.
+The original film is complete and independently verified: **1920 x 1080, 576 frames, 24 fps, exactly 24 seconds**. **The hosted studio's complete cloud acceptance has also passed:** the Blue hour production rendered all 576 frames at 540p, assembled a 24-second film, played to completion in the authenticated browser and downloaded with the expected SHA-256. Cancellation preserved 17 frames, and the resumed worker reused them. See [testing and publication gates](docs/TESTING.md) and the [accepted cloud report](cloud/qa-report.json). The original, accepted Blue hour palette study and complete 80-second studio guide are now public in the app, without an account or render start.
 
-## Start the studio
+## Try it in the browser
 
-On this Mac, double-click **start-studio.command**, or run:
+1. Open [second-nature-studio.web.app](https://second-nature-studio.web.app). The featured original film is ready to watch immediately, without signing in or starting a render.
+2. Select **Try the studio** and continue as a guest, or create an email account. Passwords require at least 12 characters.
+3. Create a production with a name, drop and enamel colors, and a detail seed. The seed controls soil dressing; the story and camera composition stay fixed.
+4. Save it, then select **Create film** when shared capacity is available. This starts the actual Blender build, render and assembly workflow. The workbench shows worker logs and completed frames.
+5. Leave the page if needed. The cloud execution continues. Return in the same browser or sign in to the same account to see its state. Budget about 80 minutes for a full CPU render on the current worker; this is an estimate, and actual progress is the source of truth.
+6. Once a production finishes, use **Play film**, **Download MP4** or **Blender scene**. Download files you want to keep: generated exports and frame checkpoints are subject to seven-day expiry.
+
+Guest identity persists in this browser's local storage. Use **Keep workspace** while signed in as a guest to link an email account and retain access across devices. Signing out of an unlinked guest account or clearing browser data can lose access to that identity. Hosted accounts are separate from the optional local studio, RenderJuice and Discord.
+
+Cloud previews cover the full story at **960 x 540 and 16 Cycles samples**. The featured original is **1080p and 48 samples**. The current tool varies an authored film system; it does not generate arbitrary stories from a prompt.
+
+## Shared capacity and retention
+
+The deployed application permits **one active production job globally**, with **three render/all starts globally, two per account and two per client network per UTC day**. Limits reset at **00:00 UTC / 05:30 IST**. Failed and cancelled starts count; resuming starts another paid execution and consumes another allowance. The interface reports unavailable capacity instead of pretending a render has started.
+
+Watching the original, preparing a project and downloading an available export do not start a render. No visitor API key or payment is needed. The operator pays cloud costs: these admission limits reduce routine usage, but they are not a hard monetary billing cap. The worker has a two-hour execution timeout and no automatic retries.
+
+Generated files and frame caches expire under a seven-day storage lifecycle; deletion timing is controlled by the storage service. Workspace metadata is retained. A saved production record is not permanent file storage. [Cloud operations and security details](cloud/README.md)
+
+## Architecture
+
+Firebase Hosting serves the frontend, and Firebase Authentication supplies guest and email identities. An authenticated Cloud Run API enforces ownership and dispatches a dedicated Blender worker. A private Cloud Storage bucket holds production metadata, artifacts and fingerprinted checkpoints. Object-generation checks make shared quota and job updates atomic. **There is no Firestore dependency.**
+
+The original film was rendered locally. Studio variants run on the app's cloud workers. No RenderJuice rendering integration or sponsor endorsement is claimed. User exports use owner-authenticated artifact requests; the bucket is not public. A separate, literal three-file public showcase route is implemented for the curated original, Blue hour study and studio guide. The deployed Hosting release points those media URLs to Cloud Run, keeping large movies out of Firebase Hosting transfer. Live checks confirm media headers, bounded Range requests and private-route rejection. This curated showcase grants no public access to user productions.
+
+## Run locally
+
+Use Python 3.10+, [Blender 4.5 LTS](https://www.blender.org/download/lts/4-5/) and [FFmpeg](https://ffmpeg.org/download.html). Python 3.12 dependency versions are recorded in `requirements-lock.txt`.
 
 ```sh
 python3 -m venv .venv
@@ -20,81 +47,76 @@ python3 -m venv .venv
 .venv/bin/python studio/server.py
 ```
 
-Open **http://127.0.0.1:8765**. Create a local account with a password of at least 12 characters. There is no default account, no email verification, and no external identity provider. Your local studio account is separate from RenderJuice and Discord.
+Open **http://127.0.0.1:8765** and create a separate local account. On macOS, `start-studio.command` performs setup and opens the local studio. Its Python server uses the standard library; NumPy and Pillow support soundtrack synthesis and typography. The local workflow keeps its own files on the workstation.
 
-Blender **4.5 LTS** and **FFmpeg** must be installed to produce variants. The current workspace has a portable Blender 4.5.9 and FFmpeg ready. On another computer, [install Blender](https://www.blender.org/download/lts/4-5/) and [FFmpeg](https://ffmpeg.org/download.html), then set `BLENDER_BIN` if Blender is not on PATH:
+If Blender is not on PATH, set its executable explicitly:
 
 ```sh
 export BLENDER_BIN='/Applications/Blender.app/Contents/MacOS/Blender'
+.venv/bin/python pipeline.py all --config project.json --profile preview
 ```
 
-Python 3.10+ is recommended. The tested Python 3.12 dependency versions are recorded in `requirements-lock.txt`. NumPy and Pillow are used only for original sound synthesis and pixel-precise typography; the studio itself uses Python's standard library. Nothing sends production files to the cloud.
+For the palette study configuration, use `--config examples/blue-hour.json`; it writes to a separate project folder. Use `--profile final` for 1080p. Build, render and assemble may also be run separately. A short installation check can render `--start 1 --end 3`; assembly intentionally refuses incomplete sequences. `pipeline.py verify --config project.json` checks build identity and all 576 PNG frames. A complete run can be lengthy on CPU hardware.
 
-## Produce a film from the command line
+Edit `project.json` to change `seed`, `hero_color` and `accent_color`; an optional `output_dir` selects the destination. The local studio puts variants in separate `projects/<id>/` folders. [Local studio instructions](studio/README.md)
 
-```sh
-.venv/bin/python pipeline.py build --config project.json
-.venv/bin/python pipeline.py render --config project.json --profile preview
-.venv/bin/python pipeline.py assemble --config project.json
-```
+## Recovery and verification
 
-Use `--profile final` for 1920 × 1080, 48-sample Cycles output. Preview uses 960 × 540 and 16 samples. Both profiles contain **576 frames at 24 fps, exactly 24 seconds**. A Metal, OptiX, CUDA, HIP or oneAPI device is selected when available, with a CPU fallback.
+- Frames are written atomically. Resume checks dimensions, chunk CRCs and the PNG end marker before reusing them.
+- Cache identity includes settings, scene source, renderer source, saved Blender file and quality profile. Modified Blender files require a fresh procedural build before deterministic resume.
+- Independent baked camera shots prevent cut-related motion blur contamination. Motion plays without Python autorun, and the font is packed.
+- Delivery uses H.264/yuv420p, AAC stereo at 48 kHz and fast-start metadata. Audio is normalized toward -16 LUFS.
+- Tests currently pass: **48 Python tests, 44 hosted-state assertions, 9 mocked account-flow scenarios (32 behavior checks), and 14 local progress-parser assertions**. Mocked tests are distinct from real film and cloud acceptance checks.
 
-A complete run is `pipeline.py all --config project.json --profile final`. For a short installation check, render `--start 1 --end 3`; assembly intentionally refuses incomplete sequences. `pipeline.py verify --config project.json` checks the built scene identity and all frames.
+See [reproducible test commands and acceptance checklist](docs/TESTING.md), [film verification](film/verification.json) and [production quality notes](docs/QUALITY.md). Preserve build/render manifests when resuming. Different GPU backends may produce small pixel differences.
 
-Edit `project.json` to change `seed`, `hero_color` or `accent_color`. An optional absolute `output_dir` chooses the destination; otherwise output goes to `film/`. The seed changes the soil dressing; the palette changes the hero and enamel. Story, duration, typography and camera edit are intentionally art directed and fixed in this release. The studio writes each variant into its own `projects/<id>/` directory.
+## Craft, credits and supporting materials
 
-## Recovery and correctness
+Geometry, materials, lighting and motion were created through Blender Python: analytic droplet, rails, gates, machined planter, seed, hinged petals, leaves and Fibonacci pollen. The soundtrack is original mathematical synthesis. Motion is scripted animation, not a physical simulation.
 
-- Frame files are written atomically. Resume checks dimensions, chunk CRCs and the PNG end marker; missing or damaged frames are rendered again.
-- Cache identity includes the configuration, geometry source, renderer source, saved Blender file and quality profile. Changes cannot silently mix old and new renders.
-- Switching profiles archives the previous frame folder. Rebuild after editing the scene source or a saved Blender project. Manual scene edits are deliberately rejected for deterministic resume.
-- One operation holds a lock per output folder. The studio additionally limits the workstation to one active job. Stop with Ctrl-C or Cancel; restart the same render to continue.
-- Camera shots have independent baked animation, preventing camera teleports from contaminating motion blur at cuts. Animation plays without Python autorun, and the font is packed into the `.blend`.
-- The MP4 uses H.264/yuv420p, AAC stereo at 48 kHz, and fast-start metadata. FFmpeg normalizes delivery audio to a -16 LUFS target and -1.5 dB true peak limit.
+Entrant and project lead: **Shivam Gupta**. OpenAI Codex assisted with concept, code, automation, documentation and review. Space Grotesk is bundled under SIL OFL 1.1. The film contains no stock models, image textures, recorded music or generative video. [Full entry and disclosure](docs/ENTRY.md)
 
-Detailed build, render and assembly logs stay beside the project. Do not remove `build-manifest.json` or `render-state.json` while resuming. Source hashes and Blender's file hash protect cache identity; they are not a claim that different GPU vendors produce byte-identical pixels.
+The separate **80-second narrated product demonstration is complete and public in the app**: [watch the guide](https://second-nature-studio.web.app/assets/studio-demo.mp4), [read the script](docs/studio-demo-script.txt) or [inspect its delivery verification](film/studio-demo.verification.json). The 1080p movie passed all eight media checks, including 1,920 decoded frames and an exact 80-second duration. Actual product screens and time-edited production stages accompany neural narration and readable burned captions. The stock synthetic narrator does not clone or impersonate Shivam. [Voiceover provenance and reproduction](docs/VOICEOVER.md)
 
-## Craft and evidence
+The [commercial thesis](docs/COMMERCIAL.md) describes a narrow variant-production workflow, proposed pilots and unvalidated assumptions. No customers, revenue or measured time savings are claimed.
 
-Everything visible was built through `bpy`: analytic droplet mesh, beveled rails and gates, loop calibration ticks, machined planter, dry soil, seed, curved petals, leaves and Fibonacci pollen. The flower uses separate hinged whorls with staggered unfolding and settling. Motion is scripted keyframe animation, **not a physical simulation**.
-
-The soundtrack is original mathematical synthesis with no recorded samples. Typography uses the bundled **Space Grotesk** font under SIL OFL 1.1. No stock models, image textures, music, or generative video appear in the film.
-
-![Authentic Blender work in progress](stills/blender-wip.png)
-
-AI assistance: OpenAI Codex helped with concept development, code, production automation, documentation and review. Shivam Gupta is the entrant and project lead. See [full disclosure and entry copy](docs/ENTRY.md).
-
-## Tests
-
-```sh
-python3 -m unittest discover -s tests -v
-python3 -m unittest discover -s studio/tests -v
-```
-
-Regression tests cover corrupt/incomplete images, configuration and source changes, modified Blender files, locking, selective resume, frame range validation, authentication, CSRF, user isolation, media path traversal, job concurrency and cancellation. Unit tests mock Blender/FFmpeg; the shipped film and quality report separately document actual rendering and delivery checks.
-
-## Submission
-
-The package is **prepared, not officially submitted**. The official entry requires a RenderJuice account, Discord registration in **#start-here**, and a post with the film and WIP image in **#contest-submissions**. Devpost alone does not enter the contest. The official cutoff is **1 November 2026 at 05:29 IST**. Follow [the complete handoff](docs/ENTRY.md) and [official contest details](https://www.renderjuice.com/contests/speed).
-
-An optional 75-second picture edit and a [word-for-word narration](docs/NARRATION.md) are included for a making-of video. Add your recording with `source/add_voiceover.py`; the 24-second contest film itself needs no voiceover.
-
-The [commercial note](docs/COMMERCIAL.md) describes a narrow customer, competing tools, proposed pricing experiments and unvalidated assumptions. No customer traction, revenue, physical simulation, sponsor endorsement or guaranteed award is claimed.
+The contest materials are prepared, **not officially submitted**. YouTube upload and the Devpost mirror also remain pending; no external publication URL is claimed. Official participation requires the RenderJuice account, Discord join form and entry post; Devpost alone does not enter the contest. Follow [the submission handoff](docs/ENTRY.md).
 
 ## Project map
 
 | Path | Purpose |
 | --- | --- |
-| `film/second-nature.mp4` | Submission film |
-| `film/second-nature.blend` | Editable Blender project, packed font and baked animation |
-| `film/soundtrack.wav` | Original stereo soundtrack |
-| `source/scene.py` | Procedural geometry, materials, camera and animation |
-| `source/render.py` | GPU selection and atomic frame rendering |
-| `source/finish.py` | Original score, title cards and delivery encoding |
-| `pipeline.py` | Validated build/render/resume/assemble/verify CLI |
-| `studio/` | Local authenticated production UI and tests |
-| `stills/` | Poster, production stills and authentic Blender WIP evidence |
-| `docs/` | Submission text, business hypothesis, narration and quality report |
+| `film/second-nature.mp4` | Complete verified original film |
+| `film/second-nature.blend` | Editable scene, packed font and baked motion |
+| `film/blue-hour-preview.mp4` | Accepted 24-second 540p cloud palette study |
+| `film/studio-demo.mp4` | Verified 80-second narrated 1080p studio guide |
+| `source/` and `pipeline.py` | Procedural film, synthesis, rendering and delivery tools |
+| `web/dist/` | Hosted frontend |
+| `cloud/` | Authenticated API, worker, checkpoints and deployment |
+| `studio/` | Optional local workstation UI |
+| `stills/` | Poster, Blender WIP and production images |
+| `docs/` | Testing, submission, commercial and publication materials |
 
-Original project materials: © 2026 Shivam Gupta, all rights reserved; see [LICENSE](LICENSE). Font license: [OFL](assets/fonts/OFL.txt).
+Original project materials: © 2026 Shivam Gupta; see [LICENSE](LICENSE). Font terms: [OFL](assets/fonts/OFL.txt).
+
+## Rebuild the production dossier
+
+The four-page PDF can be rebuilt from the included original stills without the full render cache:
+
+```sh
+.venv/bin/python -m pip install -r requirements-docs.txt
+.venv/bin/python tools/build_dossier.py
+```
+
+The source-only rebuild was exercised separately from the native render-cache build. The final PDF was rendered and visually checked on every page.
+
+## Rebuild and verify the delivery archive
+
+After the original film, cloud variant and captioned demonstration have passed their independent media checks:
+
+```sh
+.venv/bin/python tools/package_delivery.py
+.venv/bin/python tools/package_delivery.py --verify ../second-nature-submission.zip
+```
+
+The packager excludes render caches, virtual environments, local databases and credentials. It refuses unfinished or changed verified media, then checks every archive member against its manifest before publishing the ZIP.
