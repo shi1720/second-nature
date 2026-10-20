@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#102d36" />
+    <meta
+      name="description"
+      content="A film with somewhere to go. Watch SECOND NATURE and create your own palette with a real Blender production workflow."
+    />
+    <title>SECOND NATURE | Motion with meaning</title>
+    <link rel="icon" href="/assets/mark.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/style.css" />
+    <script src="/config.js"></script>
+    <script type="module" src="/app.js"></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <aside class="sidebar">
+      <a class="brand" href="#overview" aria-label="Second Nature home"
+        ><svg viewBox="0 0 48 48" aria-hidden="true">
+          <path
+            d="M24 3C18 15 8 23 8 32a16 16 0 0 0 32 0C40 23 30 15 24 3Z"
+            fill="currentColor"
+          />
+          <path
+            d="M24 17v23M24 30l9-7M24 35l-8-6"
+            fill="none"
+            stroke="#102d36"
+            stroke-width="2"
+          /></svg
+        ><span>SECOND<br />NATURE<small>MOTION WITH MEANING</small></span></a
+      >
+      <p class="nav-label">YOUR CREATIVE SPACE</p>
+      <nav aria-label="Main navigation">
+        <a class="nav-link active" href="#overview"
+          ><span aria-hidden="true">◈</span> Overview</a
+        ><a class="nav-link" href="#productions"
+          ><span aria-hidden="true">▤</span> Productions</a
+        ><a class="nav-link" href="#workbench"
+          ><span aria-hidden="true">⌘</span> Workbench</a
+        ><a class="nav-link" href="#craft"
+          ><span aria-hidden="true">✳</span> The craft</a
+        >
+      </nav>
+      <div class="sidebar-bottom">
+        <span class="live-dot"></span> BUILT WITH BLENDER
+        <p>One carefully directed story.<br />A world of possibilities.</p>
+        <a
+          href="https://github.com/shi1720/second-nature"
+          target="_blank"
+          rel="noopener"
+          >Explore the source ↗</a
+        >
+      </div>
+    </aside>
+    <main id="main">
+      <header class="topbar">
+        <span class="eyebrow"
+          >THE ART OF ARRIVING <span class="crumb">/ Studio</span></span
+        >
+        <div class="account">
+          <span id="account-label" hidden></span
+          ><button id="auth-open" class="text-button">
+            Sign in <span aria-hidden="true">↗</span></button
+          ><button id="signout" class="text-button" hidden>Sign out</button>
+        </div>
+      </header>
+      <section id="overview" aria-labelledby="page-title">
+        <div class="page-heading">
+          <div>
+            <p class="eyebrow">SECOND NATURE / 001</p>
+            <h1 id="page-title">Make motion mean more.</h1>
+            <p class="subtitle">Beautiful films. Repeatable craft.</p>
+          </div>
+          <button class="button primary" id="new-project">
+            <span aria-hidden="true">＋</span> New production
+          </button>
+        </div>
+        <div class="hero-card">
+          <div class="film-frame">
+            <video
+              id="featured-film"
+              controls
+              playsinline
+              preload="metadata"
+              poster="/assets/poster.jpg"
+              aria-label="SECOND NATURE, complete 24-second film"
+            >
+              <source src="/assets/second-nature.mp4" type="video/mp4" />
+              <track
+                default
+                kind="captions"
+                src="/assets/film.en.vtt"
+                srclang="en"
+                label="English captions"
+              /></video
+            ><span class="film-tag">THE ORIGINAL FILM / 24 SECONDS</span>
+          </div>
+          <div class="hero-copy">
+            <div>
+              <p class="eyebrow">ONE DROP. A REASON TO ARRIVE.</p>
+              <h2>
+                Speed becomes<br />
+                <em>second nature.</em>
+              </h2>
+              <p>
+                An amber drop races through a precision world. A breath of
+                stillness. A fall. A flower.
+              </p>
+              <button id="watch-film" class="text-button">
+                Watch the film <span aria-hidden="true">↗</span>
+              </button>
+            </div>
+            <div class="film-stats">
+              <div>
+                <small>CREATION</small><strong>Blender + Python</strong>
+              </div>
+              <div><small>DURATION</small><strong>24 seconds</strong></div>
+              <div><small>DIRECTION</small><strong>Shivam Gupta</strong></div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="productions" aria-labelledby="productions-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">FROM AN IDEA TO A FINISHED FILM</p>
+            <h2 id="productions-title">Your productions</h2>
+          </div>
+          <span id="project-count" class="muted">Your own color of motion</span>
+        </div>
+        <div id="project-list" class="project-list">
+          <div class="empty">
+            <span class="empty-symbol" aria-hidden="true">◈</span>
+            <h3>A new perspective starts here.</h3>
+            <p>Choose a palette. Plant a seed. Make the story your own.</p>
+            <button id="guest-start" class="button secondary">
+              Try the studio
+            </button>
+            <p class="fine">
+              No account needed to explore. Your guest workspace stays in this
+              browser.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section id="workbench" aria-labelledby="workbench-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">TRANSPARENT BY DESIGN</p>
+            <h2 id="workbench-title">Production workbench</h2>
+          </div>
+          <span id="connection" class="status-pill">Connecting</span>
+        </div>
+        <div class="workbench-grid">
+          <div class="steps">
+            <div class="step">
+              <span>01</span>
+              <div>
+                <h3>Shape the world</h3>
+                <p>Pick the drop, enamel colors and a seed for the soil.</p>
+              </div>
+            </div>
+            <div class="step">
+              <span>02</span>
+              <div>
+                <h3>Render the motion</h3>
+                <p>Blender builds and lights every frame in the cloud.</p>
+              </div>
+            </div>
+            <div class="step">
+              <span>03</span>
+              <div>
+                <h3>Make it yours</h3>
+                <p>Watch, download, or keep creating in the editable scene.</p>
+              </div>
+            </div>
+            <p class="work-note">
+              Cloud previews cover the full 24-second story at 540p. The
+              original film is 1080p. A shared daily render allowance keeps the
+              studio available for considered experiments. Exports and saved frames are kept for seven days. Download the files you want to keep.
+            </p>
+          </div>
+          <div class="console">
+            <div class="console-head">
+              <span><i class="live-dot"></i> LIVE PRODUCTION</span
+              ><button id="cancel-job" class="text-button" hidden>
+                Cancel job
+              </button>
+            </div>
+            <div class="job-summary" id="job-summary">Ready when you are.</div>
+            <progress
+              id="job-progress"
+              max="576"
+              hidden
+              aria-label="Rendered frames"
+            ></progress>
+            <p id="job-progress-label" class="progress-label">
+              Your actual build, render and export progress will appear here.
+            </p>
+            <details id="log-details">
+              <summary>Production details</summary>
+              <pre id="job-log">Create a production to begin.</pre>
+            </details>
+          </div>
+        </div>
+      </section>
+      <section id="craft" aria-labelledby="craft-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">FRAME BY FRAME</p>
+            <h2 id="craft-title">A world built with intention.</h2>
+          </div>
+          <span class="muted">Original Blender renders</span>
+        </div>
+        <div class="gallery">
+          <figure>
+            <img
+              src="/assets/drop-chase.jpg"
+              alt="Luminous amber drop accelerating along brass rails"
+              loading="lazy"
+            />
+            <figcaption>01 / The chase</figcaption>
+          </figure>
+          <figure>
+            <img
+              src="/assets/loop.jpg"
+              alt="A brass vertical loop surrounded by teal enamel"
+              loading="lazy"
+            />
+            <figcaption>02 / The journey</figcaption>
+          </figure>
+          <figure>
+            <img
+              src="/assets/bloom.jpg"
+              alt="Peach petals opening over a machined planter"
+              loading="lazy"
+            />
+            <figcaption>03 / The arrival</figcaption>
+          </figure>
+        </div>
+        <div class="craft-note">
+          <p>
+            Geometry, timing, light and sound are created for this film.
+            Procedural tools bring consistency; deliberate direction gives every
+            second a purpose.
+          </p>
+          <a href="/assets/blender-wip.png" target="_blank" rel="noopener"
+            >Inside the Blender scene ↗</a
+          >
+        </div>
+      </section>
+      <footer>
+        <span>SECOND NATURE / A film and studio by Shivam Gupta</span
+        ><button class="text-button" id="credits-open">Process & credits</button
+        ><span>Make every second grow.</span>
+      </footer>
+    </main>
+    <dialog id="auth-dialog" aria-labelledby="auth-title">
+      <div class="dialog-top">
+        <p class="eyebrow">YOUR CREATIVE SPACE</p>
+        <button
+          class="close"
+          data-close="auth-dialog"
+          aria-label="Close sign in"
+        >
+          ×
+        </button>
+      </div>
+      <h2 id="auth-title">Welcome back.</h2>
+      <p class="dialog-note" id="auth-note">
+        Save your work and pick up where you left off.
+      </p>
+      <form id="auth-form">
+        <label
+          >Email<input
+            id="email"
+            type="email"
+            autocomplete="email"
+            required
+            maxlength="254" /></label
+        ><label
+          >Password<input
+            id="password"
+            type="password"
+            autocomplete="current-password"
+            required
+            minlength="12"
+            maxlength="128"
+          /><small id="password-help">Use at least 12 characters.</small></label
+        ><button id="password-reset" class="text-button" type="button">
+          Forgot your password?
+        </button>
+        <p id="auth-error" class="form-error" role="alert"></p>
+        <button class="button primary wide" id="auth-submit">Sign in</button>
+      </form>
+      <button id="auth-switch" class="text-button wide">
+        New here? Create a workspace
+      </button>
+      <div class="or"><span>or explore first</span></div>
+      <button id="guest-auth" class="button secondary wide">
+        Continue as a guest
+      </button>
+      <p class="fine">
+        Guest work is linked to this browser. Create an account to keep access
+        across devices.
+      </p>
+    </dialog>
+    <dialog id="project-dialog" aria-labelledby="project-title">
+      <div class="dialog-top">
+        <p class="eyebrow">A NEW PERSPECTIVE</p>
+        <button
+          class="close"
+          data-close="project-dialog"
+          aria-label="Close production form"
+        >
+          ×
+        </button>
+      </div>
+      <h2 id="project-title">Make it your own.</h2>
+      <p class="dialog-note">
+        One directed story, with your own palette and detail.
+      </p>
+      <form id="project-form">
+        <label
+          >Production name<input
+            id="project-name"
+            placeholder="Blue hour"
+            required
+            maxlength="80"
+            autocomplete="off"
+        /></label>
+        <div class="palette-presets" aria-label="Palette presets">
+          <button
+            type="button"
+            data-palette="#FF763E,#154D58"
+            class="palette-preset selected"
+            aria-pressed="true"
+          >
+            <i style="background: #ff763e"></i
+            ><i style="background: #154d58"></i>Original</button
+          ><button
+            type="button"
+            data-palette="#5AB8FF,#203C5A"
+            class="palette-preset"
+            aria-pressed="false"
+          >
+            <i style="background: #5ab8ff"></i
+            ><i style="background: #203c5a"></i>Blue hour</button
+          ><button
+            type="button"
+            data-palette="#DFB3F2,#304D41"
+            class="palette-preset"
+            aria-pressed="false"
+          >
+            <i style="background: #dfb3f2"></i
+            ><i style="background: #304d41"></i>Wild orchid
+          </button>
+        </div>
+        <div class="color-row">
+          <label
+            ><input id="hero-color" type="color" value="#FF763E" /><span
+              >Drop<small id="hero-hex">#FF763E</small></span
+            ></label
+          ><label
+            ><input id="accent-color" type="color" value="#154D58" /><span
+              >Enamel<small id="accent-hex">#154D58</small></span
+            ></label
+          >
+        </div>
+        <div class="seed-row">
+          <label
+            >Detail seed<input
+              id="seed"
+              type="number"
+              min="0"
+              max="999999"
+              value="42"
+              step="1"
+              required
+            /><small
+              >The same seed keeps the soil detail consistent.</small
+            ></label
+          ><button
+            type="button"
+            id="shuffle-seed"
+            class="button secondary"
+            aria-label="Choose a random detail seed"
+          >
+            ↻ Shuffle
+          </button>
+        </div>
+        <div class="config-note">
+          Full story preview / 24 seconds / 540p<br /><span
+            >Save first, then start a render when you are ready. Cloud jobs
+            share limited daily capacity.</span
+          >
+        </div>
+        <p id="project-error" class="form-error" role="alert"></p>
+        <button id="project-submit" class="button primary wide">
+          Create production
+        </button>
+      </form>
+    </dialog>
+    <dialog
+      id="player-dialog"
+      class="player-dialog"
+      aria-labelledby="player-title"
+    >
+      <div class="dialog-top">
+        <h2 id="player-title">Your film</h2>
+        <button
+          class="close"
+          data-close="player-dialog"
+          aria-label="Close film player"
+        >
+          ×
+        </button>
+      </div>
+      <video
+        id="variant-player"
+        controls
+        playsinline
+        aria-label="Rendered production film"
+      ></video>
+      <p id="player-note" class="dialog-note"></p>
+    </dialog>
+    <dialog id="guest-exit-dialog" aria-labelledby="guest-exit-title">
+      <div class="dialog-top">
+        <p class="eyebrow">KEEP YOUR CREATIVE WORK</p>
+        <button
+          class="close"
+          data-close="guest-exit-dialog"
+          aria-label="Close workspace options"
+        >
+          ×
+        </button>
+      </div>
+      <h2 id="guest-exit-title">Before you leave.</h2>
+      <p class="dialog-note">
+        Guest work is linked to this browser session. Signing out removes your
+        access. Create an account to keep your productions across devices.
+      </p>
+      <button id="guest-keep" class="button primary wide">
+        Keep my workspace</button
+      ><button id="guest-leave" class="text-button wide">
+        Sign out without keeping access
+      </button>
+    </dialog>
+    <dialog id="credits-dialog" aria-labelledby="credits-title">
+      <div class="dialog-top">
+        <p class="eyebrow">PROCESS & CREDITS</p>
+        <button
+          class="close"
+          data-close="credits-dialog"
+          aria-label="Close credits"
+        >
+          ×
+        </button>
+      </div>
+      <h2 id="credits-title">Made with intention.</h2>
+      <p>Project lead: Shivam Gupta.</p>
+      <p>
+        OpenAI Codex assisted with concept development, code, automation,
+        documentation and review. Original geometry, materials and
+        mathematically synthesized audio were made for this project. Motion is
+        scripted and baked into the Blender scene.
+      </p>
+      <p>
+        Space Grotesk by Florian Karsten is used under SIL Open Font License
+        1.1. Blender, Python and FFmpeg power production. Rendering uses this
+        studio's own cloud workers.
+      </p>
+      <p>
+        No stock models, recorded music, generative video, physical simulation
+        or sponsor endorsement is claimed.
+      </p>
+      <a
+        class="text-button"
+        href="https://github.com/shi1720/second-nature"
+        target="_blank"
+        rel="noopener"
+        >View source and full workflow ↗</a
+      >
+    </dialog>
+    <div id="toast" class="toast" role="status" hidden></div>
+  </body>
+</html>

@@ -46,7 +46,7 @@ Edit `project.json` to change `seed`, `hero_color` or `accent_color`. An optiona
 
 ## Recovery and correctness
 
-- Frame files are written atomically. Resume checks dimensions, chunk CRCs and complete PNG structure; corrupt frames are rendered again.
+- Frame files are written atomically. Resume checks dimensions, chunk CRCs and the PNG end marker; missing or damaged frames are rendered again.
 - Cache identity includes the configuration, geometry source, renderer source, saved Blender file and quality profile. Changes cannot silently mix old and new renders.
 - Switching profiles archives the previous frame folder. Rebuild after editing the scene source or a saved Blender project. Manual scene edits are deliberately rejected for deterministic resume.
 - One operation holds a lock per output folder. The studio additionally limits the workstation to one active job. Stop with Ctrl-C or Cancel; restart the same render to continue.

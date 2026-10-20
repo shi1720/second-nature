@@ -1,0 +1,21 @@
+{
+  "project": "gen-lang-client-0444960702",
+  "site": "second-nature-studio",
+  "region": "us-central1",
+  "bucket": "second-nature-studio-render-assets",
+  "firebaseProject": "second-nature-studio",
+  "apiService": "second-nature-api",
+  "renderJob": "second-nature-render",
+  "sourceBucket": "second-nature-studio-build-source",
+  "firebaseConfig": {
+    "apiKey": "AIzaSyA8pRC-zbJRvq5esqYeZ1CldPuMhK_AaXo",
+    "authDomain": "second-nature-studio.firebaseapp.com",
+    "projectId": "second-nature-studio",
+    "storageBucket": "second-nature-studio.firebasestorage.app",
+    "messagingSenderId": "118535364063",
+    "appId": "1:118535364063:web:9198edaaac043ea83cf86a"
+  },
+  "backendProvisioned": true,
+  "apiImageTag": "src-461a0aef41153121",
+  "apiUrl": "https://second-nature-api-wh46bdeima-uc.a.run.app"
+}

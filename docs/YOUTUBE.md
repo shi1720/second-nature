@@ -2,7 +2,7 @@
 
 ## Title
 
-SECOND NATURE — Make Every Second Grow | Blender Speed Contest 2026
+SECOND NATURE - Make Every Second Grow | Blender Speed Contest 2026
 
 ## Description
 

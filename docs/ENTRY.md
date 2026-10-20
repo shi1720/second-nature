@@ -4,12 +4,12 @@
 Entrant and project lead: **Shivam Gupta**  
 24 seconds · 576 frames · 24 fps · 1920 × 1080
 
-## Discord entry — paste with the film link and WIP image attached
+## Discord entry - paste with the film link and WIP image attached
 
-**Forum title:** SECOND NATURE — Make every second grow.  
+**Forum title:** SECOND NATURE - Make every second grow.  
 **Tags:** Official Entry · Procedural & Code · Motion Design
 
-**SECOND NATURE — Make every second grow.**
+**SECOND NATURE - Make every second grow.**
 
 A dry seed waits. A luminous amber drop races through a precision world of gates, rails, and a vertical loop. Then everything slows: the drop hangs above the seed, falls, and opens into a flower.
 

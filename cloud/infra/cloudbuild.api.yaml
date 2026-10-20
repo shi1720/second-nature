@@ -1,0 +1,12 @@
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args: ['build', '-f', 'cloud/Dockerfile.api', '-t', '${_REGION}-docker.pkg.dev/$PROJECT_ID/second-nature/api:${_API_TAG}', '.']
+images:
+  - '${_REGION}-docker.pkg.dev/$PROJECT_ID/second-nature/api:${_API_TAG}'
+timeout: 900s
+options:
+  logging: GCS_ONLY
+  machineType: E2_HIGHCPU_8
+substitutions:
+  _REGION: us-central1
+  _API_TAG: manual-release

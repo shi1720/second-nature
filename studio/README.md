@@ -30,7 +30,7 @@ Each production gets a new `../projects/<uuid>/` directory with a persisted `con
 
 ```json
 {
-  "name": "Second Nature — My cut",
+  "name": "Second Nature - My cut",
   "seed": 42,
   "hero_color": "#ed785b",
   "accent_color": "#3d9893",

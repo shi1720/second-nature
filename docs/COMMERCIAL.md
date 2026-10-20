@@ -1,4 +1,4 @@
-# SECOND NATURE Studio — commercial thesis
+# SECOND NATURE Studio - commercial thesis
 
 **A repeatable Blender production workflow for small creative teams that need several polished variations of one visual idea.**
 

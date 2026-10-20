@@ -1,0 +1,3 @@
+# Optional local neural narration. Keep separate from the film/studio runtime.
+kokoro==0.9.4
+soundfile==0.13.1

@@ -1,0 +1,14 @@
+FROM python:3.11-slim-bookworm
+ARG BLENDER_VERSION=4.5.9
+ENV PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1 BLENDER_BIN=/opt/blender/blender HOME=/tmp OMP_NUM_THREADS=8
+RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates curl xz-utils ffmpeg libx11-6 libxi6 libxrender1 libxfixes3 libxkbcommon0 libsm6 libgl1 libglib2.0-0 libgomp1 libegl1 libfontconfig1 libdbus-1-3 libxext6 && rm -rf /var/lib/apt/lists/*
+RUN cd /tmp && curl --fail --show-error --location --retry 3 "https://download.blender.org/release/Blender4.5/blender-${BLENDER_VERSION}-linux-x64.tar.xz" -o blender.tar.xz && curl --fail --show-error --location --retry 3 "https://download.blender.org/release/Blender4.5/blender-${BLENDER_VERSION}.sha256" -o blender.sha256 && grep "blender-${BLENDER_VERSION}-linux-x64.tar.xz$" blender.sha256 | sed 's@blender-[^ ]*-linux-x64.tar.xz@blender.tar.xz@' | sha256sum --check --strict - && mkdir -p /opt/blender && tar -xJf blender.tar.xz -C /opt/blender --strip-components=1 && rm blender.tar.xz blender.sha256
+WORKDIR /app
+COPY cloud/requirements.txt /app/cloud/requirements.txt
+RUN pip install --no-cache-dir -r /app/cloud/requirements.txt && useradd --uid 10001 --create-home studio
+COPY pipeline.py /app/pipeline.py
+COPY source /app/source
+COPY assets/fonts /app/assets/fonts
+COPY cloud/*.py /app/cloud/
+USER 10001
+CMD ["python","-m","cloud.worker"]

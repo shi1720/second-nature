@@ -1,4 +1,4 @@
-# SECOND NATURE — optional making-of
+# SECOND NATURE - optional making-of
 
 The **24-second contest film needs no spoken narration**. Submit the film itself, not this longer explanation, as the official animation. This optional making-of can accompany a portfolio or Devpost mirror.
 
