@@ -80,7 +80,7 @@ The separate **80-second narrated product demonstration is complete and public i
 
 The [commercial thesis](docs/COMMERCIAL.md) describes a narrow variant-production workflow, proposed pilots and unvalidated assumptions. No customers, revenue or measured time savings are claimed.
 
-The contest materials are prepared, **not officially submitted**. YouTube upload and the Devpost mirror also remain pending; no external publication URL is claimed. Official participation requires the RenderJuice account, Discord join form and entry post; Devpost alone does not enter the contest. Follow [the submission handoff](docs/ENTRY.md).
+**Published and submitted on 21 October 2026.** [Original film on YouTube](https://www.youtube.com/watch?v=folQG-XiqTY) · [Studio guide on YouTube](https://www.youtube.com/watch?v=EePedJF-2lA) · [Official Discord entry](https://discord.com/channels/1547269486057627728/1562304128657522852) · [Submitted Devpost mirror](https://devpost.com/software/second-nature-jrqu9v). The RenderJuice account and private contest registration are confirmed. Both public YouTube videos have published English captions. [Submission receipt and evidence](submission/receipt.json) record these actions; organizer acceptance, eligibility adjudication and awards are not claimed. See [the entry record](docs/ENTRY.md).
 
 ## Project map
 

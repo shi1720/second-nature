@@ -1,10 +1,12 @@
 {
   "schema_version": 1,
-  "audited_at_ist": "2026-10-21T02:20:23.451494+05:30",
-  "status": "delivery media, hosted acceptance and source hygiene verified; archive and external submissions pending",
-  "scope": "Read-only reconciliation of shipped source, documents, media hashes, browser/HTTP receipts and packaging preflight. Only this audit JSON was updated. No browser/cloud mutations, render, source change, archive build or repeat regression suite was performed.",
+  "audited_at_ist": "2026-10-21T09:02:35.227782+05:30",
+  "status": "audit complete: delivery media, hosted acceptance, publication, submission receipts and current source inventory verified",
+  "scope": "Source/media/hosted evidence retained from the original audit. Final publication/privacy changes were reconciled with actual receipts. tools/package_delivery.py collect() was rerun after document and screenshot changes, applying its credential-name/content checks and exclusion rules without building an archive or rerunning regression suites. All relative Markdown links in that eligible inventory were checked for existence, case and containment.",
   "relative_markdown_links": {
-    "checked": 42,
+    "checked": 57,
+    "definition": "Relative link and image-reference occurrences across all packager-eligible Markdown files; absolute URLs and fragment-only anchors excluded.",
+    "markdown_files_checked": 14,
     "missing": [],
     "case_mismatches": [],
     "outside_delivery_root": []
@@ -16,14 +18,14 @@
     "stale_75_second_or_pending_cloud_claim_files": [],
     "hackathon_word_in_app_or_demo_copy_files": [],
     "authorship": "Shivam Gupta is credited as entrant and project lead; Codex assistance is disclosed without invented personal editing claims.",
-    "publication_status": "Prepared YouTube copy, Devpost mirror and official Discord entry remain unclaimed."
+    "publication_status": "Both YouTube videos are public with published English captions; the official Discord entry, private RenderJuice registration and Devpost submission have actual receipts. Organizer acceptance and awards are not claimed."
   },
   "credential_scan": {
-    "eligible_text_files_scanned": 108,
+    "eligible_text_files_scanned": 100,
     "credential_pattern_present": false,
     "matching_filenames": [],
     "values_printed": false,
-    "scope": "Eligible packager inventory, including source, documents, configuration, captions and browser/HTTP receipts. Ignored environments, caches, runtime databases, user projects and private operator notes were not read. Public Firebase web configuration is not a privileged credential.",
+    "scope": "Current packager.collect inventory; the packager checked all eligible text suffixes against its credential content patterns and filtered sensitive filenames. Ignored environments, caches, runtime databases, user projects and private operator notes were not read. This is the implemented pattern check, not a guarantee against every possible secret format.",
     "nonfixture_credential_candidate_present": false,
     "private_operator_notes_outside_repository_and_package": true
   },
@@ -66,8 +68,9 @@
     "finished_media_gate_currently_passes": true,
     "accepted_original_demo_and_cloud_variant_hashes_bound": true,
     "eligible_inventory_checked_without_building_archive": true,
-    "final_archive_pending": true,
-    "private_operator_note_outside_repository": true
+    "private_operator_note_outside_repository": true,
+    "release_archive_stage": "The release archive is built and verified after this audit from the frozen inventory; this audit does not claim it created an archive.",
+    "archive_sha_receipt_policy": "The final archive SHA-256 is recorded externally to the archive manifest, avoiding self-reference."
   },
   "regression_test_inventory_from_AST": {
     "python_tests": 48,
@@ -87,11 +90,7 @@
     "counts_from": "Python AST inventory and recorded suite evidence; JavaScript behavior inventory reconciled to current test source and documentation.",
     "suites_rerun": false
   },
-  "remaining_review_items": [
-    "Build the final archive from the frozen source, verify its inventory and SHA-256, then record its receipt. No final ZIP was present during this audit.",
-    "Commit and publish the frozen source and finished delivery records through the parent workflow.",
-    "YouTube uploads, Devpost mirroring and official RenderJuice account/form/Discord submission remain pending fresh confirmation and actual service receipts. Prepared copy and a hosted film are not a submitted contest entry."
-  ],
+  "remaining_review_items": [],
   "build_context_pattern_checks": {
     ".gcloudignore": {
       "static_pattern_check": "gitwildmatch-compatible pattern evaluation, not an image build",
@@ -104,7 +103,7 @@
       "private_cache_examples_excluded": true
     }
   },
-  "eligible_packaging_files_at_audit": 160,
+  "eligible_packaging_files_at_audit": 169,
   "accepted_delivery_evidence": {
     "original": {
       "movie": "film/second-nature.mp4",
@@ -217,5 +216,40 @@
       "disposable_account_deleted": true,
       "jobs_created": 0
     }
+  },
+  "publication_reconciliation": {
+    "checked_at": "2026-10-21T03:29:45.571Z",
+    "submission_receipt": "submission/receipt.json",
+    "youtube_playback_receipt": "submission/youtube-playback-qa.json",
+    "original_url": "https://www.youtube.com/watch?v=folQG-XiqTY",
+    "demo_url": "https://www.youtube.com/watch?v=EePedJF-2lA",
+    "both_public_watch_pages_reached_actual_end": true,
+    "both_selected_1080p_and_reported_1920x1080": true,
+    "original_transcoded_duration_seconds": 24.021,
+    "demo_transcoded_duration_seconds": 80.021,
+    "seek_to_end_used": false,
+    "media_errors": null,
+    "english_srt_tracks_published": true,
+    "caption_cues": {
+      "original": 6,
+      "demo": 28
+    },
+    "official_discord_entry": "https://discord.com/channels/1547269486057627728/1562304128657522852",
+    "devpost_submission": "https://devpost.com/software/second-nature-jrqu9v",
+    "renderjuice_private_registration_confirmed": true,
+    "organizer_acceptance_or_award_claimed": false,
+    "scope": "Playback on this browser and network, not a guarantee for every device.",
+    "final_packager_collect_rerun": true,
+    "private_registration_and_original_publication_fullscreen_screenshots_excluded": true,
+    "public_confirmation_images_cropped_to_entry_or_publication_dialog": true
+  },
+  "current_inventory": {
+    "method": "tools/package_delivery.py collect(ROOT), after final documentation and public-proof privacy edits",
+    "eligible_files": 169,
+    "eligible_text_files_checked_by_packager": 100,
+    "eligible_markdown_files": 14,
+    "relative_markdown_link_occurrences": 57,
+    "private_fullscreen_registration_and_original_publication_screenshots_present": false,
+    "archive_created": false
   }
 }

@@ -35,8 +35,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 11298,
-      "sha256": "79387eb401b75047bbe5564485bf0d2d453f1848c8b72e2baf69a2282409b386"
+      "bytes": 11653,
+      "sha256": "132d2efe06e81529e749643680706bb6e008e9db3092f57299542a27ce45114d"
     },
     {
       "path": "assets/demo/palette.mp4",
@@ -225,23 +225,23 @@
     },
     {
       "path": "docs/COMMERCIAL.md",
-      "bytes": 5516,
-      "sha256": "47aa3f002a8d3a0a23bb5bde6f4d17d7ca51409271393527d1530f59df953969"
+      "bytes": 5554,
+      "sha256": "bf9e5f2181868ccf69cde0870a8901ec26dd04cd7d5fdd970c45f71f26d56f69"
     },
     {
       "path": "docs/DELIVERY-AUDIT.json",
-      "bytes": 9089,
-      "sha256": "8cd1f9c45742f53f36a5e1f36478499fadc286c1d86502e0559ef9718a2514ca"
+      "bytes": 11213,
+      "sha256": "b7a6fcfa09df3f4159b8dbe62077e689c9d91e966c717eb7d2cadebb4785469a"
     },
     {
       "path": "docs/DEVPOST.md",
-      "bytes": 4706,
-      "sha256": "bf3c8672d08d2ebab87361577dc460c359f06e4860c7bbbf231664e54386d9aa"
+      "bytes": 5109,
+      "sha256": "cc509dfcfe273997b026c7021268a248468649f0b4cbf8a056bd75016d79817b"
     },
     {
       "path": "docs/ENTRY.md",
-      "bytes": 5419,
-      "sha256": "ba59f8265e7d247b1e170e2ea399d09f60782c7386446e25506ab8836a8ef008"
+      "bytes": 5945,
+      "sha256": "5754ae318d9ccd5937d3f1314117f869f407642847c01fedb486788c2bdc11d5"
     },
     {
       "path": "docs/JUDGING-REVIEW.md",
@@ -255,13 +255,13 @@
     },
     {
       "path": "docs/QUALITY.md",
-      "bytes": 13350,
-      "sha256": "404a50a064ffae8463bde6c26a2c7a2ecc65ef54a166313504ad2af957c86349"
+      "bytes": 14924,
+      "sha256": "c157979b14a7f167c35fd141c4b2bdbe22314448f5b64db2a77e08ec1b3100a6"
     },
     {
       "path": "docs/TESTING.md",
-      "bytes": 9632,
-      "sha256": "0cb94039ab7b4fb89425b9a9845d6d3712c77a4307ba66457aa195282ab0befa"
+      "bytes": 10790,
+      "sha256": "4f9e8fbafb6d0f044bd4eaed7a2d59348a00963b9f52c31b2441857c5f348326"
     },
     {
       "path": "docs/VOICEOVER.md",
@@ -270,13 +270,13 @@
     },
     {
       "path": "docs/YOUTUBE-DEMO.md",
-      "bytes": 3808,
-      "sha256": "bf42d4129e3563a6891ce0d9a0e026747afe65bfc28998ffcaaed05ba62e76b8"
+      "bytes": 4176,
+      "sha256": "9abb62061d823cae902449cc9a9f5bdabcdac7278d4ec867875a36106e2f16ba"
     },
     {
       "path": "docs/YOUTUBE.md",
-      "bytes": 3193,
-      "sha256": "32c7e455661091f78b38636186aa932b7aa46f04c5a5eabccfe6d468d8d461a4"
+      "bytes": 3627,
+      "sha256": "eae7c2ca826097cbde0ec2e3d421b7336b837977b9b05fe25938ce984d625d35"
     },
     {
       "path": "docs/studio-demo-script.txt",
@@ -415,8 +415,8 @@
     },
     {
       "path": "production-dossier.pdf",
-      "bytes": 2168923,
-      "sha256": "c764745b6e5040e0b934b493627b4b21d1b75c5301292d13f4e5966fc8053883"
+      "bytes": 2169594,
+      "sha256": "83eca25bfc27b6b5fae70990ff43c9eb3e53baa2ca38cee7225c7c21002edcae"
     },
     {
       "path": "project.json",
@@ -539,6 +539,11 @@
       "sha256": "3bcbed48e0470e1f431e7908daf2018dff1f756d0a0e5ac3cdecc1b17b52d671"
     },
     {
+      "path": "stills/studio-demo-thumbnail.jpg",
+      "bytes": 89289,
+      "sha256": "5fa029c611ced180e36430d477b15b784e5b5fa981dd8a9ca80e5370b7a0c8bc"
+    },
+    {
       "path": "stills/studio-final.png",
       "bytes": 103974,
       "sha256": "47841703a60eb9851544a1eb7c76d67e558c2f3b501417ec4ecc11e94a95d129"
@@ -634,6 +639,46 @@
       "sha256": "e14da95227d44fde7d3340e9a1fc3ae901b4adf908924fc1a2d2e11c19923fbf"
     },
     {
+      "path": "submission/devpost-submitted.png",
+      "bytes": 102137,
+      "sha256": "c2cc8aaeefab66d0379a02fe2b5f2559102ac60fe4aa1cb826642ce10a9eb017"
+    },
+    {
+      "path": "submission/discord-entry-attachments.png",
+      "bytes": 60297,
+      "sha256": "02b666235825aeb7ac3ae0467c54146bb9ea0a57ae7231b696002fd9ccbc433a"
+    },
+    {
+      "path": "submission/discord-entry.txt",
+      "bytes": 1853,
+      "sha256": "991e59890603006b2fbb1dd0faeb3edd8ccfdbef63db366b244e1f90ff9ec96a"
+    },
+    {
+      "path": "submission/discord-official-entry.png",
+      "bytes": 121279,
+      "sha256": "2ea629c1e4491754abd5de4370b0f8d1fff7bde1b5ddf9e168c11dedcc576c6a"
+    },
+    {
+      "path": "submission/receipt.json",
+      "bytes": 2635,
+      "sha256": "486a7907533669191a64e8d27db1940acdd9983f99af5163c9bd511d8ac8389b"
+    },
+    {
+      "path": "submission/renderjuice-account.png",
+      "bytes": 78154,
+      "sha256": "7e1eaef4c25e4520768418e639d98d843d0bea97d649e6ac9df7010f0acd3cd0"
+    },
+    {
+      "path": "submission/youtube-demo-published.png",
+      "bytes": 34986,
+      "sha256": "1759b9df23a19a88c31f8ca72530dcf39c1623c3ef0aaa235a74bbfcf976b444"
+    },
+    {
+      "path": "submission/youtube-playback-qa.json",
+      "bytes": 844,
+      "sha256": "a2e8b38e56d358a04efeb1397022fe1aa86775a108bb67b70fafbb16c339fd79"
+    },
+    {
       "path": "tests/test_packaging.py",
       "bytes": 3033,
       "sha256": "22923e802ae668f3e3fede8bb00562ff431f5e8b4ace1670bfc90e645a8b480d"
@@ -645,8 +690,8 @@
     },
     {
       "path": "tools/build_dossier.py",
-      "bytes": 9546,
-      "sha256": "d9093e6d9698e152945a0d9ea77ce8a42f321900aa27ae019b438c2bbd0cf3b3"
+      "bytes": 10184,
+      "sha256": "6f9c7085099a6b46c94869aa0dee5a4b8b0abcd2811ca154786af5962784cf0f"
     },
     {
       "path": "tools/package_delivery.py",

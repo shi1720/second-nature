@@ -4,53 +4,64 @@
 Entrant and project lead: **Shivam Gupta**
 24 seconds · 576 frames · 24 fps · 1920 × 1080
 
-## Discord entry - paste with the film link and WIP image attached
+## Confirmed publication and submission
+
+**Status: published and submitted on 21 October 2026.** The RenderJuice account is accessible and the private contest registration displayed “You're in!” The official Discord entry is visible; Devpost displayed “Project submitted!” These receipts confirm the actions, not organizer acceptance, eligibility adjudication or an award.
+
+| Destination | Confirmed record |
+| --- | --- |
+| Original film | [Public YouTube film](https://www.youtube.com/watch?v=folQG-XiqTY); initial checks: No issues found; six English caption cues published |
+| Studio guide | [Public 80-second YouTube guide](https://www.youtube.com/watch?v=EePedJF-2lA); initial checks: No issues found; 28 English caption cues published |
+| Official entry | [Discord submission](https://discord.com/channels/1547269486057627728/1562304128657522852); Official Entry, Procedural & Code and Motion Design tags; poster and Blender WIP attached |
+| Devpost mirror | [Submitted project](https://devpost.com/software/second-nature-jrqu9v); original film primary video, nine gallery images, cover, guide and testing links |
+
+[Machine-readable receipt](../submission/receipt.json) · [Discord confirmation](../submission/discord-official-entry.png) · [Devpost confirmation](../submission/devpost-submitted.png). The private registration email is not included in the public entry.
+
+## Submitted Discord entry
 
 **Forum title:** SECOND NATURE - Make every second grow.
 **Tags:** Official Entry · Procedural & Code · Motion Design
 
-**SECOND NATURE - Make every second grow.**
+The actual posted copy is preserved in [submission/discord-entry.txt](../submission/discord-entry.txt).
 
-A dry seed waits. A luminous amber drop races through a precision world of gates, rails, and a vertical loop. Then everything slows: the drop hangs above the seed, falls, and opens into a flower.
+**Watch the complete 24-second film:** https://youtu.be/folQG-XiqTY
 
-My interpretation of **Speed** is purposeful motion. Acceleration gives the journey energy; the pause at the end gives it meaning. The fastest moment matters because of what it makes possible.
+A dry seed waits. One luminous amber drop races through gates, rails and a vertical loop. Then everything slows: a held breath, a fall, a flower.
+
+My interpretation of **Speed** is purposeful motion. Acceleration gives the journey energy; the pause gives its arrival meaning. **Make every second grow.**
 
 **Entrant / project lead:** Shivam Gupta
-**Format:** 24 seconds, 24 fps, 1920 × 1080; original synthesized soundtrack.
+**Format:** 24 seconds, 24 fps, 1920 x 1080, original synthesized soundtrack.
 
-**Programmatic workflow:** Blender Python generates the geometry, materials, lighting, motion paths, camera animation, and staggered petal unfolding. Motion is baked into keyframes; it is scripted animation, not a physics simulation. A reproducible local pipeline builds the scene, renders frames, resumes interrupted renders, and assembles the film. A Firebase-hosted studio manages private guest or email workspaces, palette and seed variants, and real Blender jobs on Cloud Run. Checkpoints allow interrupted work to resume. Cloud variants cover the full story at 540p; the original film was rendered locally at 1080p.
+**Programmatic workflow:** Blender Python constructs geometry, materials, lighting, paths, five cameras and staggered petal unfolding. Motion is baked into keyframes and is scripted animation, not a physical simulation. The pipeline validates frames and resumes interrupted renders. A Firebase studio controls palettes and soil detail seeds, dispatches real Blender workers on Cloud Run, and provides private playback and downloads. Its complete 540p cloud variant passed cancellation, checkpoint recovery and delivery checks. The 1080p original was rendered locally.
 
-**AI / asset disclosure:** OpenAI Codex assisted with concept development, code, production automation, documentation, and review. Geometry, materials, and synthesized audio were generated specifically for this project; no stock models, textures, music, or generative video were used. Typography uses Space Grotesk by the Space Grotesk Project Authors, licensed under SIL OFL 1.1. Production tools include Blender, Python, FFmpeg, NumPy, and Pillow. This entry does not claim RenderJuice cloud rendering or a physical simulation.
+**AI / asset disclosure:** OpenAI Codex assisted with concept, code, production automation, documentation and review. Original geometry, materials and mathematically synthesized audio were created for this project. Space Grotesk is by the Space Grotesk Project Authors under SIL OFL 1.1. No stock models, textures, recorded music or generative video were used. Tools include Blender, Python, FFmpeg, NumPy and Pillow. No RenderJuice rendering or sponsor endorsement is claimed.
 
-The attached image shows the Blender work in progress. Please consider the film for the Major Awards, Best Procedural & Programmatic Animation, and Best Motion Design.
+The attached images show the finished film and authentic Blender work in progress. Please consider the film for the Major Awards, Best Procedural & Programmatic Animation and Best Motion Design.
 
-**Watch the complete film:** https://second-nature-studio.web.app/assets/second-nature.mp4
+**Studio:** https://second-nature-studio.web.app
+**Source and workflow:** https://github.com/shi1720/second-nature
 
-**Open the studio:** https://second-nature-studio.web.app
 
-**Source and production notes:** https://github.com/shi1720/second-nature
-
-## Optional Devpost mirror
+## Submitted Devpost mirror
 
 **Project name:** SECOND NATURE
-**Tagline:** One drop. A world in motion. A reason to arrive.
+**Tagline:** One drop. A world in motion. A reason to arrive. A 24-second procedural Blender film where purposeful speed becomes growth.
 
-Use the seven-section story in `docs/DEVPOST.md`. Use the complete 24-second film as the primary video; the separate 80-second studio demonstration is supporting material. The demonstration uses a disclosed synthetic stock narrator and captions.
+The [submitted mirror](https://devpost.com/software/second-nature-jrqu9v) uses the seven-section story in [DEVPOST.md](DEVPOST.md). The complete 24-second original is the primary video; the separate 80-second studio demonstration supports it. The contribution record preserves Shivam's role in the brief, direction and review, alongside disclosed AI assistance. No manual contribution or production method should be invented when maintaining the entry.
 
-## Submission actions
+## Keep the submitted entry reviewable
 
-**Submission status: prepared materials; not submitted.** Account ownership, eligibility, and receipt must be confirmed in the real services.
+- Preserve the official post permalink, publication receipts and screenshot evidence in `submission/`.
+- Keep both public video links, the app, source, poster and Blender WIP available. Retain the original media hashes and editable scene.
+- Maintain the AI/asset disclosure and synthetic narrator credit when editing descriptions. The 24-second film has no spoken narrator.
+- Treat future edits as revisions to the existing entry rather than a second entry. Recheck organizer rules before changing submitted materials.
+- Community voting closes **4 November 2026, 05:29 IST** (**3 November, 23:59 UTC**). Invite genuine viewers; do not automate reactions.
 
-1. Confirm Shivam is at least 18, eligible under the geographic rules, and listed on only one entry.
-2. Create or sign in to a free RenderJuice account through the [official contest page](https://www.renderjuice.com/contests/speed). Complete any email verification using the account owner's real email.
-3. Follow that page's Discord invitation. In **#start-here**, select **Join contest** and provide the email associated with the RenderJuice account in the private form.
-4. Play the final MP4 from start to finish. Confirm duration, audio, legibility, and that the WIP attachment visibly shows Blender and the project. Keep source files and process evidence available.
-5. In the **#contest-submissions** forum, create a post with the **Official Entry**, **Procedural & Code** and **Motion Design** tags. Attach at least one Blender WIP image and paste the entry text above with the public video link. You may attach the complete MP4 instead if it fits the account's upload limit. Check the link while signed out.
-6. Confirm the post and attachments are accessible, save its permalink and receipt screenshot, and finish before **1 November 2026, 05:29 IST** (**31 October, 23:59 UTC**). Devpost's displayed 05:30 time is one minute later; use the official cutoff.
-7. Optionally mirror on Devpost. This does not replace the Discord entry. Community voting closes **4 November, 05:29 IST** (**3 November, 23:59 UTC**). Invite genuine viewers; do not automate reactions.
+The official submission cutoff is **1 November 2026, 05:29 IST** (**31 October, 23:59 UTC**). The recorded entry precedes it. Devpost mirroring does not replace the official Discord entry; both have now been completed.
 
-Official participation requires the account, Discord form, and submission post; no paid subscription or RenderJuice rendering is required. Judges score Idea 30, Animation 25, Visuals 25, and Use of Speed 20. One film can receive one Major or Specialty Award, plus Community Choice. [Official contest](https://www.renderjuice.com/contests/speed) · [Devpost rules](https://programmatic-rendering-contest.devpost.com/rules)
+Judges score Idea 30, Animation 25, Visuals 25 and Use of Speed 20. No score, acceptance or award from the organizers is claimed. [Official contest](https://www.renderjuice.com/contests/speed) · [Devpost rules](https://programmatic-rendering-contest.devpost.com/rules)
 
-Entrants retain their rights while granting contest display/promotion permission. Authorship and production descriptions must be accurate; source and rights evidence may be requested. [Contest terms](https://www.renderjuice.com/contests/terms)
+Entrants retain their rights while granting contest display/promotion permission. Authorship and production descriptions must remain accurate; source and rights evidence may be requested. [Contest terms](https://www.renderjuice.com/contests/terms)
 
-Font attribution and redistribution terms: [Space Grotesk OFL](https://github.com/floriankarsten/space-grotesk/blob/master/OFL.txt). Preserve the included font license with distributed project files. Requirements verified against official pages on 20 October 2026; recheck for organizer changes before posting.
+Preserve the included [Space Grotesk OFL](../assets/fonts/OFL.txt) with distributed project files. Requirements were checked against official pages on 20 October 2026; recheck for organizer changes before further edits.

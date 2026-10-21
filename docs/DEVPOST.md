@@ -10,6 +10,8 @@ The entry is a complete 24-second Blender film: 576 frames at 24 fps, with an or
 
 The supporting web studio connects guest or email workspaces, palette and soil-seed controls, saved productions and Blender jobs. Creators can follow frame progress and logs, cancel or resume work, then play and download the MP4 or editable scene. Cloud variants cover the complete story at 540p; the original film is 1080p.
 
+[Open the studio](https://second-nature-studio.web.app), [watch the narrated product guide](https://youtu.be/EePedJF-2lA), or follow the [application testing instructions](https://github.com/shi1720/second-nature/blob/main/docs/TESTING.md).
+
 ## How we built it
 
 Blender Python generates geometry, materials, lighting, paths and camera animation. Separate petal hinges unfold in staggered whorls; Fibonacci placement supplies pollen detail. Baked keyframes and a packed font keep the saved scene playable without Python autorun.
@@ -28,7 +30,7 @@ Production raised different challenges: stale frames after edits, safe cancellat
 
 The film communicates a need, journey and result without dialogue. Its machine and flower share a consistent visual language, while the Blender project stays editable. Procedural controls support the direction: repeated geometry reveals speed, and staggered petals give growth its rhythm.
 
-Real local interruption-and-resume checks preserved existing frames. A hosted cancellation saved 17 completed frames; the resumed worker validated the same Blender build and began at frame 18. Regression tests cover cache integrity, selective rendering, ownership and failure handling; mocked tests are distinguished from actual rendering evidence.
+Real local interruption-and-resume checks preserved existing frames. A hosted cancellation saved 17 completed frames; the resumed worker validated the same Blender build and began at frame 18. The complete resumed production delivered all 576 frames, passed independent decoding and browser playback, and downloaded with the delivery manifest's SHA-256. Regression tests cover cache integrity, selective rendering, ownership and failure handling; mocked tests are distinguished from actual rendering evidence.
 
 Entrant and project lead: **Shivam Gupta**. OpenAI Codex assisted with concept, code, automation, documentation and review. The film uses original geometry, materials and synthesized audio, plus Space Grotesk under SIL OFL 1.1. No stock models, textures, recorded music or generative video were used. Motion is scripted, not a physical simulation. The separate demonstration uses a disclosed synthetic narrator.
 

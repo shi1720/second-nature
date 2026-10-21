@@ -1,0 +1,17 @@
+**Watch the complete 24-second film:** https://youtu.be/folQG-XiqTY
+
+A dry seed waits. One luminous amber drop races through gates, rails and a vertical loop. Then everything slows: a held breath, a fall, a flower.
+
+My interpretation of **Speed** is purposeful motion. Acceleration gives the journey energy; the pause gives its arrival meaning. **Make every second grow.**
+
+**Entrant / project lead:** Shivam Gupta
+**Format:** 24 seconds, 24 fps, 1920 x 1080, original synthesized soundtrack.
+
+**Programmatic workflow:** Blender Python constructs geometry, materials, lighting, paths, five cameras and staggered petal unfolding. Motion is baked into keyframes and is scripted animation, not a physical simulation. The pipeline validates frames and resumes interrupted renders. A Firebase studio controls palettes and soil detail seeds, dispatches real Blender workers on Cloud Run, and provides private playback and downloads. Its complete 540p cloud variant passed cancellation, checkpoint recovery and delivery checks. The 1080p original was rendered locally.
+
+**AI / asset disclosure:** OpenAI Codex assisted with concept, code, production automation, documentation and review. Original geometry, materials and mathematically synthesized audio were created for this project. Space Grotesk is by the Space Grotesk Project Authors under SIL OFL 1.1. No stock models, textures, recorded music or generative video were used. Tools include Blender, Python, FFmpeg, NumPy and Pillow. No RenderJuice rendering or sponsor endorsement is claimed.
+
+The attached images show the finished film and authentic Blender work in progress. Please consider the film for the Major Awards, Best Procedural & Programmatic Animation and Best Motion Design.
+
+**Studio:** https://second-nature-studio.web.app
+**Source and workflow:** https://github.com/shi1720/second-nature

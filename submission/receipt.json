@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-10-21T03:21:48.425671+00:00",
+  "entrant": "Shivam Gupta",
+  "status": "submitted",
+  "site": "https://second-nature-studio.web.app",
+  "source": "https://github.com/shi1720/second-nature",
+  "youtube": {
+    "original": {
+      "url": "https://www.youtube.com/watch?v=folQG-XiqTY",
+      "title": "SECOND NATURE | Make Every Second Grow | A Procedural Blender Film",
+      "visibility": "public",
+      "initial_checks": "No issues found",
+      "english_srt_published": true,
+      "caption_cues": 6,
+      "ai_use_setting": "No for the listed realistic-content categories; code assistance disclosed in description"
+    },
+    "studio_demo": {
+      "url": "https://www.youtube.com/watch?v=EePedJF-2lA",
+      "title": "SECOND NATURE Studio | From Palette to Blender Film",
+      "visibility": "public",
+      "initial_checks": "No issues found",
+      "english_srt_published": true,
+      "caption_cues": 28,
+      "ai_use_setting": "Yes; stock synthetic narrator disclosed in description"
+    }
+  },
+  "renderjuice": {
+    "account_access_verified": true,
+    "private_contest_registration_confirmed": true,
+    "registration_message": "You're in! We'll use this RenderJuice account if you win.",
+    "email_in_public_entry": false
+  },
+  "official_entry": {
+    "url": "https://discord.com/channels/1547269486057627728/1562304128657522852",
+    "title": "SECOND NATURE - Make every second grow.",
+    "thread_id": "1562304128657522852",
+    "tags": [
+      "Official Entry",
+      "Procedural & Code",
+      "Motion Design"
+    ],
+    "poster_attached": true,
+    "blender_wip_attached": true,
+    "ai_and_assets_disclosed": true,
+    "official_post_visible": true
+  },
+  "devpost": {
+    "url": "https://devpost.com/software/second-nature-jrqu9v",
+    "submission_id": "1248732",
+    "confirmation": "Project submitted!",
+    "primary_video_is_24_second_original": true,
+    "supporting_demo_link": true,
+    "thumbnail_uploaded": true,
+    "gallery_images": 9,
+    "testing_instructions_linked": true,
+    "contribution_saved": true
+  },
+  "evidence": [
+    "youtube-demo-published.png",
+    "renderjuice-account.png",
+    "discord-official-entry.png",
+    "devpost-submitted.png",
+    "discord-entry-attachments.png",
+    "youtube-playback-qa.json"
+  ],
+  "scope": "Receipts confirm publication and submission, not organizer acceptance, eligibility adjudication or an award.",
+  "private_receipts": "The original YouTube publication modal and private registration confirmation are retained outside the public repository and package to avoid exposing unrelated account context."
+}

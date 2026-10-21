@@ -10,6 +10,7 @@ from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.utils import ImageReader
 from PIL import Image
 import math
+import json
 from io import BytesIO
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -200,34 +201,46 @@ para(
 )
 C.showPage()
 
-base(4, "DELIVERY / OFFICIAL ENTRY HANDOFF")
-txt(48, 744, "Ready to review and enter.", 27)
+receipt = json.loads((ROOT / "submission/receipt.json").read_text())
+if receipt.get("status") != "submitted":
+    raise ValueError("The final dossier requires an actual submitted receipt.")
+original_url = receipt["youtube"]["original"]["url"]
+demo_url = receipt["youtube"]["studio_demo"]["url"]
+discord_url = receipt["official_entry"]["url"]
+devpost_url = receipt["devpost"]["url"]
+
+base(4, "DELIVERY / PUBLICATION AND ENTRY RECEIPTS")
+txt(48, 744, "Published. Submitted. Recorded.", 27)
 para(
     48,
     711,
-    "The film is complete in the delivery package. Official registration and the submission post are separate actions; this dossier does not claim a confirmed contest entry.",
+    "The original film and studio guide are public. The official Discord entry and Devpost mirror are submitted. Receipts confirm these actions, not organizer acceptance, eligibility adjudication or an award.",
 )
 rect(48, 599, 499, 64, TEAL)
-txt(64, 639, "OFFICIAL SUBMISSION CUTOFF", 10, PAPER)
-txt(64, 614, "1 NOVEMBER 2026  /  05:29 IST", 21, PAPER)
+txt(64, 639, "SUBMISSION RECEIPTS  /  21 OCTOBER 2026", 10, PAPER)
+txt(64, 614, "ORIGINAL 24s  /  STUDIO GUIDE 80s", 21, PAPER)
 y = 570
 for i, (title, body) in enumerate(
     [
         (
-            "Confirm eligibility",
-            "Age 18+, eligible location, one entry per person. Use your real name and account details.",
+            "Original film / public on YouTube",
+            f'<link href="{original_url}" color="#154D58">youtube.com/watch?v=folQG-XiqTY</link><br/>'
+            "24 seconds, 1080p. Initial checks: No issues found. English SRT published: six cues.",
         ),
         (
-            "Register through the official services",
-            "Create/sign in to a free RenderJuice account. Join the official Discord, then select Join contest in #start-here and complete its private form.",
+            "Studio guide / public on YouTube",
+            f'<link href="{demo_url}" color="#154D58">youtube.com/watch?v=EePedJF-2lA</link><br/>'
+            "80 seconds, 1080p. English SRT published: 28 cues. Stock synthetic narrator disclosed.",
         ),
         (
-            "Post the actual entry",
-            "In #contest-submissions, post the public 24-second film link and attach stills/blender-wip.png. Use the Official Entry tag and the prepared description and disclosure in docs/ENTRY.md.",
+            "Official Discord entry / posted",
+            f'<link href="{discord_url}" color="#154D58">Open the official entry and attached Blender WIP</link><br/>'
+            "RenderJuice account and private registration confirmed. Three entry tags; poster and Blender WIP attached.",
         ),
         (
-            "Check the receipt",
-            "Verify playback, attachments and public access. Save the post permalink. Devpost is an optional mirror and does not replace the Discord post.",
+            "Devpost mirror / Project submitted!",
+            f'<link href="{devpost_url}" color="#154D58">devpost.com/software/second-nature-jrqu9v</link><br/>'
+            "Original film primary video, nine gallery images, a cover, supporting guide and testing links.",
         ),
     ]
 ):
@@ -239,21 +252,21 @@ line(y + 7)
 y = para(
     48,
     y - 12,
-    "<b>Disclosure:</b> OpenAI Codex assisted with concept, code, production automation, documentation and review. Geometry, materials and synthesized audio were generated for this project. Space Grotesk is licensed under SIL OFL 1.1. Tools: Blender, Python, FFmpeg, NumPy and Pillow. No RenderJuice cloud rendering or physical simulation is claimed.",
+    "<b>Disclosure:</b> Shivam Gupta is entrant and project lead. OpenAI Codex assisted with concept, code, automation, documentation and review. Original geometry, materials and synthesized audio were created for this project. Space Grotesk: SIL OFL 1.1. The guide uses stock Kokoro af_heart narration, not a clone of Shivam. No RenderJuice rendering or physical simulation is claimed.",
     499,
     small,
 )
 y = para(
     48,
     y - 16,
-    "<b>Separate studio demonstration:</b> an 80-second narrated product walkthrough uses a disclosed stock synthetic voice and readable captions. Script: docs/studio-demo-script.txt. The 24-second film itself needs no voiceover.",
+    "<b>Evidence:</b> submission/receipt.json records exact URLs, confirmations and screenshot paths. Keep the original verified media and editable scene available. Publication and submitted status do not establish an official contest result.",
     499,
     small,
 )
 y = para(
     48,
     y - 18,
-    '<b>Official sources:</b><br/><link href="https://www.renderjuice.com/contests/speed" color="#154D58">renderjuice.com/contests/speed</link><br/><link href="https://www.renderjuice.com/contests/terms" color="#154D58">renderjuice.com/contests/terms</link><br/><link href="https://programmatic-rendering-contest.devpost.com/rules" color="#154D58">programmatic-rendering-contest.devpost.com/rules</link>',
+    '<b>Studio and source:</b><br/><link href="https://second-nature-studio.web.app" color="#154D58">second-nature-studio.web.app</link><br/><link href="https://github.com/shi1720/second-nature" color="#154D58">github.com/shi1720/second-nature</link>',
     499,
     small,
 )

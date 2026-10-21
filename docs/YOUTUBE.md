@@ -1,6 +1,6 @@
 # Original film publication copy
 
-**Publication status: prepared copy; no YouTube upload or public YouTube URL is claimed.**
+**Publication status: public.** [Watch the original film](https://www.youtube.com/watch?v=folQG-XiqTY). YouTube reported **No issues found** during initial checks; the six-cue English SRT is published. [Recorded receipt](../submission/receipt.json). [Public playback verification](../submission/youtube-playback-qa.json) records the actual 1920 x 1080 watch-page ending at 24.021 seconds with no media error on the tested browser/network.
 
 ## Title
 
@@ -30,18 +30,18 @@ Make every second grow.
 
 #Blender #ProceduralAnimation #MotionDesign
 
-## Upload checklist
+## Published upload record and maintenance
 
 - Film: `film/second-nature.mp4`, the independently verified 24-second 1080p original.
 - Thumbnail: `stills/poster.jpg`, 16:9.
 - Language: English on-screen text; no spoken dialogue.
-- Optional captions: `film/second-nature.en.srt`.
+- Published English captions: `film/second-nature.en.srt`, six cues.
 - Category: Film & Animation.
 - Audience: general animation and motion-design viewers, not directed to children.
 - Paid promotion: none.
 - Keep the longer product demonstration separate from this film.
-- Confirm the public video URL and processed playback after upload. Publication is not claimed until confirmed.
+- Public video URL and publication confirmation are recorded above. Preserve the disclosure, thumbnail and captions when updating the upload.
 - The original, Blue hour cloud study and narrated studio guide are public in the app through a separate three-file API allowlist. Private user exports remain owner-authenticated.
-- Final browser sign-out/reset and separate live REST ownership checks passed. These app checks do not constitute a YouTube upload or official contest submission.
+- Final browser sign-out/reset and separate live REST ownership checks passed. Publication and contest submission have their own receipts.
 
-A YouTube upload does not replace the required RenderJuice account, Discord join form and official Discord entry. See [ENTRY.md](ENTRY.md). For the separately narrated product video, use [YOUTUBE-DEMO.md](YOUTUBE-DEMO.md).
+The required RenderJuice account, private join form and official Discord entry are separately confirmed. A YouTube upload alone would not replace them. See [ENTRY.md](ENTRY.md). For the separately narrated product video, use [YOUTUBE-DEMO.md](YOUTUBE-DEMO.md).

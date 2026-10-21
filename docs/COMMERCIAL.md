@@ -4,7 +4,7 @@
 
 [Hosted studio](https://second-nature-studio.web.app) · [Public source](https://github.com/shi1720/second-nature)
 
-The original film is complete. The hosted workflow has exercised real rendering, cancellation and resume; its first full cloud delivery check is still pending. This is a commercial hypothesis with no claimed customers, revenue, paid pilots or measured demand. [Current testing record](TESTING.md)
+The original film is complete. The hosted workflow passed full cloud delivery, including real rendering, cancellation, checkpoint reuse, final playback and matching MP4/Blender downloads. This is a commercial hypothesis with no claimed customers, revenue, paid pilots or measured demand. [Current testing record](TESTING.md)
 
 ## Customer and problem
 
@@ -16,7 +16,7 @@ SECOND NATURE currently offers one authored story: a kinetic journey that resolv
 
 The public app provides Firebase guest and email workspaces, saved configurations, a workbench and a dedicated Cloud Run Blender workflow. Private Cloud Storage holds metadata, artifacts and fingerprinted frame checkpoints. Compare-and-swap updates protect shared reservations and quotas. There is no Firestore dependency. A separate local studio and command-line pipeline are also included.
 
-The original film was rendered locally at 1080p. Hosted variants render the full 24 seconds at 540p. Guest identity persists in the same browser and can be linked to an email account. Generated files expire under a seven-day lifecycle; this is not archival storage. End-to-end cloud export, playback and download must pass the [acceptance checklist](TESTING.md) before presenting the hosted workflow as fully verified.
+The original film was rendered locally at 1080p. Hosted variants render the full 24 seconds at 540p. Guest identity persists in the same browser and can be linked to an email account. Generated files expire under a seven-day lifecycle; this is not archival storage. End-to-end cloud export, playback and download passed the [acceptance checklist](TESTING.md); the accepted Blue hour study and studio guide are public in the app.
 
 The shared public worker admits one active job, three render/all starts globally, two per account and two per client network per UTC day. Failed or cancelled starts count; resume consumes another start. These limits manage exposure but are not a hard billing cap. The operator pays execution and storage costs, and an 80-minute CPU run is an approximate planning figure, not a delivery guarantee or measured unit-cost claim.
 

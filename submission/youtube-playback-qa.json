@@ -1,0 +1,30 @@
+{
+  "checked_at": "2026-10-21T03:29:45.571Z",
+  "method": "Public YouTube watch pages, actual HTML video playback to ended after choosing 1080p; no seek-to-end used.",
+  "original": {
+    "currentTime": 24.021,
+    "duration": 24.021,
+    "ended": true,
+    "error": null,
+    "height": 1080,
+    "url": "https://www.youtube.com/watch?v=folQG-XiqTY",
+    "width": 1920
+  },
+  "demo": {
+    "currentTime": 80.021,
+    "duration": 80.021,
+    "ended": true,
+    "error": null,
+    "height": 1080,
+    "paused": true,
+    "url": "https://www.youtube.com/watch?v=EePedJF-2lA",
+    "width": 1920
+  },
+  "captions": {
+    "original_english_cues": 6,
+    "demo_english_cues": 28,
+    "tracks_uploaded_and_published": true,
+    "english_option_observed": true
+  },
+  "scope": "Playback on this browser and network, not a guarantee for every device."
+}

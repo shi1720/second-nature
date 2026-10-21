@@ -44,7 +44,9 @@ Cancellation and resume are useful recovery checks, but each resumed render cons
 - [x] Eight burned-caption samples and encoded demo audio are reviewed; no silence of at least 1.2 seconds is detected at -40 dB.
 - [x] Final page has no horizontal overflow at 320, 390, 768, 1280 and 1920 pixels.
 
-Cloud and app publication acceptance are complete. YouTube upload, Devpost mirroring and official contest submission remain separate external actions; none is claimed complete. HTTP Range support is verified, without claiming a separately recorded browser seeking test.
+Cloud and app publication acceptance are complete. External publication and submission are also recorded: [public original](https://www.youtube.com/watch?v=folQG-XiqTY), [public guide](https://www.youtube.com/watch?v=EePedJF-2lA), [official Discord entry](https://discord.com/channels/1547269486057627728/1562304128657522852) and [submitted Devpost mirror](https://devpost.com/software/second-nature-jrqu9v). Both YouTube initial checks reported No issues found, with six and 28 published English caption cues. The RenderJuice account and private registration are confirmed in the [submission receipt](../submission/receipt.json). These receipts establish submitted/public status, not organizer acceptance or an award. HTTP Range support is verified. A separate native scrubber check on the app's studio guide used Home then Right and reached 0.8 seconds without error; it is not a seeking test of every player.
+
+The [public YouTube playback check](../submission/youtube-playback-qa.json) played both watch pages to their actual ends at 1920 x 1080 after selecting 1080p, without seeking to the end. The original and guide reported 24.021 and 80.021 seconds respectively, `ended: true` and no media error. These are YouTube transcoded durations; the source masters remain exactly 24 and 80 seconds. Published English captions and the English menu option were observed. This records one tested browser/network, not every device.
 
 ## Automated tests
 

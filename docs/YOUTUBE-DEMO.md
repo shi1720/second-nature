@@ -1,6 +1,6 @@
 # Product demonstration publication copy
 
-**Publication status:** the complete 80-second 1080p demo passed full decoding and all eight delivery checks. Its actual cloud result passed separate acceptance. Encoded speech measures -16.44 LUFS, with no silence of at least 1.2 seconds at the tested threshold. Captions are burned into the picture and also supplied as SRT/VTT. YouTube upload remains pending final account confirmation. See the [testing record](TESTING.md).
+**Publication status:** the complete 80-second 1080p demo passed full decoding and all eight delivery checks. Its actual cloud result passed separate acceptance. Encoded speech measures -16.44 LUFS, with no silence of at least 1.2 seconds at the tested threshold. Captions are burned into the picture and also supplied as SRT/VTT. [The guide is public on YouTube](https://www.youtube.com/watch?v=EePedJF-2lA); initial checks reported **No issues found**, and the 28-cue English SRT is published. [Receipt](../submission/receipt.json) · [Publication confirmation](../submission/youtube-demo-published.png). See the [testing record](TESTING.md).
 
 ## Title
 
@@ -49,10 +49,10 @@ These chapter starts follow the completed 80-second picture edit.
 - Narration: `film/studio-demo-narration.wav`, exactly 80 seconds.
 - Captions: `film/studio-demo-narration.srt` and `.vtt`.
 - Timing and provenance: `.words.json`, `.chapters.json`, `.narration.json` and `.verification.json` alongside the narration.
-- The 28 caption cues are model-timed. Review alignment after the final edit and AAC encoding.
+- The 28 caption cues are model-timed, with sampled final-picture checks and published English SRT. Their provenance is distinct from independent forced alignment.
 - Keep all visible account information and logs suitable for public release.
 - Preserve the synthetic-voice disclosure in the credits and metadata.
 - Actual cloud playback reached 24 seconds without errors. The browser MP4 download matches the accepted cloud delivery SHA-256.
-- Confirm a public URL and processed playback after upload; no upload is currently claimed.
+- Public YouTube publication is confirmed at the link above. Preserve the synthetic-voice disclosure, published captions and processing evidence when maintaining the upload.
 
 Category: Science & Technology or Film & Animation. Language: English. Audience: general creative-tool users, not directed to children. Paid promotion: none.
